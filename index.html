@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#111111" />
+  <title>Ninja Math</title>
+  <style>
+    :root{
+      --black:#111111; --black2:#1c1c1c; --yellow:#ffd51e; --gold:#ffbd13;
+      --cream:#fff9df; --white:#ffffff; --green:#5bcf8f; --blue:#78c9ff;
+      --purple:#b99cff; --orange:#ff9e59; --red:#ff6b6b; --text:#212121;
+      --muted:#707070; --radius:24px; --shadow:0 12px 30px rgba(0,0,0,.12);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial Rounded MT Bold, Nunito, system-ui, sans-serif;background:#f6f4ec;color:var(--text)}
+    button,input,select{font:inherit}
+    button{cursor:pointer;border:0}
+    .app{max-width:1100px;margin:auto;min-height:100vh;background:#faf8ef;position:relative;padding-bottom:92px}
+    .topbar{background:linear-gradient(135deg,var(--black),#2a2a2a);color:white;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:20}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900}
+    .logo{width:44px;height:44px;border-radius:14px;background:var(--yellow);display:grid;place-items:center;color:#111;font-size:26px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.12)}
+    .brand small{display:block;font-weight:600;color:#ddd;font-size:11px}
+    .pill{background:#2e2e2e;color:#fff;border:1px solid #444;border-radius:999px;padding:9px 12px}
+    .screen{display:none;padding:18px}
+    .screen.active{display:block}
+    .hero{background:linear-gradient(135deg,#fff4a8,#ffe036);border-radius:30px;padding:22px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.4fr .6fr;gap:18px;overflow:hidden}
+    .hero h1{font-size:clamp(28px,6vw,48px);margin:0 0 6px}
+    .hero p{margin:0 0 18px;color:#504400}
+    .mascot{font-size:clamp(72px,15vw,130px);display:grid;place-items:center;filter:drop-shadow(0 10px 10px rgba(0,0,0,.15))}
+    .btn{background:var(--yellow);color:#111;padding:14px 18px;border-radius:16px;font-weight:900;box-shadow:0 5px 0 #c99c00;transition:.15s}
+    .btn:active{transform:translateY(3px);box-shadow:0 2px 0 #c99c00}
+    .btn.dark{background:#171717;color:white;box-shadow:0 5px 0 #000}
+    .btn.ghost{background:white;border:2px solid #ddd;box-shadow:none}
+    .btn.small{padding:9px 12px;border-radius:12px;font-size:13px}
+    .grid{display:grid;gap:14px}
+    .grid.stats{grid-template-columns:repeat(4,1fr);margin:18px 0}
+    .card{background:white;border-radius:22px;padding:18px;box-shadow:var(--shadow)}
+    .stat b{font-size:25px;display:block}
+    .stat span{color:var(--muted);font-size:12px}
+    .progress{height:13px;background:#ececec;border-radius:99px;overflow:hidden}
+    .progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--yellow));border-radius:99px}
+    .section-title{display:flex;align-items:end;justify-content:space-between;margin:22px 2px 12px}
+    .section-title h2{margin:0}
+    .section-title span{font-size:12px;color:var(--muted)}
+    .topics{grid-template-columns:repeat(3,1fr)}
+    .topic{min-height:150px;display:flex;flex-direction:column;justify-content:space-between}
+    .topic .ico{font-size:38px}
+    .topic h3{margin:8px 0 3px}
+    .topic p{font-size:12px;color:#666;margin:0}
+    .topic footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+    .badge{padding:6px 9px;border-radius:10px;background:#f3f3f3;font-size:11px;font-weight:800}
+    .mission{background:#171717;color:#fff}
+    .mission .progress{background:#393939}
+    .bottom{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(1100px,100%);background:white;border-top:1px solid #ddd;display:grid;grid-template-columns:repeat(6,1fr);padding:7px max(6px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom));z-index:30}
+    .navbtn{background:transparent;padding:8px 4px;border-radius:12px;color:#777;font-size:11px}
+    .navbtn strong{display:block;font-size:21px}
+    .navbtn.active{background:#fff4ad;color:#111}
+    .question-wrap{max-width:720px;margin:auto}
+    .qhead{display:flex;justify-content:space-between;gap:10px;align-items:center}
+    .question{font-size:clamp(27px,6vw,48px);text-align:center;padding:35px 15px 24px;font-weight:900}
+    .answers{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .answer{min-height:80px;border-radius:20px;background:white;border:3px solid #eee;font-size:26px;font-weight:900}
+    .answer:hover{border-color:var(--yellow)}
+    .answer.correct{background:#dff8e8;border-color:#4bc47b}
+    .answer.wrong{background:#ffe2e2;border-color:#ff7777}
+    .feedback{min-height:65px;margin-top:16px;padding:14px;border-radius:18px;text-align:center;font-weight:900}
+    .feedback.ok{background:#dcf7e5}
+    .feedback.no{background:#fff0d7}
+    .center{text-align:center}
+    .result-score{font-size:70px;font-weight:900;margin:8px}
+    .stars{font-size:42px;letter-spacing:7px}
+    .profile-list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .child{cursor:pointer;text-align:center;border:3px solid transparent}
+    .child.selected{border-color:var(--yellow)}
+    .child .avatar{font-size:54px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{font-size:12px;font-weight:900;color:#555}
+    input,select{width:100%;padding:13px;border-radius:14px;border:2px solid #ddd;background:#fff;margin-top:5px}
+    .rank-row{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #eee}
+    .rank-num{width:36px;height:36px;border-radius:50%;background:#f4f4f4;display:grid;place-items:center;font-weight:900}
+    .performance-row{margin:13px 0}
+    .performance-row header{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+    .settings-grid{grid-template-columns:1fr 1fr}
+    .toggle{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .switch{width:55px;height:30px;border-radius:99px;background:#ddd;padding:3px}
+    .switch i{display:block;width:24px;height:24px;border-radius:50%;background:white;transition:.2s}
+    .switch.on{background:var(--yellow)}
+    .switch.on i{transform:translateX(25px)}
+    .hidden{display:none!important}
+    .toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:#111;color:white;border-radius:14px;padding:12px 18px;z-index:99;opacity:0;pointer-events:none;transition:.25s}
+    .toast.show{opacity:1}
+    @media(max-width:760px){
+      .hero{grid-template-columns:1fr}.mascot{display:none}
+      .grid.stats{grid-template-columns:1fr 1fr}
+      .topics{grid-template-columns:1fr 1fr}
+      .profile-list{grid-template-columns:1fr 1fr}
+      .bottom{grid-template-columns:repeat(6,1fr)}
+      .navbtn span{display:none}
+    }
+    @media(max-width:430px){
+      .topics,.profile-list,.settings-grid{grid-template-columns:1fr}
+      .screen{padding:14px}
+      .answers{grid-template-columns:1fr}
+      .answer{min-height:66px}
+      .form-row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">🥷</div>
+      <div>NINJA MATH<small>Learn • Train • Master</small></div>
+    </div>
+    <div style="display:flex;gap:7px">
+      <button class="pill" id="langBtn">EN</button>
+      <button class="pill" id="soundBtn">🔊</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="screen active"></section>
+    <section id="learn" class="screen"></section>
+    <section id="missions" class="screen"></section>
+    <section id="ranking" class="screen"></section>
+    <section id="profile" class="screen"></section>
+    <section id="parent" class="screen"></section>
+    <section id="quiz" class="screen"></section>
+    <section id="result" class="screen"></section>
+  </main>
+
+  <nav class="bottom">
+    <button class="navbtn active" data-go="home"><strong>🏠</strong><span>Home</span></button>
+    <button class="navbtn" data-go="learn"><strong>📚</strong><span>Learn</span></button>
+    <button class="navbtn" data-go="missions"><strong>🎯</strong><span>Missions</span></button>
+    <button class="navbtn" data-go="ranking"><strong>🏆</strong><span>Ranking</span></button>
+    <button class="navbtn" data-go="profile"><strong>🥷</strong><span>Profile</span></button>
+    <button class="navbtn" data-go="parent"><strong>👨‍👩‍👧</strong><span>Parent</span></button>
+  </nav>
+</div>
+<div id="toast" class="toast"></div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+  import { getDatabase, ref, set, get, update } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyARbc8YoST8IQrder90Z1DmysRfIGpRPXk",
+    authDomain: "ninjamath-bf687.firebaseapp.com",
+    databaseURL: "https://ninjamath-bf687-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "ninjamath-bf687",
+    storageBucket: "ninjamath-bf687.firebasestorage.app",
+    messagingSenderId: "566094745865",
+    appId: "1:566094745865:web:91094c00bd449448e4c3d8"
+  };
+
+  const fb = initializeApp(firebaseConfig);
+  const auth = getAuth(fb);
+  const db = getDatabase(fb);
+  const provider = new GoogleAuthProvider();
+
+  const T = {
+    en:{
+      ready:"Ready for Ninja Training?", start:"START MISSION", continue:"Continue Learning",
+      today:"Today's Mission", topics:"Math Training", progress:"Progress", questions:"questions",
+      practice:"Practice", parent:"Parent Dashboard", select:"Who's training today?", addChild:"Add Child",
+      save:"Save Child", accuracy:"Accuracy", weak:"Needs Practice", strong:"Strong Topics",
+      missionComplete:"MISSION COMPLETE!", retry:"TRY AGAIN", home:"HOME", next:"NEXT MISSION",
+      level:"Level", xp:"XP", stars:"Stars", streak:"Day Streak", rank:"Weekly Ninja Ranking",
+      difficulty:"Difficulty", correct:"Excellent! Ninja Power! ⭐", wrong:"Almost! Try again.",
+      q:"Question", of:"of", score:"Score", history:"Recent Learning History"
+    },
+    bm:{
+      ready:"Sedia untuk Latihan Ninja?", start:"MULA MISI", continue:"Sambung Belajar",
+      today:"Misi Hari Ini", topics:"Latihan Matematik", progress:"Kemajuan", questions:"soalan",
+      practice:"Latihan", parent:"Dashboard Ibu Bapa", select:"Siapa berlatih hari ini?", addChild:"Tambah Anak",
+      save:"Simpan Profil", accuracy:"Ketepatan", weak:"Perlu Latihan", strong:"Topik Kuat",
+      missionComplete:"MISI SELESAI!", retry:"CUBA LAGI", home:"UTAMA", next:"MISI SETERUSNYA",
+      level:"Tahap", xp:"XP", stars:"Bintang", streak:"Hari Berturut", rank:"Ranking Ninja Mingguan",
+      difficulty:"Kesukaran", correct:"Hebat! Kuasa Ninja! ⭐", wrong:"Hampir betul! Cuba lagi.",
+      q:"Soalan", of:"daripada", score:"Skor", history:"Sejarah Pembelajaran Terkini"
+    }
+  };
+
+  const topicMeta = {
+    numbers:{icon:"🔢",name:{en:"Numbers",bm:"Nombor"},desc:{en:"Counting, order & place value",bm:"Mengira, susunan & nilai tempat"}},
+    addition:{icon:"➕",name:{en:"Addition",bm:"Tambah"},desc:{en:"Add and solve simple problems",bm:"Tambah dan selesaikan masalah mudah"}},
+    subtraction:{icon:"➖",name:{en:"Subtraction",bm:"Tolak"},desc:{en:"Take away and compare",bm:"Menolak dan membanding"}},
+    fractions:{icon:"🍕",name:{en:"Fractions",bm:"Pecahan"},desc:{en:"Whole, half and quarter",bm:"Satu, separuh dan suku"}},
+    money:{icon:"💰",name:{en:"Money",bm:"Wang"},desc:{en:"Ringgit and sen",bm:"Ringgit dan sen"}},
+    time:{icon:"🕐",name:{en:"Time",bm:"Masa"},desc:{en:"Clock, days and months",bm:"Jam, hari dan bulan"}},
+    measurement:{icon:"📏",name:{en:"Measurement",bm:"Ukuran"},desc:{en:"Length, mass and capacity",bm:"Panjang, jisim dan kapasiti"}},
+    shapes:{icon:"🔺",name:{en:"Shapes & Space",bm:"Bentuk & Ruang"},desc:{en:"2D shapes and patterns",bm:"Bentuk 2D dan corak"}},
+    data:{icon:"📊",name:{en:"Data",bm:"Data"},desc:{en:"Pictures and simple charts",bm:"Gambar dan carta mudah"}}
+  };
+
+  function mc(q,a,opts,ex=""){ return {q,a,opts,ex}; }
+  const banks = {
+    numbers:[
+      mc("What number comes after 9?",10,[8,9,10,11]), mc("What number comes before 15?",14,[13,14,15,16]),
+      mc("Which number is greater?",18,[12,18,8,15]), mc("Which is the smallest number?",3,[9,7,3,6]),
+      mc("12, 13, __, 15",14,[12,14,16,18]), mc("How many tens are in 24?",2,[1,2,3,4]),
+      mc("What is the ones digit in 37?",7,[3,7,0,10]), mc("Which number equals 4 tens and 2 ones?",42,[24,40,42,22]),
+      mc("Count: ⭐⭐⭐⭐⭐⭐",6,[5,6,7,8]), mc("Which number is between 19 and 21?",20,[18,20,22,23]),
+      mc("30 + 1 =",31,[29,30,31,32]), mc("Which number is less than 11?",9,[12,15,9,11]),
+      mc("5, 10, 15, __",20,[16,18,20,25]), mc("Which is equal to ten?",10,[1,5,10,20]),
+      mc("2 tens and 5 ones =",25,[20,15,25,52]), mc("Which is bigger: 46 or 64?",64,[46,64,44,66]),
+      mc("How many numbers: 1,2,3,4,5?",5,[4,5,6,7]), mc("50, 51, __, 53",52,[51,52,54,55]),
+      mc("Which number has 6 tens?",60,[16,26,60,6]), mc("99 comes before...",100,[98,99,100,101])
+    ],
+    addition:[
+      mc("3 + 2 = ?",5,[4,5,6,7]), mc("7 + 1 = ?",8,[6,7,8,9]), mc("5 + 5 = ?",10,[8,9,10,11]),
+      mc("4 + 3 = ?",7,[5,6,7,8]), mc("10 + 2 = ?",12,[11,12,13,14]), mc("6 + 3 = ?",9,[8,9,10,11]),
+      mc("8 + 4 = ?",12,[10,11,12,13]), mc("9 + 6 = ?",15,[14,15,16,17]), mc("2 + 7 = ?",9,[8,9,10,11]),
+      mc("11 + 5 = ?",16,[14,15,16,17]), mc("5 + ? = 9",4,[3,4,5,6]), mc("? + 3 = 8",5,[4,5,6,7]),
+      mc("🍎🍎🍎 + 🍎🍎 = ?",5,[3,4,5,6]), mc("4 birds + 4 birds = ?",8,[6,7,8,9]),
+      mc("Ali has 4 apples and gets 3 more. Total?",7,[6,7,8,9]), mc("12 + 7 = ?",19,[17,18,19,20]),
+      mc("20 + 5 = ?",25,[22,24,25,30]), mc("13 + 6 = ?",19,[18,19,20,21]),
+      mc("10 + 10 = ?",20,[18,19,20,21]), mc("15 + 4 = ?",19,[17,18,19,20])
+    ],
+    subtraction:[
+      mc("5 - 2 = ?",3,[2,3,4,5]), mc("8 - 3 = ?",5,[4,5,6,7]), mc("10 - 1 = ?",9,[8,9,10,11]),
+      mc("9 - 4 = ?",5,[4,5,6,7]), mc("12 - 2 = ?",10,[8,9,10,11]), mc("7 - 5 = ?",2,[1,2,3,4]),
+      mc("15 - 5 = ?",10,[8,9,10,11]), mc("20 - 10 = ?",10,[5,10,15,20]), mc("11 - 3 = ?",8,[7,8,9,10]),
+      mc("14 - 6 = ?",8,[6,7,8,9]), mc("9 - ? = 4",5,[4,5,6,7]), mc("13 - ? = 10",3,[2,3,4,5]),
+      mc("You have 6 sweets and eat 2. Left?",4,[3,4,5,6]), mc("18 - 7 = ?",11,[10,11,12,13]),
+      mc("16 - 4 = ?",12,[11,12,13,14]), mc("10 balloons, 3 fly away. Left?",7,[6,7,8,9]),
+      mc("25 - 5 = ?",20,[15,18,20,25]), mc("19 - 9 = ?",10,[9,10,11,12]),
+      mc("17 - 6 = ?",11,[10,11,12,13]), mc("30 - 10 = ?",20,[10,15,20,30])
+    ],
+    fractions:[
+      mc("One of two equal parts is called...", "half",["whole","half","quarter","three"]),
+      mc("One of four equal parts is called...", "quarter",["half","quarter","whole","two"]),
+      mc("2 halves make...", "one whole",["one whole","one quarter","three","zero"]),
+      mc("Which fraction is bigger?", "half",["half","quarter","same","none"]),
+      mc("A pizza cut into 2 equal pieces: each piece is...", "half",["whole","half","quarter","third"]),
+      mc("Four quarters make...", "one whole",["one whole","half","two","zero"]),
+      mc("Which is smaller?", "quarter",["whole","half","quarter","all same"]),
+      mc("1/2 means...", "one half",["one half","one quarter","two wholes","three"]),
+      mc("1/4 means...", "one quarter",["one half","one quarter","one whole","four wholes"]),
+      mc("A whole cake is cut into 4 equal parts. One part = ?", "quarter",["half","quarter","whole","two"]),
+      mc("How many halves in one whole?",2,[1,2,3,4]), mc("How many quarters in one whole?",4,[2,3,4,5]),
+      mc("Half of 2 apples is...",1,[1,2,3,4]), mc("Half of 4 stars is...",2,[1,2,3,4]),
+      mc("Quarter of 4 blocks is...",1,[1,2,3,4]), mc("Which means complete?", "whole",["half","quarter","whole","part"]),
+      mc("Two quarters equal...", "half",["whole","half","quarter","three"]), mc("Half + half =", "whole",["whole","quarter","zero","three"]),
+      mc("Which fraction has 2 equal parts?", "half",["quarter","half","whole","none"]), mc("Which fraction has 4 equal parts?", "quarter",["whole","half","quarter","two"])
+    ],
+    money:[
+      mc("RM1 + RM2 = ?", "RM3",["RM1","RM2","RM3","RM4"]), mc("50 sen + 50 sen = ?", "RM1",["50 sen","RM1","RM2","RM5"]),
+      mc("Which is more?", "RM5",["RM1","RM5","50 sen","20 sen"]), mc("100 sen = ?", "RM1",["RM10","RM1","10 sen","50 sen"]),
+      mc("Pencil RM2 + eraser RM1 = ?", "RM3",["RM2","RM3","RM4","RM5"]), mc("RM10 - RM4 = ?", "RM6",["RM4","RM5","RM6","RM7"]),
+      mc("Two RM1 notes total...", "RM2",["RM1","RM2","RM3","RM4"]), mc("Which is cheaper?", "RM2",["RM7","RM2","RM5","RM9"]),
+      mc("RM5 + RM5 = ?", "RM10",["RM5","RM8","RM10","RM15"]), mc("20 sen + 20 sen = ?", "40 sen",["20 sen","30 sen","40 sen","50 sen"]),
+      mc("RM3 + RM4 = ?", "RM7",["RM6","RM7","RM8","RM9"]), mc("RM8 - RM3 = ?", "RM5",["RM4","RM5","RM6","RM7"]),
+      mc("A toy costs RM6. You have RM10. Money left?", "RM4",["RM3","RM4","RM5","RM6"]), mc("Which can buy a RM3 book?", "RM5",["RM1","RM2","RM5","50 sen"]),
+      mc("10 sen + 10 sen = ?", "20 sen",["10 sen","20 sen","30 sen","40 sen"]), mc("RM2 + RM2 + RM1 = ?", "RM5",["RM4","RM5","RM6","RM7"]),
+      mc("RM20 - RM10 = ?", "RM10",["RM5","RM10","RM15","RM20"]), mc("Which value is smallest?", "10 sen",["RM1","50 sen","20 sen","10 sen"]),
+      mc("Three RM1 coins total...", "RM3",["RM1","RM2","RM3","RM4"]), mc("RM4 + RM6 = ?", "RM10",["RM8","RM9","RM10","RM11"])
+    ],
+    time:[
+      mc("Breakfast is usually in the...", "morning",["morning","night","midnight","evening"]),
+      mc("School usually starts in the...", "morning",["night","morning","evening","midnight"]),
+      mc("After Monday comes...", "Tuesday",["Sunday","Tuesday","Friday","Saturday"]),
+      mc("Before Friday is...", "Thursday",["Monday","Thursday","Saturday","Sunday"]),
+      mc("How many days in a week?",7,[5,6,7,8]), mc("12 o'clock at noon is...", "12:00",["6:00","9:00","12:00","3:00"]),
+      mc("The short clock hand shows...", "hour",["hour","day","month","year"]),
+      mc("The long clock hand shows...", "minutes",["hours","minutes","days","months"]),
+      mc("After June comes...", "July",["May","July","August","April"]), mc("Before March is...", "February",["January","February","April","May"]),
+      mc("How many months in a year?",12,[10,11,12,13]), mc("Bedtime is usually at...", "night",["morning","noon","night","school"]),
+      mc("3:00 means...", "three o'clock",["two o'clock","three o'clock","four o'clock","five o'clock"]),
+      mc("7:00 means...", "seven o'clock",["six o'clock","seven o'clock","eight o'clock","nine o'clock"]),
+      mc("Saturday comes after...", "Friday",["Monday","Friday","Sunday","Thursday"]),
+      mc("January is a...", "month",["day","month","hour","minute"]), mc("Tuesday is a...", "day",["month","day","year","clock"]),
+      mc("Morning comes before...", "afternoon",["yesterday","afternoon","week","month"]), mc("Evening comes before...", "night",["morning","night","noon","week"]),
+      mc("Which is a weekend day?", "Sunday",["Tuesday","Wednesday","Thursday","Sunday"])
+    ],
+    measurement:[
+      mc("Which word means not long?", "short",["heavy","short","full","wide"]), mc("An elephant is usually...", "heavy",["light","heavy","empty","short"]),
+      mc("A feather is usually...", "light",["heavy","light","full","long"]), mc("A full bottle has...", "more",["less","more","none","zero"]),
+      mc("An empty cup has...", "nothing",["more","nothing","full","heavy"]), mc("Which is longer?", "ruler",["eraser","ruler","coin","button"]),
+      mc("Which is heavier?", "book",["leaf","book","feather","paper"]), mc("Which has more water?", "full cup",["empty cup","full cup","dry cup","no cup"]),
+      mc("A pencil is usually ___ than a broom.", "shorter",["heavier","shorter","fuller","wider"]), mc("A bus is usually ___ than a toy car.", "longer",["shorter","lighter","longer","empty"]),
+      mc("A rock is usually ___ than a leaf.", "heavier",["lighter","heavier","shorter","empty"]), mc("Half-full means...", "some liquid",["no liquid","some liquid","overflowing","solid"]),
+      mc("Which measures length?", "ruler",["clock","ruler","coin","calendar"]), mc("Which can hold more water?", "bucket",["spoon","bucket","cap","coin"]),
+      mc("Which is lighter?", "balloon",["brick","balloon","table","chair"]), mc("A tall bottle is usually ___ than a small cap.", "longer",["shorter","longer","empty","lighter"]),
+      mc("Which word compares mass?", "heavier",["later","heavier","faster","yellow"]), mc("Which word compares capacity?", "more",["tall","more","slow","round"]),
+      mc("A full glass is ___ than an empty glass.", "heavier",["lighter","heavier","shorter","smaller"]), mc("Which is shortest?", "coin",["broom","table","coin","ruler"])
+    ],
+    shapes:[
+      mc("Which shape has 3 sides?", "triangle",["circle","square","triangle","rectangle"]), mc("Which shape is round?", "circle",["triangle","square","circle","rectangle"]),
+      mc("Which shape has 4 equal sides?", "square",["circle","triangle","square","oval"]), mc("A door is often shaped like a...", "rectangle",["circle","rectangle","triangle","star"]),
+      mc("⚪ is a...", "circle",["circle","square","triangle","rectangle"]), mc("🔺 is a...", "triangle",["circle","square","triangle","rectangle"]),
+      mc("A square has how many sides?",4,[2,3,4,5]), mc("A triangle has how many corners?",3,[2,3,4,5]),
+      mc("A rectangle has how many sides?",4,[2,3,4,5]), mc("Which shape has no corners?", "circle",["square","triangle","circle","rectangle"]),
+      mc("Which can roll easily?", "sphere",["cube","sphere","square","triangle"]), mc("A dice looks like a...", "cube",["sphere","cube","circle","triangle"]),
+      mc("A ball looks like a...", "sphere",["cube","sphere","rectangle","square"]), mc("Circle, square, circle, square, ___", "circle",["triangle","circle","rectangle","star"]),
+      mc("Triangle, triangle, square, triangle, triangle, ___", "square",["circle","square","rectangle","star"]), mc("Which is a 2D shape?", "triangle",["cube","sphere","triangle","box"]),
+      mc("Which has 4 corners?", "square",["circle","square","sphere","ball"]), mc("A window can be shaped like a...", "square",["sphere","square","cone","ball"]),
+      mc("Which is NOT a 2D shape?", "cube",["circle","square","triangle","cube"]), mc("Which shape has 2 long and 2 short sides?", "rectangle",["circle","rectangle","triangle","sphere"])
+    ],
+    data:[
+      mc("🍎🍎🍎 vs 🍌🍌. Which has more?", "apples",["apples","bananas","same","none"]),
+      mc("⭐⭐⭐⭐ has how many stars?",4,[2,3,4,5]), mc("Cats: 5, Dogs: 3. Most?", "cats",["cats","dogs","same","none"]),
+      mc("Red: 2, Blue: 6. Least?", "red",["red","blue","same","none"]), mc("🍊🍊🍊🍊🍊 = ?",5,[3,4,5,6]),
+      mc("If 1 picture = 1 child, 👦👦👦 means...",3,[1,2,3,4]), mc("Votes: Apple 7, Mango 4. Winner?", "Apple",["Apple","Mango","same","none"]),
+      mc("Books read: Ali 2, Mia 5. Who read more?", "Mia",["Ali","Mia","same","none"]),
+      mc("Cars: 🚗🚗🚗🚗. Total?",4,[3,4,5,6]), mc("Which data is greatest: 2, 8, 5?",8,[2,5,8,10]),
+      mc("Which data is smallest: 9, 3, 6?",3,[3,6,9,12]), mc("Blue 4, Green 4. They are...", "equal",["more","less","equal","zero"]),
+      mc("1 picture = 2 stars. ⭐⭐ pictures = how many stars?",4,[2,3,4,5]), mc("Banana 6, Apple 3. Difference?",3,[2,3,4,5]),
+      mc("Monday 2 books, Tuesday 4 books. Total?",6,[4,5,6,7]), mc("Which bar would be tallest for values 2,7,4?",7,[2,4,7,9]),
+      mc("If 5 children choose cats and 2 choose fish, how many children?",7,[5,6,7,8]),
+      mc("Data: 1,1,1. Total items?",3,[1,2,3,4]), mc("🍓🍓🍓 and 🍇🍇🍇. Which has more?", "same",["strawberry","grape","same","none"]),
+      mc("Votes: A=10, B=8. A has how many more?",2,[1,2,3,4])
+    ]
+  };
+
+  let state = {
+    lang: localStorage.getItem("nm_lang") || "en",
+    sound: localStorage.getItem("nm_sound") !== "off",
+    currentChildId: localStorage.getItem("nm_child") || "adam",
+    currentTopic:"addition", difficulty:1, quiz:[], qi:0, correct:0, locked:false
+  };
+
+  let children = JSON.parse(localStorage.getItem("nm_children")||"null") || {
+    adam:{name:"Adam",avatar:"🥷",age:7,xp:1250,stars:18,streak:5,totalQ:86,correct:73,topic:{numbers:92,addition:85,subtraction:72,money:90,time:65,shapes:95,fractions:78,measurement:82,data:76},history:[]},
+    aisyah:{name:"Aisyah",avatar:"👧",age:7,xp:940,stars:14,streak:3,totalQ:50,correct:42,topic:{numbers:88,addition:80,subtraction:68,money:81,time:70,shapes:90,fractions:74,measurement:79,data:71},history:[]}
+  };
+
+  const levels=["Ninja Rookie","Little Ninja","Number Ninja","Smart Ninja","Math Ninja","Super Ninja","Ninja Warrior","Ninja Expert","Ninja Champion","Ninja Master"];
+  const $=s=>document.querySelector(s);
+  const tr=k=>T[state.lang][k]||k;
+  const child=()=>children[state.currentChildId] || Object.values(children)[0];
+
+  function saveLocal(){
+    localStorage.setItem("nm_children",JSON.stringify(children));
+    localStorage.setItem("nm_child",state.currentChildId);
+    localStorage.setItem("nm_lang",state.lang);
+    localStorage.setItem("nm_sound",state.sound?"on":"off");
+  }
+
+  function toast(msg){ const t=$("#toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800); }
+  function beep(type="ok"){
+    if(!state.sound)return;
+    try{
+      const ac=new (window.AudioContext||window.webkitAudioContext)(), o=ac.createOscillator(), g=ac.createGain();
+      o.connect(g);g.connect(ac.destination);o.frequency.value=type==="ok"?650:260;g.gain.setValueAtTime(.08,ac.currentTime);
+      g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+.22);o.start();o.stop(ac.currentTime+.22);
+    }catch(e){}
+  }
+  function levelInfo(c){ const lv=Math.min(10,Math.floor(c.xp/500)+1); return {lv,name:levels[lv-1],in:c.xp%500}; }
+  function starsFor(acc){return acc>=90?3:acc>=70?2:1}
+  function show(id){
+    document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));
+    $("#"+id).classList.add("active");
+    document.querySelectorAll(".navbtn").forEach(x=>x.classList.toggle("active",x.dataset.go===id));
+    window.scrollTo({top:0,behavior:"smooth"});
+    renderAll();
+  }
+
+  function renderHome(){
+    const c=child(), l=levelInfo(c), topic="addition", p=c.topic[topic]||0;
+    $("#home").innerHTML=`
+      <div class="hero">
+        <div>
+          <div class="badge">🥷 ${tr("level")} ${l.lv} • ${l.name}</div>
+          <h1>Hi ${c.name}! 👋</h1>
+          <p>${tr("ready")}</p>
+          <button class="btn" onclick="startQuiz('addition')">${tr("start")} ➜</button>
+        </div>
+        <div class="mascot">${c.avatar}</div>
+      </div>
+      <div class="grid stats">
+        <div class="card stat"><b>${c.xp}</b><span>⚡ ${tr("xp")}</span></div>
+        <div class="card stat"><b>${c.stars}</b><span>⭐ ${tr("stars")}</span></div>
+        <div class="card stat"><b>${Math.round(c.correct/Math.max(c.totalQ,1)*100)}%</b><span>🎯 ${tr("accuracy")}</span></div>
+        <div class="card stat"><b>${c.streak}</b><span>🔥 ${tr("streak")}</span></div>
+      </div>
+      <div class="card mission">
+        <div class="section-title" style="margin-top:0"><h2>${tr("today")}</h2><span>+75 XP</span></div>
+        <h3>➕ Addition Training</h3>
+        <p>${state.lang==="en"?"Answer 15 addition questions and earn Ninja XP.":"Jawab 15 soalan tambah dan dapatkan XP Ninja."}</p>
+        <div class="progress"><i style="width:${p}%"></i></div>
+        <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px"><span>${tr("progress")}</span><b>${p}%</b></div>
+      </div>
+      <div class="section-title"><h2>${tr("continue")}</h2><span>${p}%</span></div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:15px">
+          <div style="font-size:45px">➕</div><div style="flex:1"><h3 style="margin:0">Addition</h3><p style="color:#777;margin:5px 0">Basic Addition • Level ${state.difficulty}</p><div class="progress"><i style="width:${p}%"></i></div></div>
+          <button class="btn small" onclick="startQuiz('addition')">GO</button>
+        </div>
+      </div>`;
+  }
+
+  function renderLearn(){
+    $("#learn").innerHTML=`<div class="section-title"><h2>📚 ${tr("topics")}</h2><span>Year 1</span></div>
+      <div class="grid topics">${Object.entries(topicMeta).map(([k,v])=>`
+        <div class="card topic">
+          <div><div class="ico">${v.icon}</div><h3>${v.name[state.lang]}</h3><p>${v.desc[state.lang]}</p></div>
+          <footer><span class="badge">${child().topic[k]||0}%</span><button class="btn small" onclick="startQuiz('${k}')">${tr("practice")}</button></footer>
+        </div>`).join("")}</div>`;
+  }
+
+  function renderMissions(){
+    $("#missions").innerHTML=`<div class="section-title"><h2>🎯 Ninja Missions</h2><span>Daily</span></div>
+      ${[
+        ["➕","Addition Sprint","15 questions","+75 XP","addition"],
+        ["🔢","Number Sense","15 questions","+75 XP","numbers"],
+        ["🔺","Shape Hunter","15 questions","+75 XP","shapes"]
+      ].map(x=>`<div class="card" style="margin-bottom:14px;display:grid;grid-template-columns:55px 1fr auto;align-items:center;gap:12px">
+        <div style="font-size:38px">${x[0]}</div><div><h3 style="margin:0">${x[1]}</h3><small>${x[2]} • ${x[3]}</small></div>
+        <button class="btn small" onclick="startQuiz('${x[4]}')">START</button></div>`).join("")}`;
+  }
+
+  function renderRanking(){
+    const list=Object.values(children).map(c=>({name:"Ninja "+c.name,xp:c.xp,avatar:c.avatar})).concat([
+      {name:"Ninja Mia",xp:1180,avatar:"🐱"},{name:"Ninja Ray",xp:1030,avatar:"🤖"},{name:"Ninja Hana",xp:870,avatar:"🐼"}
+    ]).sort((a,b)=>b.xp-a.xp);
+    $("#ranking").innerHTML=`<div class="section-title"><h2>🏆 ${tr("rank")}</h2><span>Child-safe nicknames</span></div>
+      <div class="card">${list.map((r,i)=>`<div class="rank-row"><div class="rank-num">${i<3?["🥇","🥈","🥉"][i]:i+1}</div>
+      <div><b>${r.avatar} ${r.name}</b><br><small>${i===0?"Ninja Champion":"Math Trainer"}</small></div><b>${r.xp} XP</b></div>`).join("")}</div>`;
+  }
+
+  function renderProfile(){
+    $("#profile").innerHTML=`<div class="section-title"><h2>🥷 ${tr("select")}</h2><span>Multi-child</span></div>
+      <div class="profile-list">${Object.entries(children).map(([id,c])=>`<div class="card child ${id===state.currentChildId?"selected":""}" onclick="selectChild('${id}')">
+        <div class="avatar">${c.avatar}</div><h3>${c.name}</h3><p>${c.xp} XP • ⭐ ${c.stars}</p></div>`).join("")}</div>
+      <div class="section-title"><h2>➕ ${tr("addChild")}</h2></div>
+      <div class="card"><div class="form-row">
+      <div><label>Ninja Name<input id="newName" placeholder="e.g. Danish"></label></div>
+      <div><label>Avatar<select id="newAvatar"><option>🥷</option><option>👦</option><option>👧</option><option>🐼</option><option>🐱</option><option>🤖</option></select></label></div>
+      </div><button class="btn" style="margin-top:14px" onclick="addChild()">${tr("save")}</button></div>`;
+  }
+
+  function renderParent(){
+    const c=child(), acc=Math.round(c.correct/Math.max(1,c.totalQ)*100);
+    const sorted=Object.entries(c.topic).sort((a,b)=>a[1]-b[1]);
+    $("#parent").innerHTML=`<div class="section-title"><h2>👨‍👩‍👧 ${tr("parent")}</h2><span>${c.name}</span></div>
+      <div class="grid stats">
+        <div class="card stat"><b>${c.xp}</b><span>Total XP</span></div>
+        <div class="card stat"><b>${c.totalQ}</b><span>Total Questions</span></div>
+        <div class="card stat"><b>${c.correct}</b><span>Correct</span></div>
+        <div class="card stat"><b>${acc}%</b><span>${tr("accuracy")}</span></div>
+      </div>
+      <div class="card"><h3>📊 Performance by Topic</h3>
+      ${Object.entries(c.topic).map(([k,v])=>`<div class="performance-row"><header><b>${topicMeta[k]?.name[state.lang]||k}</b><span>${v}%</span></header><div class="progress"><i style="width:${v}%"></i></div></div>`).join("")}</div>
+      <div class="grid settings-grid" style="margin-top:14px">
+        <div class="card"><h3>⚠️ ${tr("weak")}</h3>${sorted.slice(0,3).map(([k,v])=>`<p>${topicMeta[k]?.icon||"📘"} ${topicMeta[k]?.name[state.lang]||k} — <b>${v}%</b></p>`).join("")}</div>
+        <div class="card"><h3>💪 ${tr("strong")}</h3>${sorted.slice(-3).reverse().map(([k,v])=>`<p>${topicMeta[k]?.icon||"📘"} ${topicMeta[k]?.name[state.lang]||k} — <b>${v}%</b></p>`).join("")}</div>
+      </div>
+      <div class="card" style="margin-top:14px"><h3>⚙️ Settings</h3>
+        <div class="toggle"><span>🔊 Sound Effects</span><button class="switch ${state.sound?"on":""}" onclick="toggleSound()"><i></i></button></div>
+        <div class="toggle" style="margin-top:14px"><span>🌐 Language</span><button class="btn small" onclick="toggleLang()">${state.lang.toUpperCase()}</button></div>
+      </div>`;
+  }
+
+  function startQuiz(topic){
+    state.currentTopic=topic; state.qi=0; state.correct=0; state.locked=false;
+    let pool=[...(banks[topic]||banks.addition)];
+    pool.sort(()=>Math.random()-.5);
+    state.quiz=pool.slice(0,15);
+    show("quiz"); renderQuestion();
+  }
+
+  function renderQuestion(){
+    const q=state.quiz[state.qi];
+    if(!q){finishQuiz();return}
+    $("#quiz").innerHTML=`<div class="question-wrap">
+      <div class="qhead"><button class="btn ghost small" onclick="show('learn')">←</button>
+      <b>${topicMeta[state.currentTopic].icon} ${topicMeta[state.currentTopic].name[state.lang]}</b>
+      <span class="badge">${tr("q")} ${state.qi+1} ${tr("of")} ${state.quiz.length}</span></div>
+      <div class="progress" style="margin-top:15px"><i style="width:${state.qi/state.quiz.length*100}%"></i></div>
+      <div class="center" style="margin-top:12px"><label>${tr("difficulty")}: </label>
+      <select style="width:auto;padding:8px" onchange="state.difficulty=+this.value">
+      ${[1,2,3,4,5].map(n=>`<option value="${n}" ${n===state.difficulty?"selected":""}>${n}</option>`).join("")}</select></div>
+      <div class="question">${q.q}</div>
+      <div class="answers">${q.opts.sort(()=>Math.random()-.5).map((a,i)=>`<button class="answer" data-value="${String(a).replace(/"/g,"&quot;")}" onclick="answer(this)">${a}</button>`).join("")}</div>
+      <div id="feedback" class="feedback"></div></div>`;
+  }
+
+  function answer(btn){
+    if(state.locked)return;
+    state.locked=true;
+    const q=state.quiz[state.qi], value=btn.dataset.value;
+    const ok=String(value)===String(q.a);
+    if(ok){state.correct++;btn.classList.add("correct");$("#feedback").className="feedback ok";$("#feedback").textContent=tr("correct");beep("ok");}
+    else{
+      btn.classList.add("wrong");
+      [...document.querySelectorAll(".answer")].find(x=>String(x.dataset.value)===String(q.a))?.classList.add("correct");
+      $("#feedback").className="feedback no";$("#feedback").textContent=tr("wrong")+" ✓ "+q.a;beep("no");
+    }
+    setTimeout(()=>{state.qi++;state.locked=false;renderQuestion()},850);
+  }
+
+  async function finishQuiz(){
+    const c=child(), total=state.quiz.length, acc=Math.round(state.correct/total*100), earned=state.correct*10+50+(acc===100?100:0);
+    c.xp+=earned;c.totalQ+=total;c.correct+=state.correct;c.stars+=starsFor(acc);
+    const old=c.topic[state.currentTopic]||0;c.topic[state.currentTopic]=Math.round((old+acc)/2);
+    c.history.unshift({topic:state.currentTopic,score:`${state.correct}/${total}`,acc,date:new Date().toLocaleDateString()});
+    c.history=c.history.slice(0,10);saveLocal();syncCloud();
+    const stars="⭐".repeat(starsFor(acc));
+    $("#result").innerHTML=`<div class="question-wrap center"><div class="mascot" style="display:block">${c.avatar}</div>
+      <h1>${tr("missionComplete")}</h1><div class="result-score">${state.correct}/${total}</div><div class="stars">${stars}</div>
+      <div class="grid stats" style="margin-top:22px"><div class="card stat"><b>${acc}%</b><span>${tr("accuracy")}</span></div>
+      <div class="card stat"><b>+${earned}</b><span>XP Earned</span></div><div class="card stat"><b>+${starsFor(acc)}</b><span>${tr("stars")}</span></div>
+      <div class="card stat"><b>${state.difficulty}</b><span>${tr("level")}</span></div></div>
+      <p>${acc>=90?"🏆 Excellent! Ready for a harder Ninja challenge.":acc>=70?"👍 Good work! Keep training at this level.":"💛 More practice will make your Ninja skills stronger."}</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn" onclick="startQuiz('${state.currentTopic}')">${tr("retry")}</button>
+      <button class="btn dark" onclick="show('home')">${tr("home")}</button></div></div>`;
+    show("result");
+  }
+
+  function selectChild(id){ state.currentChildId=id;saveLocal();renderAll();toast("Switched to "+child().name); }
+  function addChild(){
+    const name=$("#newName").value.trim(),avatar=$("#newAvatar").value;if(!name)return toast("Enter a Ninja name.");
+    const id=(name.toLowerCase().replace(/[^a-z0-9]/g,"")||"child")+Date.now().toString().slice(-4);
+    children[id]={name,avatar,age:7,xp:0,stars:0,streak:1,totalQ:0,correct:0,topic:Object.fromEntries(Object.keys(topicMeta).map(k=>[k,0])),history:[]};
+    state.currentChildId=id;saveLocal();syncCloud();renderAll();toast("Ninja profile created!");
+  }
+  function toggleLang(){state.lang=state.lang==="en"?"bm":"en";saveLocal();renderAll()}
+  function toggleSound(){state.sound=!state.sound;saveLocal();renderAll()}
+
+  async function syncCloud(){
+    if(!auth.currentUser)return;
+    try{await set(ref(db,`users/${auth.currentUser.uid}/ninjaMath`),{children,currentChildId:state.currentChildId,updatedAt:Date.now()})}catch(e){}
+  }
+  async function loadCloud(user){
+    try{
+      const s=await get(ref(db,`users/${user.uid}/ninjaMath`));
+      if(s.exists()){
+        const d=s.val(); if(d.children)children=d.children;if(d.currentChildId)state.currentChildId=d.currentChildId;saveLocal();
+      }
+    }catch(e){}
+    renderAll();
+  }
+
+  window.startQuiz=startQuiz;window.answer=answer;window.show=show;window.selectChild=selectChild;window.addChild=addChild;
+  window.toggleLang=toggleLang;window.toggleSound=toggleSound;window.state=state;
+
+  document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>show(b.dataset.go)));
+  $("#langBtn").onclick=toggleLang;$("#soundBtn").onclick=toggleSound;
+
+  function renderAll(){
+    $("#langBtn").textContent=state.lang.toUpperCase();$("#soundBtn").textContent=state.sound?"🔊":"🔇";
+    renderHome();renderLearn();renderMissions();renderRanking();renderProfile();renderParent();
+  }
+
+  onAuthStateChanged(auth,u=>{if(u)loadCloud(u);});
+  signInAnonymously(auth).catch(()=>{});
+  renderAll();
+</script>
+</body>
+</html>
