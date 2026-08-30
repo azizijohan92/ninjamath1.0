@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="theme-color" content="#111111">
 
 <title>Ninja Math</title>
@@ -10,19 +10,25 @@
 <style>
 :root{
   --black:#111111;
-  --black2:#202020;
+  --black2:#222222;
   --yellow:#FFD51E;
   --gold:#FFB800;
   --white:#FFFFFF;
   --bg:#F7F5ED;
   --green:#50C878;
   --red:#FF6B6B;
+  --blue:#4FA3FF;
+  --purple:#9B72FF;
   --muted:#777;
   --shadow:0 10px 28px rgba(0,0,0,.10);
 }
 
 *{
   box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
@@ -46,12 +52,12 @@ button{
   min-height:100vh;
   margin:auto;
   background:#FAF9F3;
-  padding-bottom:95px;
+  padding-bottom:100px;
 }
 
-/* =========================
+/* =========================================================
    HEADER
-========================= */
+========================================================= */
 
 .topbar{
   position:sticky;
@@ -104,9 +110,9 @@ button{
   border-radius:999px;
 }
 
-/* =========================
+/* =========================================================
    GENERAL
-========================= */
+========================================================= */
 
 .screen{
   display:none;
@@ -136,6 +142,10 @@ button{
   color:#111;
   font-weight:900;
   box-shadow:0 5px 0 #C79E00;
+}
+
+.btn:hover{
+  filter:brightness(.98);
 }
 
 .btn:active{
@@ -184,9 +194,18 @@ button{
   font-size:12px;
 }
 
-/* =========================
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:10px;
+  background:#F1F1F1;
+  font-size:11px;
+  font-weight:900;
+}
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero{
   display:grid;
@@ -214,18 +233,9 @@ button{
   font-size:110px;
 }
 
-.badge{
-  display:inline-block;
-  padding:6px 10px;
-  border-radius:10px;
-  background:#F1F1F1;
-  font-size:11px;
-  font-weight:900;
-}
-
-/* =========================
+/* =========================================================
    STATS
-========================= */
+========================================================= */
 
 .stats{
   grid-template-columns:repeat(4,1fr);
@@ -242,9 +252,9 @@ button{
   font-size:12px;
 }
 
-/* =========================
+/* =========================================================
    PROGRESS
-========================= */
+========================================================= */
 
 .progress{
   height:13px;
@@ -260,9 +270,9 @@ button{
   background:linear-gradient(90deg,var(--gold),var(--yellow));
 }
 
-/* =========================
+/* =========================================================
    MISSION
-========================= */
+========================================================= */
 
 .mission{
   color:white;
@@ -273,23 +283,23 @@ button{
   background:#393939;
 }
 
-/* =========================
-   TOPICS
-========================= */
+/* =========================================================
+   LEARN TOPICS
+========================================================= */
 
 .topics{
   grid-template-columns:repeat(3,1fr);
 }
 
 .topic{
-  min-height:165px;
+  min-height:175px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
 }
 
 .topic-icon{
-  font-size:40px;
+  font-size:42px;
 }
 
 .topic h3{
@@ -300,6 +310,7 @@ button{
   margin:0;
   color:#777;
   font-size:12px;
+  line-height:1.5;
 }
 
 .topic footer{
@@ -310,9 +321,110 @@ button{
   margin-top:15px;
 }
 
-/* =========================
+/* =========================================================
+   DIFFICULTY SCREEN
+========================================================= */
+
+.difficulty-header{
+  max-width:800px;
+  margin:auto;
+  text-align:center;
+  padding:10px 0 18px;
+}
+
+.difficulty-topic-icon{
+  font-size:70px;
+}
+
+.difficulty-header h1{
+  margin:6px 0;
+}
+
+.difficulty-header p{
+  color:#777;
+  line-height:1.5;
+}
+
+.difficulty-grid{
+  max-width:850px;
+  margin:auto;
+  display:grid;
+  gap:14px;
+}
+
+.difficulty-card{
+  position:relative;
+  display:grid;
+  grid-template-columns:65px 1fr auto;
+  gap:15px;
+  align-items:center;
+  padding:18px;
+  border:3px solid transparent;
+  border-radius:22px;
+  background:white;
+  box-shadow:var(--shadow);
+  transition:.2s ease;
+}
+
+.difficulty-card:hover{
+  transform:translateY(-2px);
+  border-color:var(--yellow);
+}
+
+.difficulty-number{
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  border-radius:18px;
+  font-size:24px;
+  font-weight:900;
+}
+
+.level-1 .difficulty-number{
+  background:#E0F8E7;
+  color:#178642;
+}
+
+.level-2 .difficulty-number{
+  background:#DDEFFF;
+  color:#1768AA;
+}
+
+.level-3 .difficulty-number{
+  background:#FFF1C8;
+  color:#9A6300;
+}
+
+.level-4 .difficulty-number{
+  background:#FFE0CC;
+  color:#B65013;
+}
+
+.level-5 .difficulty-number{
+  background:#F1E2FF;
+  color:#7A28B8;
+}
+
+.difficulty-info h3{
+  margin:0 0 5px;
+}
+
+.difficulty-info p{
+  margin:0;
+  color:#777;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.difficulty-stars{
+  margin-top:7px;
+  font-size:14px;
+}
+
+/* =========================================================
    NAV
-========================= */
+========================================================= */
 
 .bottom-nav{
   position:fixed;
@@ -346,9 +458,9 @@ button{
   background:#FFF4AD;
 }
 
-/* =========================
+/* =========================================================
    PROFILE
-========================= */
+========================================================= */
 
 .profile-list{
   grid-template-columns:repeat(3,1fr);
@@ -376,9 +488,9 @@ button{
   margin-top:10px;
 }
 
-/* =========================
+/* =========================================================
    FORM
-========================= */
+========================================================= */
 
 .form-grid{
   grid-template-columns:1fr 1fr;
@@ -401,9 +513,9 @@ select{
   background:white;
 }
 
-/* =========================
+/* =========================================================
    QUIZ
-========================= */
+========================================================= */
 
 .quiz-wrap{
   max-width:720px;
@@ -417,11 +529,21 @@ select{
   gap:10px;
 }
 
+.quiz-level{
+  padding:7px 10px;
+  border-radius:999px;
+  color:#111;
+  background:var(--yellow);
+  font-size:11px;
+  font-weight:900;
+}
+
 .question{
   padding:38px 10px 28px;
   text-align:center;
-  font-size:clamp(28px,6vw,48px);
+  font-size:clamp(27px,6vw,46px);
   font-weight:900;
+  line-height:1.25;
 }
 
 .answers{
@@ -436,7 +558,7 @@ select{
   border:3px solid #eee;
   border-radius:20px;
   background:white;
-  font-size:25px;
+  font-size:24px;
   font-weight:900;
 }
 
@@ -471,9 +593,9 @@ select{
   background:#FFF0D8;
 }
 
-/* =========================
+/* =========================================================
    RESULT
-========================= */
+========================================================= */
 
 .center{
   text-align:center;
@@ -493,9 +615,9 @@ select{
   letter-spacing:5px;
 }
 
-/* =========================
+/* =========================================================
    RANKING
-========================= */
+========================================================= */
 
 .ranking-top-card{
   margin-bottom:14px;
@@ -505,10 +627,6 @@ select{
 
 .ranking-top-card .trophy{
   font-size:55px;
-}
-
-.ranking-top-card h2{
-  margin:5px 0;
 }
 
 .rank-row{
@@ -557,9 +675,9 @@ select{
   font-weight:900;
 }
 
-/* =========================
+/* =========================================================
    PARENT
-========================= */
+========================================================= */
 
 .performance-row{
   margin:14px 0;
@@ -576,9 +694,9 @@ select{
   grid-template-columns:1fr 1fr;
 }
 
-/* =========================
+/* =========================================================
    TOAST
-========================= */
+========================================================= */
 
 .toast{
   position:fixed;
@@ -599,9 +717,9 @@ select{
   opacity:1;
 }
 
-/* =========================
+/* =========================================================
    RESPONSIVE
-========================= */
+========================================================= */
 
 @media(max-width:760px){
 
@@ -629,6 +747,13 @@ select{
     display:none;
   }
 
+  .difficulty-card{
+    grid-template-columns:55px 1fr;
+  }
+
+  .difficulty-card .btn{
+    grid-column:1 / -1;
+  }
 }
 
 @media(max-width:430px){
@@ -659,7 +784,6 @@ select{
     grid-template-columns:42px 45px 1fr auto;
     gap:7px;
   }
-
 }
 </style>
 </head>
@@ -670,39 +794,30 @@ select{
 
 <header class="topbar">
 
-<div class="brand">
+  <div class="brand">
 
-<div class="logo">
-🥷
-</div>
+    <div class="logo">
+      🥷
+    </div>
 
-<div>
-NINJA MATH
+    <div>
+      NINJA MATH
+      <small>Learn • Train • Master</small>
+    </div>
 
-<small>
-Learn • Train • Master
-</small>
+  </div>
 
-</div>
+  <div class="header-actions">
 
-</div>
+    <button class="pill" id="languageButton">
+      EN
+    </button>
 
+    <button class="pill" id="soundButton">
+      🔊
+    </button>
 
-<div class="header-actions">
-
-<button
-class="pill"
-id="languageButton">
-EN
-</button>
-
-<button
-class="pill"
-id="soundButton">
-🔊
-</button>
-
-</div>
+  </div>
 
 </header>
 
@@ -712,6 +827,8 @@ id="soundButton">
 <section id="home" class="screen active"></section>
 
 <section id="learn" class="screen"></section>
+
+<section id="difficulty" class="screen"></section>
 
 <section id="missions" class="screen"></section>
 
@@ -731,39 +848,38 @@ id="soundButton">
 <nav class="bottom-nav">
 
 <button class="nav-btn active" data-page="home">
-<strong>🏠</strong>
-<span>Home</span>
+  <strong>🏠</strong>
+  <span>Home</span>
 </button>
 
 <button class="nav-btn" data-page="learn">
-<strong>📚</strong>
-<span>Learn</span>
+  <strong>📚</strong>
+  <span>Learn</span>
 </button>
 
 <button class="nav-btn" data-page="missions">
-<strong>🎯</strong>
-<span>Missions</span>
+  <strong>🎯</strong>
+  <span>Missions</span>
 </button>
 
 <button class="nav-btn" data-page="ranking">
-<strong>🏆</strong>
-<span>Ranking</span>
+  <strong>🏆</strong>
+  <span>Ranking</span>
 </button>
 
 <button class="nav-btn" data-page="profile">
-<strong>🥷</strong>
-<span>Profile</span>
+  <strong>🥷</strong>
+  <span>Profile</span>
 </button>
 
 <button class="nav-btn" data-page="parent">
-<strong>👨‍👩‍👧</strong>
-<span>Parent</span>
+  <strong>👨‍👩‍👧</strong>
+  <span>Parent</span>
 </button>
 
 </nav>
 
 </div>
-
 
 <div id="toast" class="toast"></div>
 
@@ -819,18 +935,14 @@ const firebaseConfig = {
 
   appId:
   "1:566094745865:web:91094c00bd449448e4c3d8"
-
 };
 
 
-const firebaseApp =
-initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
 
-const auth =
-getAuth(firebaseApp);
+const auth = getAuth(firebaseApp);
 
-const database =
-getDatabase(firebaseApp);
+const database = getDatabase(firebaseApp);
 
 
 /* =========================================================
@@ -897,7 +1009,25 @@ ranking:"Family Ninja Ranking",
 
 rankingInfo:"Only child profiles in this account are shown",
 
-you:"YOU"
+you:"YOU",
+
+chooseDifficulty:"Choose Difficulty",
+
+chooseDifficultyDescription:"Choose your Ninja training level. Each level becomes more challenging.",
+
+beginner:"Beginner",
+
+easy:"Easy",
+
+medium:"Medium",
+
+hard:"Hard",
+
+master:"Ninja Master",
+
+start:"START",
+
+changeLevel:"Change Level"
 
 },
 
@@ -959,7 +1089,25 @@ ranking:"Ranking Ninja Keluarga",
 
 rankingInfo:"Hanya profil anak dalam akaun ini dipaparkan",
 
-you:"ANDA"
+you:"ANDA",
+
+chooseDifficulty:"Pilih Tahap Kesukaran",
+
+chooseDifficultyDescription:"Pilih tahap latihan Ninja. Soalan menjadi semakin mencabar pada setiap tahap.",
+
+beginner:"Permulaan",
+
+easy:"Mudah",
+
+medium:"Sederhana",
+
+hard:"Sukar",
+
+master:"Ninja Master",
+
+start:"MULA",
+
+changeLevel:"Tukar Tahap"
 
 }
 
@@ -1048,6 +1196,55 @@ descriptionBM:"Data dan carta mudah"
 
 
 /* =========================================================
+   DIFFICULTY INFORMATION
+========================================================= */
+
+const difficultyInfo = {
+
+1:{
+nameEN:"Beginner",
+nameBM:"Permulaan",
+stars:"⭐",
+descriptionEN:"Basic questions with small numbers and simple concepts.",
+descriptionBM:"Soalan asas menggunakan nombor kecil dan konsep mudah."
+},
+
+2:{
+nameEN:"Easy",
+nameBM:"Mudah",
+stars:"⭐⭐",
+descriptionEN:"Slightly larger numbers and simple problem solving.",
+descriptionBM:"Nombor lebih besar sedikit dan penyelesaian masalah mudah."
+},
+
+3:{
+nameEN:"Medium",
+nameBM:"Sederhana",
+stars:"⭐⭐⭐",
+descriptionEN:"Mixed questions requiring more thinking.",
+descriptionBM:"Soalan campuran yang memerlukan lebih banyak pemikiran."
+},
+
+4:{
+nameEN:"Hard",
+nameBM:"Sukar",
+stars:"⭐⭐⭐⭐",
+descriptionEN:"Larger numbers and more challenging word problems.",
+descriptionBM:"Nombor lebih besar dan masalah perkataan yang lebih mencabar."
+},
+
+5:{
+nameEN:"Ninja Master",
+nameBM:"Ninja Master",
+stars:"⭐⭐⭐⭐⭐",
+descriptionEN:"Advanced Year 1 Ninja challenge with multi-step thinking.",
+descriptionBM:"Cabaran Ninja Tahun 1 lanjutan dengan pemikiran beberapa langkah."
+}
+
+};
+
+
+/* =========================================================
    STATE
 ========================================================= */
 
@@ -1078,7 +1275,7 @@ answerLocked:false
 
 
 /* =========================================================
-   DEFAULT CHILD DATA
+   DEFAULT CHILDREN
 ========================================================= */
 
 let children =
@@ -1112,21 +1309,13 @@ correctAnswers:73,
 topics:{
 
 numbers:92,
-
 addition:85,
-
 subtraction:72,
-
 fractions:78,
-
 money:90,
-
 time:65,
-
 measurement:82,
-
 shapes:95,
-
 data:76
 
 },
@@ -1134,7 +1323,6 @@ data:76
 history:[]
 
 },
-
 
 aisyah:{
 
@@ -1157,21 +1345,13 @@ correctAnswers:42,
 topics:{
 
 numbers:88,
-
 addition:80,
-
 subtraction:68,
-
 fractions:74,
-
 money:81,
-
 time:70,
-
 measurement:79,
-
 shapes:90,
-
 data:71
 
 },
@@ -1187,9 +1367,7 @@ history:[]
    HELPERS
 ========================================================= */
 
-const $ =
-selector =>
-document.querySelector(selector);
+const $ = selector => document.querySelector(selector);
 
 
 function t(key){
@@ -1215,6 +1393,17 @@ return state.language === "en"
 topics[topic].en
 :
 topics[topic].bm;
+
+}
+
+
+function difficultyName(level){
+
+return state.language === "en"
+?
+difficultyInfo[level].nameEN
+:
+difficultyInfo[level].nameBM;
 
 }
 
@@ -1246,11 +1435,9 @@ state.sound ? "on" : "off"
 
 function toast(message){
 
-const element =
-$("#toast");
+const element = $("#toast");
 
-element.textContent =
-message;
+element.textContent = message;
 
 element.classList.add("show");
 
@@ -1272,23 +1459,17 @@ function playSound(type){
 if(!state.sound)
 return;
 
-
 try{
 
-const context =
-new AudioContext();
+const context = new AudioContext();
 
-const oscillator =
-context.createOscillator();
+const oscillator = context.createOscillator();
 
-const gain =
-context.createGain();
+const gain = context.createGain();
 
 oscillator.connect(gain);
 
-gain.connect(
-context.destination
-);
+gain.connect(context.destination);
 
 oscillator.frequency.value =
 type === "correct"
@@ -1326,23 +1507,14 @@ catch(error){}
 const ninjaLevels = [
 
 "Ninja Rookie",
-
 "Little Ninja",
-
 "Number Ninja",
-
 "Smart Ninja",
-
 "Math Ninja",
-
 "Super Ninja",
-
 "Ninja Warrior",
-
 "Ninja Expert",
-
 "Ninja Champion",
-
 "Ninja Master"
 
 ];
@@ -1357,12 +1529,8 @@ Math.floor(child.xp / 500) + 1
 );
 
 return{
-
 level,
-
-name:
-ninjaLevels[level - 1]
-
+name:ninjaLevels[level - 1]
 };
 
 }
@@ -1393,9 +1561,13 @@ document
 screen.classList.remove("active")
 );
 
-$("#" + page)
-.classList.add("active");
+const target = $("#" + page);
 
+if(target){
+
+target.classList.add("active");
+
+}
 
 document
 .querySelectorAll(".nav-btn")
@@ -1408,12 +1580,10 @@ button.dataset.page === page
 
 });
 
-
 window.scrollTo({
 top:0,
 behavior:"smooth"
 });
-
 
 renderAll();
 
@@ -1426,11 +1596,9 @@ renderAll();
 
 function renderHome(){
 
-const child =
-currentChild();
+const child = currentChild();
 
-const level =
-getLevel(child);
+const level = getLevel(child);
 
 const accuracy =
 Math.round(
@@ -1465,7 +1633,7 @@ ${t("ready")}
 
 <button
 class="btn"
-onclick="startQuiz('addition')">
+onclick="openDifficulty('addition')">
 
 ${t("startMission")} ➜
 
@@ -1483,38 +1651,23 @@ ${child.avatar}
 <div class="grid stats">
 
 <div class="card stat">
-
 <b>${child.xp}</b>
-
 <span>⚡ XP</span>
-
 </div>
 
-
 <div class="card stat">
-
 <b>${child.stars}</b>
-
 <span>⭐ ${t("stars")}</span>
-
 </div>
 
-
 <div class="card stat">
-
 <b>${accuracy}%</b>
-
 <span>🎯 ${t("accuracy")}</span>
-
 </div>
 
-
 <div class="card stat">
-
 <b>${child.streak}</b>
-
 <span>🔥 ${t("dayStreak")}</span>
-
 </div>
 
 </div>
@@ -1522,9 +1675,7 @@ ${child.avatar}
 
 <div class="card mission">
 
-<div
-class="section-title"
-style="margin-top:0">
+<div class="section-title" style="margin-top:0">
 
 <h2>
 ${t("today")}
@@ -1554,91 +1705,7 @@ state.language === "en"
 
 <div class="progress">
 
-<i style="
-width:${additionProgress}%
-"></i>
-
-</div>
-
-<div style="
-display:flex;
-justify-content:space-between;
-margin-top:8px;
-font-size:12px;
-">
-
-<span>
-${t("progress")}
-</span>
-
-<b>
-${additionProgress}%
-</b>
-
-</div>
-
-</div>
-
-
-<div class="section-title">
-
-<h2>
-${t("continueLearning")}
-</h2>
-
-<span>
-${additionProgress}%
-</span>
-
-</div>
-
-
-<div class="card">
-
-<div style="
-display:flex;
-gap:15px;
-align-items:center;
-">
-
-<div style="font-size:44px">
-➕
-</div>
-
-<div style="flex:1">
-
-<h3 style="margin:0">
-Addition
-</h3>
-
-<p style="
-margin:5px 0;
-color:#777;
-">
-
-Basic Addition
-•
-Level ${state.difficulty}
-
-</p>
-
-<div class="progress">
-
-<i style="
-width:${additionProgress}%
-"></i>
-
-</div>
-
-</div>
-
-<button
-class="btn small"
-onclick="startQuiz('addition')">
-
-GO
-
-</button>
+<i style="width:${additionProgress}%"></i>
 
 </div>
 
@@ -1669,7 +1736,6 @@ Year 1
 
 </div>
 
-
 <div class="grid topics">
 
 ${
@@ -1683,49 +1749,28 @@ Object.entries(topics)
 <div>
 
 <div class="topic-icon">
-
 ${topic.icon}
-
 </div>
 
 <h3>
-
-${
-state.language === "en"
-?
-topic.en
-:
-topic.bm
-}
-
+${state.language === "en" ? topic.en : topic.bm}
 </h3>
 
 <p>
-
-${
-state.language === "en"
-?
-topic.descriptionEN
-:
-topic.descriptionBM
-}
-
+${state.language === "en" ? topic.descriptionEN : topic.descriptionBM}
 </p>
 
 </div>
 
-
 <footer>
 
 <span class="badge">
-
 ${currentChild().topics[key] || 0}%
-
 </span>
 
 <button
 class="btn small"
-onclick="startQuiz('${key}')">
+onclick="openDifficulty('${key}')">
 
 ${t("practice")}
 
@@ -1742,6 +1787,140 @@ ${t("practice")}
 </div>
 
 `;
+
+}
+
+
+/* =========================================================
+   OPEN DIFFICULTY SELECTION
+========================================================= */
+
+function openDifficulty(topic){
+
+state.currentTopic = topic;
+
+renderDifficulty();
+
+showPage("difficulty");
+
+}
+
+
+/* =========================================================
+   DIFFICULTY SCREEN
+========================================================= */
+
+function renderDifficulty(){
+
+const topic = topics[state.currentTopic];
+
+if(!topic)
+return;
+
+$("#difficulty").innerHTML = `
+
+<div class="difficulty-header">
+
+<div class="difficulty-topic-icon">
+${topic.icon}
+</div>
+
+<h1>
+${topicName(state.currentTopic)}
+</h1>
+
+<h2>
+${t("chooseDifficulty")}
+</h2>
+
+<p>
+${t("chooseDifficultyDescription")}
+</p>
+
+<button
+class="btn ghost small"
+onclick="showPage('learn')">
+
+← Back to Learn
+
+</button>
+
+</div>
+
+
+<div class="difficulty-grid">
+
+${[1,2,3,4,5].map(level=>`
+
+<div class="difficulty-card level-${level}">
+
+<div class="difficulty-number">
+
+${level}
+
+</div>
+
+<div class="difficulty-info">
+
+<h3>
+
+Level ${level}
+•
+${difficultyName(level)}
+
+</h3>
+
+<p>
+
+${
+state.language === "en"
+?
+difficultyInfo[level].descriptionEN
+:
+difficultyInfo[level].descriptionBM
+}
+
+</p>
+
+<div class="difficulty-stars">
+
+${difficultyInfo[level].stars}
+
+</div>
+
+</div>
+
+<button
+class="btn"
+onclick="selectDifficulty(${level})">
+
+${t("start")} ➜
+
+</button>
+
+</div>
+
+`).join("")}
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   SELECT DIFFICULTY
+========================================================= */
+
+function selectDifficulty(level){
+
+state.difficulty = Number(level);
+
+startQuiz(
+state.currentTopic,
+state.difficulty
+);
 
 }
 
@@ -1795,7 +1974,6 @@ Daily
 
 </div>
 
-
 ${
 
 missions.map(mission=>`
@@ -1811,30 +1989,24 @@ align-items:center;
 ">
 
 <div style="font-size:38px">
-
 ${mission.icon}
-
 </div>
 
 <div>
 
 <h3 style="margin:0">
-
 ${mission.name}
-
 </h3>
 
 <small>
-
-15 Questions • +75 XP
-
+15 Questions • Choose Difficulty
 </small>
 
 </div>
 
 <button
 class="btn small"
-onclick="startQuiz('${mission.topic}')">
+onclick="openDifficulty('${mission.topic}')">
 
 START
 
@@ -1852,7 +2024,7 @@ START
 
 
 /* =========================================================
-   QUESTION GENERATOR
+   RANDOM HELPERS
 ========================================================= */
 
 function randomNumber(min,max){
@@ -1878,56 +2050,48 @@ answer,
 options
 ){
 
+const unique =
+[...new Set(options.map(String))];
+
+while(unique.length < 4){
+
+unique.push(
+String(
+Number(answer) + unique.length + 1
+)
+);
+
+}
+
 return{
 
 question,
 
-answer,
+answer:String(answer),
 
 options:
-shuffle(options)
+shuffle(unique.slice(0,4))
 
 };
 
 }
 
 
-function generateQuestion(topic){
+/* =========================================================
+   ADDITION QUESTIONS BY LEVEL
+========================================================= */
 
-const difficulty =
-state.difficulty;
+function additionQuestion(level){
 
-
-let maxNumber =
-
-difficulty === 1 ? 10 :
-
-difficulty === 2 ? 20 :
-
-difficulty === 3 ? 50 :
-
-100;
+let a,b,answer;
 
 
-/* ADDITION */
+if(level === 1){
 
-if(topic === "addition"){
+a = randomNumber(0,5);
+b = randomNumber(0,5);
 
-const a =
-randomNumber(
-1,
-Math.max(2,Math.floor(maxNumber/2))
-);
-
-const b =
-randomNumber(
-1,
-Math.max(2,Math.floor(maxNumber/2))
-);
-
-const answer =
-a+b;
-
+answer = a+b;
 
 return makeQuestion(
 
@@ -1947,19 +2111,174 @@ answer+2
 }
 
 
-/* SUBTRACTION */
+if(level === 2){
 
-if(topic === "subtraction"){
+a = randomNumber(2,10);
+b = randomNumber(1,10);
 
-let a =
-randomNumber(2,maxNumber);
+answer = a+b;
 
-let b =
-randomNumber(1,a);
+return makeQuestion(
 
-const answer =
-a-b;
+`${a} + ${b} = ?`,
 
+answer,
+
+[
+answer,
+answer+2,
+answer-1,
+answer+1
+]
+
+);
+
+}
+
+
+if(level === 3){
+
+a = randomNumber(10,30);
+b = randomNumber(5,20);
+
+answer = a+b;
+
+return makeQuestion(
+
+`${a} + ${b} = ?`,
+
+answer,
+
+[
+answer,
+answer+10,
+answer-2,
+answer+2
+]
+
+);
+
+}
+
+
+if(level === 4){
+
+a = randomNumber(20,60);
+b = randomNumber(10,40);
+
+answer = a+b;
+
+const questionType =
+randomNumber(1,2);
+
+
+if(questionType === 1){
+
+return makeQuestion(
+
+`${a} + ${b} = ?`,
+
+answer,
+
+[
+answer,
+answer+10,
+answer-10,
+answer+2
+]
+
+);
+
+}
+
+
+return makeQuestion(
+
+`Ali has ${a} stickers. He gets ${b} more. How many stickers does he have now?`,
+
+answer,
+
+[
+answer,
+answer+5,
+answer-5,
+answer+10
+]
+
+);
+
+}
+
+
+a = randomNumber(30,80);
+
+b = randomNumber(10,70);
+
+answer = a+b;
+
+
+const c =
+randomNumber(1,15);
+
+
+const type =
+randomNumber(1,2);
+
+
+if(type === 1){
+
+return makeQuestion(
+
+`${a} + ${b} + ${c} = ?`,
+
+answer+c,
+
+[
+answer+c,
+answer+c+5,
+answer+c-5,
+answer+c+10
+]
+
+);
+
+}
+
+
+return makeQuestion(
+
+`A box has ${a} pencils. Teacher adds ${b} pencils. Then she adds ${c} more. How many pencils are there?`,
+
+answer+c,
+
+[
+answer+c,
+answer+c+10,
+answer+c-10,
+answer+c+5
+]
+
+);
+
+}
+
+
+/* =========================================================
+   SUBTRACTION QUESTIONS BY LEVEL
+========================================================= */
+
+function subtractionQuestion(level){
+
+let a,b,answer;
+
+
+if(level === 1){
+
+a = randomNumber(2,10);
+
+b = randomNumber(0,a);
+
+answer = a-b;
 
 return makeQuestion(
 
@@ -1979,26 +2298,140 @@ answer+2
 }
 
 
-/* NUMBERS */
+if(level === 2){
 
-if(topic === "numbers"){
+a = randomNumber(10,20);
 
-const types =
-["after","before","greater","sequence"];
+b = randomNumber(1,10);
 
-const type =
-types[
-randomNumber(
-0,
-types.length-1
-)
-];
+answer = a-b;
+
+return makeQuestion(
+
+`${a} − ${b} = ?`,
+
+answer,
+
+[
+answer,
+answer+2,
+Math.max(0,answer-2),
+answer+1
+]
+
+);
+
+}
 
 
-if(type === "after"){
+if(level === 3){
 
-const n =
-randomNumber(1,maxNumber-1);
+a = randomNumber(20,50);
+
+b = randomNumber(5,a-5);
+
+answer = a-b;
+
+return makeQuestion(
+
+`${a} − ${b} = ?`,
+
+answer,
+
+[
+answer,
+answer+5,
+Math.max(0,answer-5),
+answer+2
+]
+
+);
+
+}
+
+
+if(level === 4){
+
+a = randomNumber(40,80);
+
+b = randomNumber(10,35);
+
+answer = a-b;
+
+if(randomNumber(1,2) === 1){
+
+return makeQuestion(
+
+`${a} − ${b} = ?`,
+
+answer,
+
+[
+answer,
+answer+10,
+answer-10,
+answer+5
+]
+
+);
+
+}
+
+return makeQuestion(
+
+`Sara has ${a} marbles. She gives away ${b}. How many are left?`,
+
+answer,
+
+[
+answer,
+answer+5,
+answer-5,
+answer+10
+]
+
+);
+
+}
+
+
+a = randomNumber(60,100);
+
+b = randomNumber(20,50);
+
+const c = randomNumber(1,15);
+
+answer = a-b-c;
+
+return makeQuestion(
+
+`There are ${a} balloons. ${b} burst and ${c} are given away. How many balloons remain?`,
+
+answer,
+
+[
+answer,
+answer+10,
+Math.max(0,answer-10),
+answer+5
+]
+
+);
+
+}
+
+
+/* =========================================================
+   NUMBER QUESTIONS BY LEVEL
+========================================================= */
+
+function numbersQuestion(level){
+
+if(level === 1){
+
+const n = randomNumber(0,9);
+
+if(randomNumber(1,2) === 1){
 
 return makeQuestion(
 
@@ -2017,23 +2450,17 @@ Math.max(0,n-1)
 
 }
 
-
-if(type === "before"){
-
-const n =
-randomNumber(2,maxNumber);
-
 return makeQuestion(
 
-`What number comes before ${n}?`,
+`What number comes before ${n+1}?`,
 
-n-1,
+n,
 
 [
 n,
-n-1,
 n+1,
-Math.max(0,n-2)
+n+2,
+Math.max(0,n-1)
 ]
 
 );
@@ -2041,36 +2468,32 @@ Math.max(0,n-2)
 }
 
 
-if(type === "greater"){
+if(level === 2){
 
-const a =
-randomNumber(1,maxNumber);
+const a = randomNumber(1,20);
 
-let b =
-randomNumber(1,maxNumber);
+let b = randomNumber(1,20);
 
-while(b === a){
+while(a === b){
 
-b =
-randomNumber(1,maxNumber);
+b = randomNumber(1,20);
 
 }
 
 const answer =
 Math.max(a,b);
 
-
 return makeQuestion(
 
-`Which number is greater?`,
+`Which number is greater: ${a} or ${b}?`,
 
 answer,
 
 [
 a,
 b,
-Math.max(0,a-1),
-b+1
+Math.max(0,answer-1),
+answer+1
 ]
 
 );
@@ -2078,23 +2501,22 @@ b+1
 }
 
 
-const n =
-randomNumber(
-1,
-Math.max(2,maxNumber-3)
-);
+if(level === 3){
+
+const start =
+randomNumber(5,40);
 
 return makeQuestion(
 
-`${n}, ${n+1}, __, ${n+3}`,
+`${start}, ${start+2}, ${start+4}, __, ${start+8}`,
 
-n+2,
+start+6,
 
 [
-n+1,
-n+2,
-n+3,
-n+4
+start+5,
+start+6,
+start+7,
+start+8
 ]
 
 );
@@ -2102,19 +2524,198 @@ n+4
 }
 
 
-/* MONEY */
+if(level === 4){
 
-if(topic === "money"){
+const tens =
+randomNumber(2,8);
 
-const a =
-randomNumber(1,10);
+const ones =
+randomNumber(1,9);
 
-const b =
-randomNumber(1,10);
+const number =
+tens*10+ones;
 
-const answer =
-a+b;
+return makeQuestion(
 
+`What is the place value of ${tens} in ${number}?`,
+
+tens*10,
+
+[
+tens,
+tens*10,
+ones,
+number
+]
+
+);
+
+}
+
+
+const a = randomNumber(20,90);
+const b = randomNumber(20,90);
+const c = randomNumber(20,90);
+
+const sorted =
+[a,b,c].sort((x,y)=>x-y);
+
+return makeQuestion(
+
+`Which number is the largest: ${a}, ${b}, ${c}?`,
+
+sorted[2],
+
+[
+a,
+b,
+c,
+sorted[0]-1
+]
+
+);
+
+}
+
+
+/* =========================================================
+   FRACTIONS QUESTIONS BY LEVEL
+========================================================= */
+
+function fractionsQuestion(level){
+
+const banks = {
+
+1:[
+
+makeQuestion(
+"One of two equal parts is called...",
+"Half",
+["Whole","Half","Quarter","Three"]
+),
+
+makeQuestion(
+"How many halves make one whole?",
+2,
+[1,2,3,4]
+)
+
+],
+
+2:[
+
+makeQuestion(
+"One of four equal parts is called...",
+"Quarter",
+["Half","Quarter","Whole","Third"]
+),
+
+makeQuestion(
+"How many quarters make one whole?",
+4,
+[2,3,4,5]
+)
+
+],
+
+3:[
+
+makeQuestion(
+"Which is bigger?",
+"Half",
+["Half","Quarter","Same","None"]
+),
+
+makeQuestion(
+"Two quarters are equal to...",
+"Half",
+["Whole","Half","One quarter","Three quarters"]
+)
+
+],
+
+4:[
+
+makeQuestion(
+"Ali eats half of a pizza. What fraction is left?",
+"Half",
+["Whole","Half","Quarter","None"]
+),
+
+makeQuestion(
+"A cake is cut into 4 equal pieces. One piece is...",
+"Quarter",
+["Half","Quarter","Whole","Two"]
+)
+
+],
+
+5:[
+
+makeQuestion(
+"Mia has 4 equal pieces of chocolate and eats 2. What fraction did she eat?",
+"Half",
+["Quarter","Half","Whole","None"]
+),
+
+makeQuestion(
+"Which is smaller?",
+"Quarter",
+["Half","Quarter","Whole","Two halves"]
+)
+
+]
+
+};
+
+const list = banks[level];
+
+return list[
+randomNumber(0,list.length-1)
+];
+
+}
+
+
+/* =========================================================
+   MONEY QUESTIONS BY LEVEL
+========================================================= */
+
+function moneyQuestion(level){
+
+if(level === 1){
+
+const values = [1,5,10,20,50];
+
+const value =
+values[
+randomNumber(0,values.length-1)
+];
+
+return makeQuestion(
+
+`Which amount is ${value} sen?`,
+
+`${value} sen`,
+
+[
+`${value} sen`,
+`${value+5} sen`,
+`${Math.max(1,value-5)} sen`,
+`RM${value}`
+]
+
+);
+
+}
+
+
+if(level === 2){
+
+const a = randomNumber(1,5);
+const b = randomNumber(1,5);
+
+const answer = a+b;
 
 return makeQuestion(
 
@@ -2134,59 +2735,103 @@ return makeQuestion(
 }
 
 
-/* FRACTIONS */
+if(level === 3){
 
-if(topic === "fractions"){
+const price =
+randomNumber(2,10);
 
-const questions = [
+const paid =
+price + randomNumber(1,5);
 
-makeQuestion(
-"One of two equal parts is called...",
-"Half",
-["Whole","Half","Quarter","Three"]
-),
+const change =
+paid-price;
 
-makeQuestion(
-"One of four equal parts is called...",
-"Quarter",
-["Half","Quarter","Whole","Two"]
-),
+return makeQuestion(
 
-makeQuestion(
-"How many halves make one whole?",
-2,
-[1,2,3,4]
-),
+`A toy costs RM${price}. You pay RM${paid}. How much change?`,
 
-makeQuestion(
-"How many quarters make one whole?",
-4,
-[2,3,4,5]
-),
+`RM${change}`,
 
-makeQuestion(
-"Which is bigger?",
-"Half",
-["Half","Quarter","Same","None"]
-)
+[
+`RM${change}`,
+`RM${change+1}`,
+`RM${Math.max(1,change-1)}`,
+`RM${price}`
+]
 
-];
-
-return questions[
-randomNumber(
-0,
-questions.length-1
-)
-];
+);
 
 }
 
 
-/* TIME */
+if(level === 4){
 
-if(topic === "time"){
+const item1 =
+randomNumber(2,10);
 
-const questions = [
+const item2 =
+randomNumber(2,10);
+
+const total =
+item1+item2;
+
+return makeQuestion(
+
+`A book costs RM${item1} and a pencil case costs RM${item2}. What is the total?`,
+
+`RM${total}`,
+
+[
+`RM${total}`,
+`RM${total+2}`,
+`RM${Math.max(1,total-2)}`,
+`RM${item1}`
+]
+
+);
+
+}
+
+
+const money =
+randomNumber(15,30);
+
+const item1 =
+randomNumber(3,8);
+
+const item2 =
+randomNumber(3,8);
+
+const left =
+money-item1-item2;
+
+return makeQuestion(
+
+`Amir has RM${money}. He buys items for RM${item1} and RM${item2}. How much money is left?`,
+
+`RM${left}`,
+
+[
+`RM${left}`,
+`RM${left+2}`,
+`RM${Math.max(0,left-2)}`,
+`RM${money-item1}`
+]
+
+);
+
+}
+
+
+/* =========================================================
+   TIME QUESTIONS BY LEVEL
+========================================================= */
+
+function timeQuestion(level){
+
+const banks = {
+
+1:[
 
 makeQuestion(
 "How many days are in one week?",
@@ -2198,7 +2843,11 @@ makeQuestion(
 "After Monday comes...",
 "Tuesday",
 ["Sunday","Tuesday","Friday","Saturday"]
-),
+)
+
+],
+
+2:[
 
 makeQuestion(
 "Before Friday is...",
@@ -2210,43 +2859,94 @@ makeQuestion(
 "How many months are in one year?",
 12,
 [10,11,12,13]
-),
+)
+
+],
+
+3:[
 
 makeQuestion(
 "Breakfast is usually in the...",
 "Morning",
 ["Morning","Night","Evening","Midnight"]
+),
+
+makeQuestion(
+"School usually starts in the...",
+"Morning",
+["Morning","Night","Midnight","Late evening"]
 )
 
-];
+],
 
-return questions[
-randomNumber(
-0,
-questions.length-1
+4:[
+
+makeQuestion(
+"If class starts at 8:00 and ends at 9:00, how long is the class?",
+"1 hour",
+["30 minutes","1 hour","2 hours","3 hours"]
+),
+
+makeQuestion(
+"2 hours after 3:00 is...",
+"5:00",
+["4:00","5:00","6:00","7:00"]
 )
+
+],
+
+5:[
+
+makeQuestion(
+"A movie starts at 2:00 and ends at 4:00. How long is it?",
+"2 hours",
+["1 hour","2 hours","3 hours","4 hours"]
+),
+
+makeQuestion(
+"One hour before 7:00 is...",
+"6:00",
+["5:00","6:00","7:00","8:00"]
+)
+
+]
+
+};
+
+const list = banks[level];
+
+return list[
+randomNumber(0,list.length-1)
 ];
 
 }
 
 
-/* MEASUREMENT */
+/* =========================================================
+   MEASUREMENT QUESTIONS BY LEVEL
+========================================================= */
 
-if(topic === "measurement"){
+function measurementQuestion(level){
 
-const questions = [
+const banks = {
+
+1:[
 
 makeQuestion(
-"An elephant is usually...",
-"Heavy",
-["Light","Heavy","Empty","Short"]
+"Which is usually longer?",
+"Broom",
+["Pencil","Broom","Coin","Eraser"]
 ),
 
 makeQuestion(
 "A feather is usually...",
 "Light",
 ["Heavy","Light","Full","Long"]
-),
+)
+
+],
+
+2:[
 
 makeQuestion(
 "Which can hold more water?",
@@ -2258,31 +2958,78 @@ makeQuestion(
 "Which measures length?",
 "Ruler",
 ["Clock","Ruler","Calendar","Coin"]
+)
+
+],
+
+3:[
+
+makeQuestion(
+"Which is heavier?",
+"Elephant",
+["Feather","Elephant","Paper","Leaf"]
 ),
 
 makeQuestion(
-"A broom is usually ___ than a pencil.",
-"Longer",
-["Shorter","Longer","Lighter","Empty"]
+"A bottle is full. A cup is half full. Which contains more?",
+"Bottle",
+["Bottle","Cup","Same","None"]
 )
 
-];
+],
 
-return questions[
-randomNumber(
-0,
-questions.length-1
+4:[
+
+makeQuestion(
+"A rope is 8 m long. Another rope is 5 m long. How much longer is the first rope?",
+"3 m",
+["2 m","3 m","4 m","5 m"]
+),
+
+makeQuestion(
+"A pencil is 15 cm long and an eraser is 5 cm long. What is the difference?",
+"10 cm",
+["5 cm","10 cm","15 cm","20 cm"]
 )
+
+],
+
+5:[
+
+makeQuestion(
+"Ali walks 20 m, then another 15 m. How far does he walk altogether?",
+"35 m",
+["25 m","30 m","35 m","40 m"]
+),
+
+makeQuestion(
+"A container holds 10 cups. It already has 6 cups. How many more cups are needed?",
+4,
+[2,3,4,5]
+)
+
+]
+
+};
+
+const list = banks[level];
+
+return list[
+randomNumber(0,list.length-1)
 ];
 
 }
 
 
-/* SHAPES */
+/* =========================================================
+   SHAPE QUESTIONS BY LEVEL
+========================================================= */
 
-if(topic === "shapes"){
+function shapesQuestion(level){
 
-const questions = [
+const banks = {
+
+1:[
 
 makeQuestion(
 "Which shape has 3 sides?",
@@ -2294,7 +3041,11 @@ makeQuestion(
 "Which shape is round?",
 "Circle",
 ["Triangle","Square","Circle","Rectangle"]
-),
+)
+
+],
+
+2:[
 
 makeQuestion(
 "Which shape has 4 equal sides?",
@@ -2303,46 +3054,97 @@ makeQuestion(
 ),
 
 makeQuestion(
-"How many sides does a triangle have?",
-3,
+"How many sides does a rectangle have?",
+4,
 [2,3,4,5]
-),
+)
+
+],
+
+3:[
 
 makeQuestion(
 "Which shape has no corners?",
 "Circle",
 ["Square","Triangle","Circle","Rectangle"]
+),
+
+makeQuestion(
+"Which shape has more sides?",
+"Rectangle",
+["Triangle","Rectangle","Circle","Oval"]
 )
 
-];
+],
 
-return questions[
-randomNumber(
-0,
-questions.length-1
+4:[
+
+makeQuestion(
+"🔺 🔵 🔺 🔵 🔺 __",
+"🔵",
+["🔺","🔵","⬛","⭐"]
+),
+
+makeQuestion(
+"⬛ ⬛ 🔺 ⬛ ⬛ 🔺 __",
+"⬛",
+["🔺","⬛","🔵","⭐"]
 )
+
+],
+
+5:[
+
+makeQuestion(
+"A shape has 4 sides and all sides are equal. What is it?",
+"Square",
+["Rectangle","Triangle","Square","Circle"]
+),
+
+makeQuestion(
+"A shape has 3 sides and 3 corners. What is it?",
+"Triangle",
+["Circle","Rectangle","Triangle","Square"]
+)
+
+]
+
+};
+
+const list = banks[level];
+
+return list[
+randomNumber(0,list.length-1)
 ];
 
 }
 
 
-/* DATA */
+/* =========================================================
+   DATA QUESTIONS BY LEVEL
+========================================================= */
 
-if(topic === "data"){
+function dataQuestion(level){
 
-const questions = [
+const banks = {
 
-makeQuestion(
-"🍎🍎🍎 and 🍌🍌. Which has more?",
-"Apples",
-["Apples","Bananas","Same","None"]
-),
+1:[
 
 makeQuestion(
 "⭐⭐⭐⭐ How many stars?",
 4,
 [2,3,4,5]
 ),
+
+makeQuestion(
+"🍎🍎🍎 and 🍌🍌. Which has more?",
+"Apples",
+["Apples","Bananas","Same","None"]
+)
+
+],
+
+2:[
 
 makeQuestion(
 "Cats: 5, Dogs: 3. Which has more?",
@@ -2354,26 +3156,105 @@ makeQuestion(
 "Red: 2, Blue: 6. Which has fewer?",
 "Red",
 ["Red","Blue","Same","None"]
+)
+
+],
+
+3:[
+
+makeQuestion(
+"Ali read 2 books. Mia read 5 books. How many books altogether?",
+7,
+[5,6,7,8]
 ),
 
 makeQuestion(
-"Ali read 2 books. Mia read 5. Who read more?",
-"Mia",
-["Ali","Mia","Same","Nobody"]
+"Apples: 6, Bananas: 4. What is the difference?",
+2,
+[1,2,3,4]
 )
 
-];
+],
 
-return questions[
-randomNumber(
-0,
-questions.length-1
+4:[
+
+makeQuestion(
+"Red balls: 8, Blue balls: 5, Green balls: 3. Which colour has the most?",
+"Red",
+["Red","Blue","Green","Same"]
+),
+
+makeQuestion(
+"Cats: 7, Dogs: 4. How many animals altogether?",
+11,
+[9,10,11,12]
 )
+
+],
+
+5:[
+
+makeQuestion(
+"Monday: 3 books, Tuesday: 5 books, Wednesday: 4 books. How many books altogether?",
+12,
+[10,11,12,13]
+),
+
+makeQuestion(
+"Team A has 9 points and Team B has 6 points. How many more points does Team A have?",
+3,
+[2,3,4,5]
+)
+
+]
+
+};
+
+const list = banks[level];
+
+return list[
+randomNumber(0,list.length-1)
 ];
 
 }
 
 
+/* =========================================================
+   MAIN QUESTION GENERATOR
+========================================================= */
+
+function generateQuestion(topic,level){
+
+switch(topic){
+
+case "addition":
+return additionQuestion(level);
+
+case "subtraction":
+return subtractionQuestion(level);
+
+case "numbers":
+return numbersQuestion(level);
+
+case "fractions":
+return fractionsQuestion(level);
+
+case "money":
+return moneyQuestion(level);
+
+case "time":
+return timeQuestion(level);
+
+case "measurement":
+return measurementQuestion(level);
+
+case "shapes":
+return shapesQuestion(level);
+
+case "data":
+return dataQuestion(level);
+
+default:
 return makeQuestion(
 "1 + 1 = ?",
 2,
@@ -2382,37 +3263,35 @@ return makeQuestion(
 
 }
 
+}
+
 
 /* =========================================================
    START QUIZ
 ========================================================= */
 
-function startQuiz(topic){
+function startQuiz(topic,level){
 
-state.currentTopic =
-topic;
+state.currentTopic = topic;
 
-state.questions =
-[];
+state.difficulty = Number(level);
 
-state.questionIndex =
-0;
+state.questions = [];
 
-state.correctAnswers =
-0;
+state.questionIndex = 0;
 
-state.answerLocked =
-false;
+state.correctAnswers = 0;
+
+state.answerLocked = false;
 
 
-for(
-let i=0;
-i<15;
-i++
-){
+for(let i=0;i<15;i++){
 
 state.questions.push(
-generateQuestion(topic)
+generateQuestion(
+state.currentTopic,
+state.difficulty
+)
 );
 
 }
@@ -2426,7 +3305,7 @@ renderQuestion();
 
 
 /* =========================================================
-   RENDER QUESTION
+   QUESTION SCREEN
 ========================================================= */
 
 function renderQuestion(){
@@ -2454,7 +3333,7 @@ $("#quiz").innerHTML = `
 
 <button
 class="btn ghost small"
-onclick="showPage('learn')">
+onclick="openDifficulty('${state.currentTopic}')">
 
 ←
 
@@ -2470,17 +3349,17 @@ ${topicName(state.currentTopic)}
 </b>
 
 
-<span class="badge">
+<div>
 
-${t("question")}
+<div class="quiz-level">
 
-${state.questionIndex+1}
+Level ${state.difficulty}
+•
+${difficultyName(state.difficulty)}
 
-${t("of")}
+</div>
 
-${state.questions.length}
-
-</span>
+</div>
 
 </div>
 
@@ -2500,41 +3379,30 @@ ${state.questionIndex/state.questions.length*100}%
 
 
 <div
-class="center"
-style="margin-top:12px">
-
-<label>
-
-${t("difficulty")}
-
-<select
 style="
-width:auto;
-padding:8px;
-"
-onchange="changeDifficulty(this.value)">
+display:flex;
+justify-content:space-between;
+margin-top:10px;
+font-size:12px;
+color:#777;
+">
 
-${
+<span>
 
-[1,2,3,4,5]
+${t("question")}
+${state.questionIndex+1}
+${t("of")}
+${state.questions.length}
 
-.map(level=>`
+</span>
 
-<option
-value="${level}"
-${level === state.difficulty ? "selected":""}>
+<button
+class="btn ghost small"
+onclick="openDifficulty('${state.currentTopic}')">
 
-${level}
+${t("changeLevel")}
 
-</option>
-
-`).join("")
-
-}
-
-</select>
-
-</label>
+</button>
 
 </div>
 
@@ -2550,9 +3418,7 @@ ${question.question}
 
 ${
 
-question.options
-
-.map(option=>`
+question.options.map(option=>`
 
 <button
 class="answer"
@@ -2592,8 +3458,7 @@ if(state.answerLocked)
 return;
 
 
-state.answerLocked =
-true;
+state.answerLocked = true;
 
 
 const question =
@@ -2601,16 +3466,14 @@ state.questions[
 state.questionIndex
 ];
 
+
 const selected =
 button.dataset.answer;
 
 
 const correct =
-
 String(selected)
-
 ===
-
 String(question.answer);
 
 
@@ -2622,9 +3485,7 @@ if(correct){
 
 state.correctAnswers++;
 
-button.classList.add(
-"correct"
-);
+button.classList.add("correct");
 
 feedback.className =
 "feedback correct";
@@ -2638,9 +3499,7 @@ playSound("correct");
 
 else{
 
-button.classList.add(
-"wrong"
-);
+button.classList.add("wrong");
 
 
 document
@@ -2648,22 +3507,12 @@ document
 .forEach(answerButton=>{
 
 if(
-
-String(
-answerButton.dataset.answer
-)
-
+String(answerButton.dataset.answer)
 ===
-
-String(
-question.answer
-)
-
+String(question.answer)
 ){
 
-answerButton.classList.add(
-"correct"
-);
+answerButton.classList.add("correct");
 
 }
 
@@ -2674,15 +3523,19 @@ feedback.className =
 "feedback wrong";
 
 
-feedback.innerHTML =
+feedback.innerHTML = `
 
-`${t("wrong")}<br>
+${t("wrong")}
+
+<br>
 
 Correct answer:
 
 <strong>
 ${question.answer}
-</strong>`;
+</strong>
+
+`;
 
 
 playSound("wrong");
@@ -2694,8 +3547,7 @@ setTimeout(()=>{
 
 state.questionIndex++;
 
-state.answerLocked =
-false;
+state.answerLocked = false;
 
 renderQuestion();
 
@@ -2708,39 +3560,38 @@ renderQuestion();
    QUIZ RESULT
 ========================================================= */
 
-async function finishQuiz(){
+function finishQuiz(){
 
-const child =
-currentChild();
-
+const child = currentChild();
 
 const total =
 state.questions.length;
 
 
 const accuracy =
-
 Math.round(
-
 state.correctAnswers /
-
 total * 100
-
 );
 
 
+/*
+Higher difficulty gives slightly higher XP.
+*/
+
+const difficultyBonus =
+state.difficulty * 10;
+
+
 let xpEarned =
-state.correctAnswers * 10;
-
-
-xpEarned +=
-50;
+state.correctAnswers * 10
++
+difficultyBonus;
 
 
 if(accuracy === 100){
 
-xpEarned +=
-100;
+xpEarned += 100;
 
 }
 
@@ -2749,20 +3600,13 @@ const starsEarned =
 getStars(accuracy);
 
 
-child.xp +=
-xpEarned;
+child.xp += xpEarned;
 
+child.stars += starsEarned;
 
-child.stars +=
-starsEarned;
+child.totalQuestions += total;
 
-
-child.totalQuestions +=
-total;
-
-
-child.correctAnswers +=
-state.correctAnswers;
+child.correctAnswers += state.correctAnswers;
 
 
 const oldTopicScore =
@@ -2782,8 +3626,9 @@ Math.round(
 
 child.history.unshift({
 
-topic:
-state.currentTopic,
+topic:state.currentTopic,
+
+difficulty:state.difficulty,
 
 score:
 `${state.correctAnswers}/${total}`,
@@ -2805,46 +3650,6 @@ saveLocal();
 syncFirebase();
 
 
-let adaptiveMessage;
-
-
-if(accuracy >= 90){
-
-adaptiveMessage =
-
-state.language === "en"
-?
-"🏆 Excellent! You are ready for a harder Ninja challenge."
-:
-"🏆 Hebat! Anda bersedia untuk cabaran Ninja yang lebih sukar.";
-
-}
-
-else if(accuracy >= 70){
-
-adaptiveMessage =
-
-state.language === "en"
-?
-"👍 Good work! Keep training at this level."
-:
-"👍 Bagus! Teruskan latihan pada tahap ini.";
-
-}
-
-else{
-
-adaptiveMessage =
-
-state.language === "en"
-?
-"💛 More practice will make your Ninja skills stronger."
-:
-"💛 Lebih banyak latihan akan menguatkan kemahiran Ninja anda.";
-
-}
-
-
 $("#result").innerHTML = `
 
 <div class="quiz-wrap center">
@@ -2863,6 +3668,19 @@ ${t("missionComplete")}
 </h1>
 
 
+<p class="badge">
+
+${topicName(state.currentTopic)}
+
+•
+Level ${state.difficulty}
+
+•
+${difficultyName(state.difficulty)}
+
+</p>
+
+
 <div class="result-score">
 
 ${state.correctAnswers}/${total}
@@ -2878,7 +3696,6 @@ ${"⭐".repeat(starsEarned)}
 
 
 <div class="grid stats">
-
 
 <div class="card stat">
 
@@ -2931,15 +3748,7 @@ ${t("level")}
 
 </div>
 
-
 </div>
-
-
-<p>
-
-${adaptiveMessage}
-
-</p>
 
 
 <div style="
@@ -2951,7 +3760,7 @@ flex-wrap:wrap;
 
 <button
 class="btn"
-onclick="startQuiz('${state.currentTopic}')">
+onclick="startQuiz('${state.currentTopic}',${state.difficulty})">
 
 ${t("tryAgain")}
 
@@ -2959,10 +3768,19 @@ ${t("tryAgain")}
 
 
 <button
-class="btn dark"
-onclick="showPage('home')">
+class="btn ghost"
+onclick="openDifficulty('${state.currentTopic}')">
 
-${t("home")}
+${t("changeLevel")}
+
+</button>
+
+
+<button
+class="btn dark"
+onclick="showPage('learn')">
+
+📚 Learn
 
 </button>
 
@@ -3018,20 +3836,17 @@ ${id === state.currentChildId ? "selected":""}
 class="child-select"
 onclick="selectChild('${id}')">
 
-
 <div class="child-avatar">
 
 ${child.avatar}
 
 </div>
 
-
 <h3>
 
 ${child.name}
 
 </h3>
-
 
 <p>
 
@@ -3043,7 +3858,6 @@ ${child.xp} XP
 
 </p>
 
-
 </div>
 
 
@@ -3054,7 +3868,6 @@ onclick="deleteChild('${id}')">
 🗑️ ${t("deleteProfile")}
 
 </button>
-
 
 </div>
 
@@ -3077,7 +3890,6 @@ onclick="deleteChild('${id}')">
 <div class="card">
 
 <div class="grid form-grid">
-
 
 <div>
 
@@ -3103,36 +3915,23 @@ Avatar
 
 <select id="newChildAvatar">
 
-<option value="🥷">
-🥷 Ninja
-</option>
+<option value="🥷">🥷 Ninja</option>
 
-<option value="👦">
-👦 Boy
-</option>
+<option value="👦">👦 Boy</option>
 
-<option value="👧">
-👧 Girl
-</option>
+<option value="👧">👧 Girl</option>
 
-<option value="🐼">
-🐼 Panda Ninja
-</option>
+<option value="🐼">🐼 Panda Ninja</option>
 
-<option value="🐱">
-🐱 Cat Ninja
-</option>
+<option value="🐱">🐱 Cat Ninja</option>
 
-<option value="🤖">
-🤖 Robot Ninja
-</option>
+<option value="🤖">🤖 Robot Ninja</option>
 
 </select>
 
 </label>
 
 </div>
-
 
 </div>
 
@@ -3145,7 +3944,6 @@ onclick="addChild()">
 ${t("saveChild")}
 
 </button>
-
 
 </div>
 
@@ -3164,8 +3962,7 @@ if(!children[id])
 return;
 
 
-state.currentChildId =
-id;
+state.currentChildId = id;
 
 
 saveLocal();
@@ -3174,13 +3971,9 @@ renderAll();
 
 
 toast(
-
 "🥷 " +
-
 children[id].name +
-
 " selected!"
-
 );
 
 }
@@ -3259,21 +4052,13 @@ correctAnswers:0,
 topics:{
 
 numbers:0,
-
 addition:0,
-
 subtraction:0,
-
 fractions:0,
-
 money:0,
-
 time:0,
-
 measurement:0,
-
 shapes:0,
-
 data:0
 
 },
@@ -3283,8 +4068,7 @@ history:[]
 };
 
 
-state.currentChildId =
-id;
+state.currentChildId = id;
 
 
 saveLocal();
@@ -3308,26 +4092,19 @@ state.language === "en"
 
 
 /* =========================================================
-   DELETE CHILD PROFILE
+   DELETE CHILD
 ========================================================= */
 
 function deleteChild(id){
 
-const child =
-children[id];
+const child = children[id];
 
 
 if(!child)
 return;
 
 
-/*
-At least one profile must remain.
-*/
-
-if(
-Object.keys(children).length <= 1
-){
+if(Object.keys(children).length <= 1){
 
 toast(
 
@@ -3343,10 +4120,6 @@ return;
 
 }
 
-
-/*
-Delete confirmation.
-*/
 
 const message =
 
@@ -3365,43 +4138,20 @@ All XP, stars, quiz history and learning progress for this child will be permane
 Semua XP, bintang, sejarah kuiz dan kemajuan pembelajaran anak ini akan dipadam.`;
 
 
-const confirmed =
-window.confirm(message);
-
-
-if(!confirmed)
+if(!window.confirm(message))
 return;
 
-
-/*
-Remove child from central children object.
-
-Because Profile and Ranking both read from this same
-children object, the child automatically disappears
-from BOTH Profile and Ranking.
-*/
 
 delete children[id];
 
 
-/*
-If current active child was deleted,
-select the first remaining child.
-*/
-
-if(
-state.currentChildId === id
-){
+if(state.currentChildId === id){
 
 state.currentChildId =
 Object.keys(children)[0];
 
 }
 
-
-/*
-Save updated children list.
-*/
 
 saveLocal();
 
@@ -3425,19 +4175,9 @@ state.language === "en"
 
 /* =========================================================
    RANKING
-   IMPORTANT:
-   Ranking uses ONLY accounts inside "children".
 ========================================================= */
 
 function renderRanking(){
-
-/*
-Create ranking directly from existing child profiles.
-
-NO fake accounts.
-NO demo ranking users.
-NO external users.
-*/
 
 const ranking =
 
@@ -3445,7 +4185,7 @@ Object.entries(children)
 
 .map(([id,child])=>({
 
-id:id,
+id,
 
 name:child.name,
 
@@ -3461,36 +4201,24 @@ levelName:getLevel(child).name
 
 }))
 
-
-/*
-Sort highest XP first.
-
-If same XP, use stars as tie breaker.
-*/
-
 .sort((a,b)=>{
 
 if(b.xp !== a.xp){
 
-return b.xp - a.xp;
+return b.xp-a.xp;
 
 }
 
-return b.stars - a.stars;
+return b.stars-a.stars;
 
 });
 
-
-/*
-Top child.
-*/
 
 const champion =
 ranking[0];
 
 
 $("#ranking").innerHTML = `
-
 
 <div class="section-title">
 
@@ -3501,13 +4229,7 @@ $("#ranking").innerHTML = `
 <span>
 
 ${ranking.length}
-${
-ranking.length === 1
-?
-" Ninja"
-:
-" Ninjas"
-}
+${ranking.length === 1 ? " Ninja":" Ninjas"}
 
 </span>
 
@@ -3517,7 +4239,9 @@ ranking.length === 1
 <div class="card ranking-top-card">
 
 <div class="trophy">
+
 🏆
+
 </div>
 
 <h2>
@@ -3532,11 +4256,7 @@ state.language === "en"
 
 </h2>
 
-
-<p style="
-margin:5px 0 0;
-color:#5c5000;
-">
+<p>
 
 ${t("rankingInfo")}
 
@@ -3549,11 +4269,6 @@ champion
 
 `
 
-<div style="
-margin-top:15px;
-font-size:18px;
-">
-
 <strong>
 
 ${champion.avatar}
@@ -3564,16 +4279,13 @@ ${champion.name}
 
 <br>
 
-<span style="
-font-size:13px;
-">
+<small>
 
-Current Leader •
+Current Leader
+•
 ${champion.xp} XP
 
-</span>
-
-</div>
+</small>
 
 `
 
@@ -3590,12 +4302,7 @@ ${champion.xp} XP
 
 ${
 
-ranking.length
-
-?
-
 ranking.map((player,index)=>{
-
 
 const current =
 player.id === state.currentChildId;
@@ -3615,7 +4322,7 @@ index === 2
 ?
 "🥉"
 :
-index + 1;
+index+1;
 
 
 return `
@@ -3625,7 +4332,6 @@ class="
 rank-row
 ${current ? "rank-current":""}
 ">
-
 
 <div class="rank-position">
 
@@ -3650,21 +4356,14 @@ Ninja ${player.name}
 ${
 current
 ?
-
-`<span class="you-badge">
-${t("you")}
-</span>`
-
+`<span class="you-badge">${t("you")}</span>`
 :
-
 ""
 }
 
 </b>
 
-
 <br>
-
 
 <small>
 
@@ -3674,9 +4373,7 @@ ${player.levelName}
 
 </small>
 
-
 <br>
-
 
 <small>
 
@@ -3687,9 +4384,7 @@ ${player.levelName}
 </div>
 
 
-<div style="
-text-align:right;
-">
+<div style="text-align:right">
 
 <b>
 
@@ -3700,35 +4395,16 @@ ${player.xp}
 <br>
 
 <small>
-
 XP
-
 </small>
 
 </div>
-
 
 </div>
 
 `;
 
 }).join("")
-
-:
-
-`
-
-<div class="center">
-
-<p>
-
-No child profiles available.
-
-</p>
-
-</div>
-
-`
 
 }
 
@@ -3745,12 +4421,10 @@ No child profiles available.
 
 function renderParent(){
 
-const child =
-currentChild();
+const child = currentChild();
 
 
 const accuracy =
-
 Math.round(
 
 child.correctAnswers /
@@ -3766,14 +4440,8 @@ child.totalQuestions
 
 
 const sortedTopics =
-
-Object.entries(
-child.topics
-)
-
-.sort(
-(a,b)=>a[1]-b[1]
-);
+Object.entries(child.topics)
+.sort((a,b)=>a[1]-b[1]);
 
 
 const weakTopics =
@@ -3781,11 +4449,8 @@ sortedTopics.slice(0,3);
 
 
 const strongTopics =
-
 [...sortedTopics]
-
 .reverse()
-
 .slice(0,3);
 
 
@@ -3809,7 +4474,6 @@ ${child.name}
 
 
 <div class="grid stats">
-
 
 <div class="card stat">
 
@@ -3862,7 +4526,6 @@ ${t("accuracy")}
 
 </div>
 
-
 </div>
 
 
@@ -3880,7 +4543,6 @@ Object.entries(child.topics)
 .map(([topic,score])=>`
 
 <div class="performance-row">
-
 
 <header>
 
@@ -3900,15 +4562,11 @@ ${score}%
 
 </header>
 
-
 <div class="progress">
 
-<i style="
-width:${score}%
-"></i>
+<i style="width:${score}%"></i>
 
 </div>
-
 
 </div>
 
@@ -3923,19 +4581,17 @@ width:${score}%
 class="grid parent-two-column"
 style="margin-top:14px">
 
-
 <div class="card">
 
 <h3>
+
 ⚠️ ${t("needsPractice")}
-</h3>
 
+</h3>
 
 ${
 
-weakTopics
-
-.map(([topic,score])=>`
+weakTopics.map(([topic,score])=>`
 
 <p>
 
@@ -3945,11 +4601,7 @@ ${topicName(topic)}
 
 —
 
-<b>
-
-${score}%
-
-</b>
+<b>${score}%</b>
 
 </p>
 
@@ -3963,15 +4615,14 @@ ${score}%
 <div class="card">
 
 <h3>
-💪 ${t("strongTopics")}
-</h3>
 
+💪 ${t("strongTopics")}
+
+</h3>
 
 ${
 
-strongTopics
-
-.map(([topic,score])=>`
+strongTopics.map(([topic,score])=>`
 
 <p>
 
@@ -3981,11 +4632,7 @@ ${topicName(topic)}
 
 —
 
-<b>
-
-${score}%
-
-</b>
+<b>${score}%</b>
 
 </p>
 
@@ -3994,7 +4641,6 @@ ${score}%
 }
 
 </div>
-
 
 </div>
 
@@ -4004,11 +4650,8 @@ class="card"
 style="margin-top:14px">
 
 <h3>
-
 📚 Learning History
-
 </h3>
-
 
 ${
 
@@ -4018,7 +4661,8 @@ child.history.length
 
 child.history.map(history=>`
 
-<div style="
+<div
+style="
 padding:10px 0;
 border-bottom:1px solid #eee;
 ">
@@ -4039,10 +4683,13 @@ history.topic
 
 <br>
 
-
 <small>
 
 ${history.date}
+
+•
+
+Level ${history.difficulty || 1}
 
 •
 
@@ -4053,7 +4700,6 @@ ${history.score}
 ${history.accuracy}%
 
 </small>
-
 
 </div>
 
@@ -4075,48 +4721,6 @@ No learning history yet.
 
 </div>
 
-
-<div
-class="card"
-style="margin-top:14px">
-
-<h3>
-⚙️ Settings
-</h3>
-
-
-<p>
-
-Language:
-
-<button
-class="btn small"
-onclick="toggleLanguage()">
-
-${state.language.toUpperCase()}
-
-</button>
-
-</p>
-
-
-<p>
-
-Sound:
-
-<button
-class="btn small"
-onclick="toggleSound()">
-
-${state.sound ? "🔊 ON":"🔇 OFF"}
-
-</button>
-
-</p>
-
-
-</div>
-
 `;
 
 }
@@ -4129,7 +4733,6 @@ ${state.sound ? "🔊 ON":"🔇 OFF"}
 function toggleLanguage(){
 
 state.language =
-
 state.language === "en"
 ?
 "bm"
@@ -4162,18 +4765,6 @@ renderAll();
 
 
 /* =========================================================
-   DIFFICULTY
-========================================================= */
-
-function changeDifficulty(level){
-
-state.difficulty =
-Number(level);
-
-}
-
-
-/* =========================================================
    FIREBASE SAVE
 ========================================================= */
 
@@ -4196,8 +4787,6 @@ database,
 ),
 
 {
-
-children:
 
 children,
 
@@ -4311,13 +4900,11 @@ renderAll();
 
 function renderAll(){
 
-$("#languageButton")
-.textContent =
+$("#languageButton").textContent =
 state.language.toUpperCase();
 
 
-$("#soundButton")
-.textContent =
+$("#soundButton").textContent =
 state.sound
 ?
 "🔊"
@@ -4328,6 +4915,8 @@ state.sound
 renderHome();
 
 renderLearn();
+
+renderDifficulty();
 
 renderMissions();
 
@@ -4382,37 +4971,32 @@ toggleSound
 window.showPage =
 showPage;
 
+window.openDifficulty =
+openDifficulty;
+
+window.selectDifficulty =
+selectDifficulty;
 
 window.startQuiz =
 startQuiz;
 
-
 window.answerQuestion =
 answerQuestion;
-
 
 window.selectChild =
 selectChild;
 
-
 window.addChild =
 addChild;
-
 
 window.deleteChild =
 deleteChild;
 
-
 window.toggleLanguage =
 toggleLanguage;
 
-
 window.toggleSound =
 toggleSound;
-
-
-window.changeDifficulty =
-changeDifficulty;
 
 
 /* =========================================================
@@ -4449,7 +5033,7 @@ error
 
 
 /* =========================================================
-   START
+   START APP
 ========================================================= */
 
 renderAll();
