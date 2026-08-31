@@ -35,8 +35,8 @@ button,input,select{
 }
 
 button{
-  cursor:pointer;
   border:0;
+  cursor:pointer;
 }
 
 .app{
@@ -44,8 +44,10 @@ button{
   min-height:100vh;
   margin:auto;
   background:#FAF9F3;
-  padding-bottom:100px;
+  padding-bottom:105px;
 }
+
+/* TOP BAR */
 
 .topbar{
   position:sticky;
@@ -55,7 +57,7 @@ button{
   justify-content:space-between;
   align-items:center;
   gap:10px;
-  padding:16px 20px;
+  padding:14px 18px;
   color:white;
   background:linear-gradient(135deg,#101010,#292929);
 }
@@ -80,23 +82,35 @@ button{
 
 .brand small{
   display:block;
+  margin-top:2px;
   color:#ccc;
   font-size:10px;
-  margin-top:2px;
 }
 
 .header-actions{
   display:flex;
-  gap:7px;
+  gap:6px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
 }
 
 .pill{
-  padding:9px 12px;
+  min-width:45px;
+  padding:9px 10px;
   color:white;
   background:#333;
   border:1px solid #555;
   border-radius:999px;
+  font-size:13px;
 }
+
+.pill.active{
+  color:#111;
+  background:var(--yellow);
+  border-color:var(--yellow);
+}
+
+/* GENERAL */
 
 .screen{
   display:none;
@@ -126,6 +140,10 @@ button{
   color:#111;
   font-weight:900;
   box-shadow:0 5px 0 #C79E00;
+}
+
+.btn:hover{
+  filter:brightness(1.02);
 }
 
 .btn:active{
@@ -183,6 +201,8 @@ button{
   font-weight:900;
 }
 
+.center{text-align:center}
+
 /* HERO */
 
 .hero{
@@ -210,10 +230,9 @@ button{
   place-items:center;
 }
 
-/* AVATAR */
+/* NINJA AVATAR */
 
 .ninja-avatar{
-  position:relative;
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -222,7 +241,11 @@ button{
   border-radius:50%;
   box-shadow:0 5px 15px rgba(0,0,0,.18);
   overflow:hidden;
-  font-size:54px;
+}
+
+.ninja-face{
+  font-size:inherit;
+  filter:drop-shadow(0 3px 2px rgba(0,0,0,.15));
 }
 
 .ninja-avatar.small{
@@ -245,31 +268,31 @@ button{
 }
 
 .avatar-red{
-  background:linear-gradient(135deg,#FF6A6A,#CE2029);
+  background:linear-gradient(135deg,#FF7777,#C71924);
 }
 
 .avatar-pink{
-  background:linear-gradient(135deg,#FFB2D4,#FF5CA8);
+  background:linear-gradient(135deg,#FFB0D4,#F43E93);
 }
 
 .avatar-blue{
-  background:linear-gradient(135deg,#72C8FF,#2379D8);
+  background:linear-gradient(135deg,#7ACFFF,#2379D8);
 }
 
 .avatar-purple{
-  background:linear-gradient(135deg,#C99AFF,#7F45CE);
+  background:linear-gradient(135deg,#D0A3FF,#7D3EC5);
 }
 
 .avatar-green{
-  background:linear-gradient(135deg,#8BE59E,#2FA853);
+  background:linear-gradient(135deg,#92E7A3,#279D4C);
 }
 
 .avatar-orange{
-  background:linear-gradient(135deg,#FFCE71,#F07E22);
+  background:linear-gradient(135deg,#FFD37C,#F0781D);
 }
 
 .avatar-cyan{
-  background:linear-gradient(135deg,#9CF2F4,#25B8C2);
+  background:linear-gradient(135deg,#A5F3F5,#20AEB7);
 }
 
 /* STATS */
@@ -365,6 +388,10 @@ button{
   margin:6px 0;
 }
 
+.difficulty-header p{
+  color:#777;
+}
+
 .difficulty-grid{
   max-width:850px;
   margin:auto;
@@ -382,9 +409,11 @@ button{
   border-radius:22px;
   background:white;
   box-shadow:var(--shadow);
+  transition:.15s;
 }
 
 .difficulty-card:hover{
+  transform:translateY(-2px);
   border-color:var(--yellow);
 }
 
@@ -418,40 +447,6 @@ button{
   margin-top:7px;
 }
 
-/* NAV */
-
-.bottom-nav{
-  position:fixed;
-  left:50%;
-  bottom:0;
-  z-index:100;
-  transform:translateX(-50%);
-  width:min(1100px,100%);
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  padding:7px 5px calc(7px + env(safe-area-inset-bottom));
-  background:white;
-  border-top:1px solid #ddd;
-}
-
-.nav-btn{
-  padding:8px 3px;
-  border-radius:12px;
-  color:#777;
-  background:transparent;
-  font-size:11px;
-}
-
-.nav-btn strong{
-  display:block;
-  font-size:21px;
-}
-
-.nav-btn.active{
-  color:#111;
-  background:#FFF4AD;
-}
-
 /* PROFILE */
 
 .profile-list{
@@ -465,6 +460,7 @@ button{
 
 .child-card.selected{
   border-color:var(--yellow);
+  background:#FFFDF1;
 }
 
 .child-select{
@@ -481,8 +477,6 @@ button{
   width:100%;
   margin-top:10px;
 }
-
-/* ADD CHILD */
 
 .form-grid{
   grid-template-columns:1fr 1fr;
@@ -518,7 +512,6 @@ select{
 }
 
 .avatar-option{
-  position:relative;
   padding:12px 5px;
   text-align:center;
   border:3px solid transparent;
@@ -591,11 +584,18 @@ select{
   background:white;
   font-size:24px;
   font-weight:900;
+  transition:.15s;
+}
+
+.answer:hover{
+  transform:scale(1.02);
+  border-color:#FFD51E;
 }
 
 .answer.correct{
   border-color:#42B96D;
   background:#DBF7E5;
+  transform:scale(1.03);
 }
 
 .answer.wrong{
@@ -612,12 +612,15 @@ select{
   font-weight:900;
 }
 
-.feedback.correct{background:#DDF7E6}
-.feedback.wrong{background:#FFF0D8}
+.feedback.correct{
+  background:#DDF7E6;
+}
+
+.feedback.wrong{
+  background:#FFF0D8;
+}
 
 /* RESULT */
-
-.center{text-align:center}
 
 .result-avatar{
   display:flex;
@@ -631,6 +634,7 @@ select{
 }
 
 .result-stars{
+  margin:10px 0;
   font-size:45px;
 }
 
@@ -729,6 +733,77 @@ select{
   border-bottom:1px solid #eee;
 }
 
+/* AUDIO INFO */
+
+.audio-card{
+  margin-top:14px;
+  background:linear-gradient(135deg,#181818,#303030);
+  color:white;
+}
+
+.audio-controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+
+.audio-control{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  border-radius:15px;
+  background:#3A3A3A;
+}
+
+.audio-status{
+  padding:6px 9px;
+  border-radius:999px;
+  background:#555;
+  font-size:11px;
+}
+
+.audio-status.on{
+  color:#111;
+  background:var(--yellow);
+}
+
+/* NAV */
+
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  z-index:100;
+  transform:translateX(-50%);
+  width:min(1100px,100%);
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  padding:7px 5px calc(7px + env(safe-area-inset-bottom));
+  background:white;
+  border-top:1px solid #ddd;
+}
+
+.nav-btn{
+  padding:8px 3px;
+  border-radius:12px;
+  color:#777;
+  background:transparent;
+  font-size:11px;
+}
+
+.nav-btn strong{
+  display:block;
+  font-size:21px;
+}
+
+.nav-btn.active{
+  color:#111;
+  background:#FFF4AD;
+}
+
 /* TOAST */
 
 .toast{
@@ -749,8 +824,6 @@ select{
 .toast.show{
   opacity:1;
 }
-
-/* RESPONSIVE */
 
 @media(max-width:800px){
 
@@ -811,6 +884,10 @@ select{
     grid-template-columns:repeat(2,1fr);
   }
 
+  .audio-controls{
+    grid-template-columns:1fr;
+  }
+
 }
 
 @media(max-width:430px){
@@ -830,6 +907,15 @@ select{
     grid-template-columns:1fr;
   }
 
+  .header-actions{
+    gap:3px;
+  }
+
+  .pill{
+    padding:8px 8px;
+    font-size:12px;
+  }
+
 }
 </style>
 </head>
@@ -841,17 +927,39 @@ select{
 <header class="topbar">
 
 <div class="brand">
+
 <div class="logo">🥷</div>
 
 <div>
 NINJA MATH
 <small>Learn • Train • Master</small>
 </div>
+
 </div>
 
 <div class="header-actions">
-<button class="pill" id="languageButton">EN</button>
-<button class="pill" id="soundButton">🔊</button>
+
+<button
+class="pill"
+id="languageButton"
+title="Language">
+EN
+</button>
+
+<button
+class="pill"
+id="musicButton"
+title="Background Music">
+🎵
+</button>
+
+<button
+class="pill"
+id="sfxButton"
+title="Sound Effects">
+🔊
+</button>
+
 </div>
 
 </header>
@@ -859,13 +967,21 @@ NINJA MATH
 <main>
 
 <section id="home" class="screen active"></section>
+
 <section id="learn" class="screen"></section>
+
 <section id="difficulty" class="screen"></section>
+
 <section id="missions" class="screen"></section>
+
 <section id="ranking" class="screen"></section>
+
 <section id="profile" class="screen"></section>
+
 <section id="parent" class="screen"></section>
+
 <section id="quiz" class="screen"></section>
+
 <section id="result" class="screen"></section>
 
 </main>
@@ -873,27 +989,33 @@ NINJA MATH
 <nav class="bottom-nav">
 
 <button class="nav-btn active" data-page="home">
-<strong>🏠</strong><span>Home</span>
+<strong>🏠</strong>
+<span>Home</span>
 </button>
 
 <button class="nav-btn" data-page="learn">
-<strong>📚</strong><span>Learn</span>
+<strong>📚</strong>
+<span>Learn</span>
 </button>
 
 <button class="nav-btn" data-page="missions">
-<strong>🎯</strong><span>Missions</span>
+<strong>🎯</strong>
+<span>Missions</span>
 </button>
 
 <button class="nav-btn" data-page="ranking">
-<strong>🏆</strong><span>Ranking</span>
+<strong>🏆</strong>
+<span>Ranking</span>
 </button>
 
 <button class="nav-btn" data-page="profile">
-<strong>🥷</strong><span>Profile</span>
+<strong>🥷</strong>
+<span>Profile</span>
 </button>
 
 <button class="nav-btn" data-page="parent">
-<strong>👨‍👩‍👧</strong><span>Parent</span>
+<strong>👨‍👩‍👧</strong>
+<span>Parent</span>
 </button>
 
 </nav>
@@ -904,7 +1026,13 @@ NINJA MATH
 
 <script type="module">
 
-import {initializeApp}
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import {
+initializeApp
+}
 from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
 import {
@@ -923,164 +1051,281 @@ get
 from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
 
-/* FIREBASE */
-
 const firebaseConfig={
-apiKey:"AIzaSyARbc8YoST8IQrder90Z1DmysRfIGpRPXk",
-authDomain:"ninjamath-bf687.firebaseapp.com",
-databaseURL:"https://ninjamath-bf687-default-rtdb.asia-southeast1.firebasedatabase.app",
-projectId:"ninjamath-bf687",
-storageBucket:"ninjamath-bf687.firebasestorage.app",
-messagingSenderId:"566094745865",
-appId:"1:566094745865:web:91094c00bd449448e4c3d8"
+
+apiKey:
+"AIzaSyARbc8YoST8IQrder90Z1DmysRfIGpRPXk",
+
+authDomain:
+"ninjamath-bf687.firebaseapp.com",
+
+databaseURL:
+"https://ninjamath-bf687-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+projectId:
+"ninjamath-bf687",
+
+storageBucket:
+"ninjamath-bf687.firebasestorage.app",
+
+messagingSenderId:
+"566094745865",
+
+appId:
+"1:566094745865:web:91094c00bd449448e4c3d8"
+
 };
 
-const firebaseApp=initializeApp(firebaseConfig);
-const auth=getAuth(firebaseApp);
-const database=getDatabase(firebaseApp);
+
+const firebaseApp=
+initializeApp(firebaseConfig);
+
+const auth=
+getAuth(firebaseApp);
+
+const database=
+getDatabase(firebaseApp);
 
 
-/* TRANSLATION */
+/* =========================================================
+   TRANSLATION
+========================================================= */
 
 const translations={
 
 en:{
+
 ready:"Ready for Ninja Training?",
+
 today:"Today's Mission",
+
 startMission:"START MISSION",
+
 mathTraining:"Math Training",
+
 practice:"Practice",
+
 accuracy:"Accuracy",
+
 stars:"Stars",
+
 dayStreak:"Day Streak",
+
 parentDashboard:"Parent Dashboard",
+
 selectChild:"Select Child Profile",
+
 viewPerformance:"View learning performance for",
+
 whoTraining:"Who's training today?",
+
 addChild:"Add Child",
+
 saveChild:"Create Ninja Profile",
+
 deleteProfile:"Delete Profile",
+
 chooseAge:"Age",
+
 chooseAvatar:"Choose Your Ninja",
+
 needsPractice:"Needs Practice",
+
 strongTopics:"Strong Topics",
+
 missionComplete:"MISSION COMPLETE!",
+
 tryAgain:"TRY AGAIN",
+
 level:"Level",
+
 correct:"Excellent! Ninja Power! ⭐",
+
 wrong:"Almost! Try again.",
+
 ranking:"Family Ninja Ranking",
+
 rankingInfo:"Only child profiles in this account are shown",
+
 chooseDifficulty:"Choose Difficulty",
-chooseDifficultyDescription:"Choose your Ninja training level. Each level becomes more challenging.",
+
+chooseDifficultyDescription:
+"Choose your Ninja training level. Each level becomes more challenging.",
+
 start:"START",
+
 learningHistory:"Learning History",
-performanceTopic:"Performance by Topic"
+
+performanceTopic:"Performance by Topic",
+
+music:"Background Music",
+
+soundEffects:"Sound Effects",
+
+audioSettings:"Audio Settings",
+
+audioInfo:
+"Music and fun sound effects make Ninja training more interactive."
+
 },
 
 bm:{
+
 ready:"Sedia untuk Latihan Ninja?",
+
 today:"Misi Hari Ini",
+
 startMission:"MULA MISI",
+
 mathTraining:"Latihan Matematik",
+
 practice:"Latihan",
+
 accuracy:"Ketepatan",
+
 stars:"Bintang",
+
 dayStreak:"Hari Berturut",
+
 parentDashboard:"Dashboard Ibu Bapa",
+
 selectChild:"Pilih Profil Anak",
+
 viewPerformance:"Lihat prestasi pembelajaran untuk",
+
 whoTraining:"Siapa berlatih hari ini?",
+
 addChild:"Tambah Anak",
+
 saveChild:"Cipta Profil Ninja",
+
 deleteProfile:"Padam Profil",
+
 chooseAge:"Umur",
+
 chooseAvatar:"Pilih Ninja Anda",
+
 needsPractice:"Perlu Latihan",
+
 strongTopics:"Topik Kuat",
+
 missionComplete:"MISI SELESAI!",
+
 tryAgain:"CUBA LAGI",
+
 level:"Tahap",
+
 correct:"Hebat! Kuasa Ninja! ⭐",
+
 wrong:"Hampir betul! Cuba lagi.",
+
 ranking:"Ranking Ninja Keluarga",
+
 rankingInfo:"Hanya profil anak dalam akaun ini dipaparkan",
+
 chooseDifficulty:"Pilih Tahap Kesukaran",
-chooseDifficultyDescription:"Pilih tahap latihan Ninja. Soalan menjadi lebih mencabar pada setiap tahap.",
+
+chooseDifficultyDescription:
+"Pilih tahap latihan Ninja. Soalan menjadi lebih mencabar pada setiap tahap.",
+
 start:"MULA",
+
 learningHistory:"Sejarah Pembelajaran",
-performanceTopic:"Prestasi Mengikut Topik"
+
+performanceTopic:"Prestasi Mengikut Topik",
+
+music:"Muzik Latar",
+
+soundEffects:"Kesan Bunyi",
+
+audioSettings:"Tetapan Audio",
+
+audioInfo:
+"Muzik dan kesan bunyi menjadikan latihan Ninja lebih interaktif."
+
 }
 
 };
 
 
-/* NINJA AVATARS */
+/* =========================================================
+   AVATARS
+========================================================= */
 
 const avatars={
 
 redBoy:{
 name:"Red Ninja Boy",
-className:"avatar-red",
-icon:"🥷"
+className:"avatar-red"
 },
 
 pinkGirl:{
 name:"Pink Ninja Girl",
-className:"avatar-pink",
-icon:"🥷"
+className:"avatar-pink"
 },
 
 blueBoy:{
 name:"Blue Ninja Boy",
-className:"avatar-blue",
-icon:"🥷"
+className:"avatar-blue"
 },
 
 purpleGirl:{
 name:"Purple Ninja Girl",
-className:"avatar-purple",
-icon:"🥷"
+className:"avatar-purple"
 },
 
 greenBoy:{
 name:"Green Ninja Boy",
-className:"avatar-green",
-icon:"🥷"
+className:"avatar-green"
 },
 
 orangeBoy:{
 name:"Orange Ninja Boy",
-className:"avatar-orange",
-icon:"🥷"
+className:"avatar-orange"
 },
 
 cyanGirl:{
 name:"Cyan Ninja Girl",
-className:"avatar-cyan",
-icon:"🥷"
+className:"avatar-cyan"
 }
 
 };
 
 
-function renderAvatar(avatarId,size="medium"){
+function renderAvatar(
+avatarId,
+size="medium"
+){
 
 const avatar=
-avatars[avatarId] || avatars.redBoy;
+avatars[avatarId]
+||
+avatars.redBoy;
 
-return `
+return`
+
 <div
-class="ninja-avatar ${size} ${avatar.className}"
+class="
+ninja-avatar
+${size}
+${avatar.className}
+"
 title="${avatar.name}">
-${avatar.icon}
+
+<span class="ninja-face">
+🥷
+</span>
+
 </div>
+
 `;
 
 }
 
 
-/* TOPICS */
+/* =========================================================
+   TOPICS
+========================================================= */
 
 const topics={
 
@@ -1159,7 +1404,9 @@ descriptionBM:"Data dan carta mudah"
 };
 
 
-/* DIFFICULTY */
+/* =========================================================
+   DIFFICULTY
+========================================================= */
 
 const difficultyInfo={
 
@@ -1206,21 +1453,36 @@ descriptionBM:"Cabaran Ninja lanjutan."
 };
 
 
-/* STATE */
+/* =========================================================
+   STATE
+========================================================= */
 
 let state={
 
 language:
-localStorage.getItem("ninja_language") || "en",
+localStorage.getItem("ninja_language")
+||
+"en",
 
-sound:
-localStorage.getItem("ninja_sound") !== "off",
+music:
+localStorage.getItem("ninja_music")
+!==
+"off",
+
+sfx:
+localStorage.getItem("ninja_sfx")
+!==
+"off",
 
 currentChildId:
-localStorage.getItem("ninja_child") || "adam",
+localStorage.getItem("ninja_child")
+||
+"adam",
 
 parentChildId:
-localStorage.getItem("ninja_parent_child") || null,
+localStorage.getItem("ninja_parent_child")
+||
+null,
 
 newAvatar:
 "redBoy",
@@ -1242,24 +1504,39 @@ answerLocked:false
 };
 
 
-/* CHILD DATA */
+/* =========================================================
+   CHILDREN
+========================================================= */
 
 let children=
 JSON.parse(
-localStorage.getItem("ninja_children") || "null"
-)
+localStorage.getItem("ninja_children")
 ||
+"null"
+)
+
+||
+
 {
 
 adam:{
+
 name:"Adam",
+
 avatarId:"redBoy",
+
 age:7,
+
 xp:1250,
+
 stars:18,
+
 streak:5,
+
 totalQuestions:86,
+
 correctAnswers:73,
+
 topics:{
 numbers:92,
 addition:85,
@@ -1271,18 +1548,29 @@ measurement:82,
 shapes:95,
 data:76
 },
+
 history:[]
+
 },
 
 aisyah:{
+
 name:"Aisyah",
+
 avatarId:"pinkGirl",
+
 age:8,
+
 xp:940,
+
 stars:14,
+
 streak:3,
+
 totalQuestions:50,
+
 correctAnswers:42,
+
 topics:{
 numbers:88,
 addition:80,
@@ -1294,22 +1582,23 @@ measurement:79,
 shapes:90,
 data:71
 },
+
 history:[]
+
 }
 
 };
 
 
-/*
-Convert old profiles that used emoji avatar.
-*/
+/* OLD PROFILE MIGRATION */
 
-Object.values(children).forEach((child,index)=>{
+Object.values(children)
+.forEach((child,index)=>{
 
 if(!child.avatarId){
 
-child.avatarId =
-index % 2 === 0
+child.avatarId=
+index % 2===0
 ?
 "redBoy"
 :
@@ -1327,39 +1616,82 @@ child.age=7;
 
 
 if(!children[state.currentChildId]){
-state.currentChildId=Object.keys(children)[0];
+
+state.currentChildId=
+Object.keys(children)[0];
+
 }
 
-if(!state.parentChildId || !children[state.parentChildId]){
-state.parentChildId=state.currentChildId;
+
+if(
+!state.parentChildId
+||
+!children[state.parentChildId]
+){
+
+state.parentChildId=
+state.currentChildId;
+
 }
 
 
-/* HELPERS */
+/* =========================================================
+   HELPERS
+========================================================= */
 
-const $=selector=>document.querySelector(selector);
+const $=
+selector=>
+document.querySelector(selector);
+
 
 function t(key){
-return translations[state.language][key] || key;
+
+return translations[state.language][key]
+||
+key;
+
 }
+
 
 function currentChild(){
-return children[state.currentChildId];
+
+return children[
+state.currentChildId
+];
+
 }
+
 
 function parentChild(){
-return children[state.parentChildId] || currentChild();
+
+return children[
+state.parentChildId
+]
+||
+currentChild();
+
 }
+
 
 function topicName(topic){
+
 return state.language==="en"
-? topics[topic].en
-: topics[topic].bm;
+?
+topics[topic].en
+:
+topics[topic].bm;
+
 }
 
+
 function difficultyName(level){
-return difficultyInfo[level][state.language];
+
+return difficultyInfo[level][
+state.language
+];
+
 }
+
 
 function saveLocal(){
 
@@ -1384,74 +1716,828 @@ state.language
 );
 
 localStorage.setItem(
-"ninja_sound",
-state.sound ? "on":"off"
+"ninja_music",
+state.music
+?
+"on"
+:
+"off"
+);
+
+localStorage.setItem(
+"ninja_sfx",
+state.sfx
+?
+"on"
+:
+"off"
 );
 
 }
 
+
 function toast(message){
 
-const el=$("#toast");
+const el=
+$("#toast");
 
-el.textContent=message;
+el.textContent=
+message;
+
 el.classList.add("show");
 
 setTimeout(()=>{
+
 el.classList.remove("show");
+
 },1800);
 
 }
 
 
-/* AUDIO */
+/* =========================================================
+   AUDIO ENGINE
+========================================================= */
 
-function playSound(type){
+let audioContext=null;
 
-if(!state.sound)return;
+let masterGain=null;
 
-try{
+let musicGain=null;
 
-const AudioContextClass=
-window.AudioContext ||
-window.webkitAudioContext;
+let sfxGain=null;
 
-const context=
-new AudioContextClass();
+let musicTimer=null;
 
-const oscillator=
-context.createOscillator();
+let musicStep=0;
 
-const gain=
-context.createGain();
+let audioUnlocked=false;
 
-oscillator.connect(gain);
-gain.connect(context.destination);
 
-oscillator.frequency.value=
-type==="correct" ? 650:280;
+/*
+Create AudioContext only after
+a real user interaction.
+*/
 
-gain.gain.setValueAtTime(
-0.08,
-context.currentTime
-);
+function initAudio(){
 
-gain.gain.exponentialRampToValueAtTime(
-0.001,
-context.currentTime+.2
-);
+if(audioContext){
 
-oscillator.start();
-oscillator.stop(context.currentTime+.2);
+if(audioContext.state==="suspended"){
 
-}catch(e){}
+audioContext.resume();
+
+}
+
+return;
 
 }
 
 
-/* PLAYER LEVEL */
+const AudioContextClass=
+window.AudioContext
+||
+window.webkitAudioContext;
+
+
+if(!AudioContextClass){
+
+return;
+
+}
+
+
+audioContext=
+new AudioContextClass();
+
+
+masterGain=
+audioContext.createGain();
+
+
+musicGain=
+audioContext.createGain();
+
+
+sfxGain=
+audioContext.createGain();
+
+
+masterGain.gain.value=
+0.75;
+
+
+/*
+Keep background music softer
+than sound effects.
+*/
+
+musicGain.gain.value=
+0.08;
+
+
+sfxGain.gain.value=
+0.18;
+
+
+musicGain.connect(
+masterGain
+);
+
+
+sfxGain.connect(
+masterGain
+);
+
+
+masterGain.connect(
+audioContext.destination
+);
+
+
+audioUnlocked=true;
+
+
+if(state.music){
+
+startBackgroundMusic();
+
+}
+
+}
+
+
+/* =========================================================
+   BASIC AUDIO NOTE
+========================================================= */
+
+function playTone(
+frequency,
+duration=.12,
+volume=.15,
+type="sine",
+delay=0,
+destination="sfx"
+){
+
+if(!audioContext)
+return;
+
+
+const start=
+audioContext.currentTime
++
+delay;
+
+
+const oscillator=
+audioContext.createOscillator();
+
+
+const gain=
+audioContext.createGain();
+
+
+oscillator.type=
+type;
+
+
+oscillator.frequency
+.setValueAtTime(
+frequency,
+start
+);
+
+
+gain.gain
+.setValueAtTime(
+0.0001,
+start
+);
+
+
+gain.gain
+.exponentialRampToValueAtTime(
+Math.max(volume,0.001),
+start+.015
+);
+
+
+gain.gain
+.exponentialRampToValueAtTime(
+0.0001,
+start+duration
+);
+
+
+oscillator.connect(gain);
+
+
+gain.connect(
+destination==="music"
+?
+musicGain
+:
+sfxGain
+);
+
+
+oscillator.start(start);
+
+oscillator.stop(
+start+duration+.03
+);
+
+}
+
+
+/* =========================================================
+   SOUND EFFECTS
+========================================================= */
+
+function playSFX(type){
+
+if(
+!state.sfx
+||
+!audioUnlocked
+||
+!audioContext
+){
+
+return;
+
+}
+
+
+if(audioContext.state==="suspended"){
+
+audioContext.resume();
+
+}
+
+
+switch(type){
+
+
+case "tap":
+
+playTone(
+520,
+.06,
+.06,
+"sine",
+0
+);
+
+playTone(
+660,
+.07,
+.04,
+"sine",
+.035
+);
+
+break;
+
+
+case "select":
+
+playTone(
+440,
+.08,
+.08,
+"triangle",
+0
+);
+
+playTone(
+660,
+.1,
+.08,
+"triangle",
+.07
+);
+
+break;
+
+
+case "start":
+
+playTone(
+392,
+.12,
+.1,
+"triangle",
+0
+);
+
+playTone(
+523,
+.12,
+.1,
+"triangle",
+.1
+);
+
+playTone(
+659,
+.16,
+.12,
+"triangle",
+.2
+);
+
+break;
+
+
+case "correct":
+
+playTone(
+523,
+.1,
+.12,
+"sine",
+0
+);
+
+playTone(
+659,
+.1,
+.12,
+"sine",
+.09
+);
+
+playTone(
+784,
+.17,
+.13,
+"sine",
+.18
+);
+
+break;
+
+
+case "wrong":
+
+playTone(
+300,
+.15,
+.11,
+"sawtooth",
+0
+);
+
+playTone(
+220,
+.18,
+.09,
+"sawtooth",
+.12
+);
+
+break;
+
+
+case "complete":
+
+playTone(
+523,
+.13,
+.13,
+"triangle",
+0
+);
+
+playTone(
+659,
+.13,
+.13,
+"triangle",
+.12
+);
+
+playTone(
+784,
+.13,
+.13,
+"triangle",
+.24
+);
+
+playTone(
+1046,
+.28,
+.14,
+"triangle",
+.36
+);
+
+break;
+
+
+case "profile":
+
+playTone(
+659,
+.09,
+.08,
+"sine",
+0
+);
+
+playTone(
+880,
+.12,
+.1,
+"sine",
+.08
+);
+
+break;
+
+
+case "delete":
+
+playTone(
+300,
+.12,
+.08,
+"triangle",
+0
+);
+
+playTone(
+200,
+.18,
+.08,
+"triangle",
+.1
+);
+
+break;
+
+}
+
+}
+
+
+/* =========================================================
+   BACKGROUND MUSIC
+========================================================= */
+
+/*
+Original simple Ninja Math melody.
+No external song or copyrighted music.
+*/
+
+const melody=[
+
+659,
+784,
+880,
+784,
+
+659,
+523,
+587,
+659,
+
+784,
+880,
+988,
+880,
+
+784,
+659,
+587,
+523
+
+];
+
+
+const bass=[
+
+131,
+131,
+147,
+147,
+
+165,
+165,
+147,
+147
+
+];
+
+
+function musicTick(){
+
+if(
+!state.music
+||
+!audioContext
+){
+
+return;
+
+}
+
+
+const note=
+melody[
+musicStep % melody.length
+];
+
+
+const bassNote=
+bass[
+Math.floor(musicStep/2)
+%
+bass.length
+];
+
+
+/*
+Main melody
+*/
+
+playTone(
+note,
+.19,
+.07,
+"triangle",
+0,
+"music"
+);
+
+
+/*
+Soft bass every second beat
+*/
+
+if(musicStep % 2===0){
+
+playTone(
+bassNote,
+.30,
+.05,
+"sine",
+0,
+"music"
+);
+
+}
+
+
+/*
+Small sparkle every 4 beats
+*/
+
+if(musicStep % 4===3){
+
+playTone(
+note*2,
+.08,
+.025,
+"sine",
+.03,
+"music"
+);
+
+}
+
+
+musicStep++;
+
+}
+
+
+/* =========================================================
+   MUSIC START
+========================================================= */
+
+function startBackgroundMusic(){
+
+if(
+!audioUnlocked
+||
+!audioContext
+||
+!state.music
+){
+
+return;
+
+}
+
+
+if(audioContext.state==="suspended"){
+
+audioContext.resume();
+
+}
+
+
+if(musicTimer){
+
+return;
+
+}
+
+
+musicTick();
+
+
+musicTimer=
+setInterval(
+musicTick,
+420
+);
+
+}
+
+
+/* =========================================================
+   MUSIC STOP
+========================================================= */
+
+function stopBackgroundMusic(){
+
+if(musicTimer){
+
+clearInterval(
+musicTimer
+);
+
+musicTimer=null;
+
+}
+
+}
+
+
+/* =========================================================
+   MUSIC TOGGLE
+========================================================= */
+
+function toggleMusic(){
+
+initAudio();
+
+
+state.music=
+!state.music;
+
+
+if(state.music){
+
+startBackgroundMusic();
+
+playSFX("select");
+
+toast(
+state.language==="en"
+?
+"🎵 Music ON"
+:
+"🎵 Muzik ON"
+);
+
+}
+else{
+
+stopBackgroundMusic();
+
+toast(
+state.language==="en"
+?
+"🔇 Music OFF"
+:
+"🔇 Muzik OFF"
+);
+
+}
+
+
+saveLocal();
+
+renderHeader();
+
+}
+
+
+/* =========================================================
+   SFX TOGGLE
+========================================================= */
+
+function toggleSFX(){
+
+initAudio();
+
+
+state.sfx=
+!state.sfx;
+
+
+if(state.sfx){
+
+playSFX("select");
+
+}
+
+
+toast(
+
+state.language==="en"
+
+?
+
+`🔊 Sound Effects ${state.sfx ? "ON":"OFF"}`
+
+:
+
+`🔊 Kesan Bunyi ${state.sfx ? "ON":"OFF"}`
+
+);
+
+
+saveLocal();
+
+renderHeader();
+
+}
+
+
+/* =========================================================
+   UNLOCK AUDIO
+========================================================= */
+
+/*
+Mobile Safari / Chrome require
+user interaction before audio starts.
+*/
+
+function unlockAudio(){
+
+if(!audioUnlocked){
+
+initAudio();
+
+}
+
+}
+
+
+/*
+First click/touch anywhere unlocks music.
+*/
+
+document.addEventListener(
+"pointerdown",
+unlockAudio,
+{
+once:true
+}
+);
+
+
+/* =========================================================
+   CLICK SOUND FOR UI
+========================================================= */
+
+document.addEventListener(
+"click",
+event=>{
+
+const clickable=
+event.target.closest(
+"button,.child-select,.avatar-option"
+);
+
+
+if(
+clickable
+&&
+!clickable.classList.contains("answer")
+){
+
+playSFX("tap");
+
+}
+
+}
+);
+
+
+/* =========================================================
+   LEVEL
+========================================================= */
 
 const ninjaLevels=[
+
 "Ninja Rookie",
 "Little Ninja",
 "Number Ninja",
@@ -1462,44 +2548,120 @@ const ninjaLevels=[
 "Ninja Expert",
 "Ninja Champion",
 "Ninja Master"
+
 ];
+
 
 function getLevel(child){
 
 const level=
 Math.min(
 10,
-Math.floor((child.xp||0)/500)+1
+Math.floor(
+(child.xp||0)/500
+)+1
 );
 
+
 return{
+
 level,
-name:ninjaLevels[level-1]
+
+name:
+ninjaLevels[level-1]
+
 };
 
 }
 
+
 function getStars(accuracy){
 
-if(accuracy>=90)return 3;
-if(accuracy>=70)return 2;
+if(accuracy>=90)
+return 3;
+
+if(accuracy>=70)
+return 2;
 
 return 1;
 
 }
 
 
-/* NAVIGATION */
+/* =========================================================
+   HEADER
+========================================================= */
+
+function renderHeader(){
+
+$("#languageButton")
+.textContent=
+state.language.toUpperCase();
+
+
+$("#musicButton")
+.textContent=
+state.music
+?
+"🎵"
+:
+"🚫🎵";
+
+
+$("#sfxButton")
+.textContent=
+state.sfx
+?
+"🔊"
+:
+"🔇";
+
+
+$("#musicButton")
+.classList.toggle(
+"active",
+state.music
+);
+
+
+$("#sfxButton")
+.classList.toggle(
+"active",
+state.sfx
+);
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
 
 function showPage(page){
 
 document
 .querySelectorAll(".screen")
-.forEach(screen=>
-screen.classList.remove("active")
+.forEach(screen=>{
+
+screen.classList.remove(
+"active"
 );
 
-$("#"+page)?.classList.add("active");
+});
+
+
+const target=
+$("#"+page);
+
+
+if(target){
+
+target.classList.add(
+"active"
+);
+
+}
+
 
 document
 .querySelectorAll(".nav-btn")
@@ -1512,29 +2674,51 @@ button.dataset.page===page
 
 });
 
+
 window.scrollTo({
+
 top:0,
+
 behavior:"smooth"
+
 });
+
 
 renderAll();
 
 }
 
 
-/* HOME */
+/* =========================================================
+   HOME
+========================================================= */
 
 function renderHome(){
 
-const child=currentChild();
-const level=getLevel(child);
+const child=
+currentChild();
+
+
+const level=
+getLevel(child);
+
 
 const accuracy=
 Math.round(
-(child.correctAnswers||0) /
-Math.max(child.totalQuestions||0,1)
+
+(child.correctAnswers||0)
+
+/
+
+Math.max(
+child.totalQuestions||0,
+1
+)
+
 *100
+
 );
+
 
 $("#home").innerHTML=`
 
@@ -1543,29 +2727,48 @@ $("#home").innerHTML=`
 <div>
 
 <span class="badge">
+
 🥷 ${t("level")} ${level.level}
+
 •
+
 ${level.name}
+
 </span>
 
+
 <h1>
+
 Hi ${child.name}! 👋
+
 </h1>
 
+
 <p>
+
 ${t("ready")}
+
 </p>
+
 
 <button
 class="btn"
 onclick="openDifficulty('addition')">
+
 ${t("startMission")} ➜
+
 </button>
 
 </div>
 
+
 <div class="mascot">
-${renderAvatar(child.avatarId,"large")}
+
+${renderAvatar(
+child.avatarId,
+"large"
+)}
+
 </div>
 
 </div>
@@ -1574,23 +2777,54 @@ ${renderAvatar(child.avatarId,"large")}
 <div class="grid stats">
 
 <div class="card stat">
-<b>${child.xp||0}</b>
-<span>⚡ XP</span>
+
+<b>
+${child.xp||0}
+</b>
+
+<span>
+⚡ XP
+</span>
+
 </div>
 
-<div class="card stat">
-<b>${child.stars||0}</b>
-<span>⭐ ${t("stars")}</span>
-</div>
 
 <div class="card stat">
-<b>${accuracy}%</b>
-<span>🎯 ${t("accuracy")}</span>
+
+<b>
+${child.stars||0}
+</b>
+
+<span>
+⭐ ${t("stars")}
+</span>
+
 </div>
 
+
 <div class="card stat">
-<b>${child.streak||0}</b>
-<span>🔥 ${t("dayStreak")}</span>
+
+<b>
+${accuracy}%
+</b>
+
+<span>
+🎯 ${t("accuracy")}
+</span>
+
+</div>
+
+
+<div class="card stat">
+
+<b>
+${child.streak||0}
+</b>
+
+<span>
+🔥 ${t("dayStreak")}
+</span>
+
 </div>
 
 </div>
@@ -1607,24 +2841,98 @@ ${renderAvatar(child.avatarId,"large")}
 </h3>
 
 <p>
-15 Questions • Choose Difficulty • Earn XP
+
+${
+state.language==="en"
+?
+"Complete 15 questions and earn Ninja XP."
+:
+"Selesaikan 15 soalan dan dapatkan XP Ninja."
+}
+
 </p>
 
 <div class="progress">
-<i style="width:${child.topics?.addition||0}%"></i>
+
+<i
+style="
+width:
+${child.topics?.addition||0}%
+">
+</i>
+
 </div>
 
 </div>
+
+
+<div class="card audio-card">
+
+<h3>
+🎧 ${t("audioSettings")}
+</h3>
+
+<p>
+${t("audioInfo")}
+</p>
+
+<div class="audio-controls">
+
+<div class="audio-control">
+
+<span>
+🎵 ${t("music")}
+</span>
+
+<span
+class="
+audio-status
+${state.music ? "on":""}
+">
+
+${state.music ? "ON":"OFF"}
+
+</span>
+
+</div>
+
+
+<div class="audio-control">
+
+<span>
+🔊 ${t("soundEffects")}
+</span>
+
+<span
+class="
+audio-status
+${state.sfx ? "on":""}
+">
+
+${state.sfx ? "ON":"OFF"}
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
 `;
 
 }
 
 
-/* LEARN */
+/* =========================================================
+   LEARN
+========================================================= */
 
 function renderLearn(){
 
-const child=currentChild();
+const child=
+currentChild();
+
 
 $("#learn").innerHTML=`
 
@@ -1640,9 +2948,14 @@ Age ${child.age}
 
 </div>
 
+
 <div class="grid topics">
 
-${Object.entries(topics).map(([key,topic])=>`
+${
+
+Object.entries(topics)
+
+.map(([key,topic])=>`
 
 <div class="card topic">
 
@@ -1657,126 +2970,212 @@ ${topicName(key)}
 </h3>
 
 <p>
-${state.language==="en"
-?topic.descriptionEN
-:topic.descriptionBM}
+
+${
+state.language==="en"
+?
+topic.descriptionEN
+:
+topic.descriptionBM
+}
+
 </p>
 
 </div>
 
+
 <footer>
 
 <span class="badge">
+
 ${child.topics?.[key]||0}%
+
 </span>
+
 
 <button
 class="btn small"
 onclick="openDifficulty('${key}')">
+
 ${t("practice")}
+
 </button>
 
 </footer>
 
 </div>
 
-`).join("")}
+`).join("")
+
+}
 
 </div>
+
 `;
 
 }
 
 
-/* DIFFICULTY */
+/* =========================================================
+   DIFFICULTY
+========================================================= */
 
 function openDifficulty(topic){
 
-state.currentTopic=topic;
-showPage("difficulty");
+state.currentTopic=
+topic;
+
+
+playSFX("select");
+
+
+showPage(
+"difficulty"
+);
 
 }
 
+
 function renderDifficulty(){
 
-const topic=topics[state.currentTopic];
+const topic=
+topics[state.currentTopic];
+
+
+if(!topic)
+return;
+
 
 $("#difficulty").innerHTML=`
 
 <div class="difficulty-header">
 
 <div class="difficulty-topic-icon">
+
 ${topic.icon}
+
 </div>
 
+
 <h1>
-${topicName(state.currentTopic)}
+
+${topicName(
+state.currentTopic
+)}
+
 </h1>
 
+
 <h2>
+
 ${t("chooseDifficulty")}
+
 </h2>
 
+
 <p>
+
 ${t("chooseDifficultyDescription")}
+
 </p>
+
 
 <button
 class="btn ghost small"
 onclick="showPage('learn')">
+
 ← Learn
+
 </button>
 
 </div>
 
+
 <div class="difficulty-grid">
 
-${[1,2,3,4,5].map(level=>`
+${
 
-<div class="difficulty-card level-${level}">
+[1,2,3,4,5]
+
+.map(level=>`
+
+<div
+class="
+difficulty-card
+level-${level}
+">
 
 <div class="difficulty-number">
+
 ${level}
+
 </div>
+
 
 <div class="difficulty-info">
 
 <h3>
+
 Level ${level}
+
 •
+
 ${difficultyName(level)}
+
 </h3>
 
+
 <p>
-${state.language==="en"
-?difficultyInfo[level].descriptionEN
-:difficultyInfo[level].descriptionBM}
+
+${
+state.language==="en"
+?
+difficultyInfo[level].descriptionEN
+:
+difficultyInfo[level].descriptionBM
+}
+
 </p>
 
+
 <div class="difficulty-stars">
+
 ${difficultyInfo[level].stars}
+
 </div>
 
 </div>
+
 
 <button
 class="btn"
 onclick="selectDifficulty(${level})">
+
 ${t("start")} ➜
+
 </button>
 
 </div>
 
-`).join("")}
+`).join("")
+
+}
 
 </div>
+
 `;
 
 }
 
+
 function selectDifficulty(level){
 
-state.difficulty=Number(level);
+state.difficulty=
+Number(level);
+
+
+playSFX("start");
+
 
 startQuiz(
 state.currentTopic,
@@ -1786,25 +3185,61 @@ state.difficulty
 }
 
 
-/* MISSIONS */
+/* =========================================================
+   MISSIONS
+========================================================= */
 
 function renderMissions(){
 
 const missions=[
-{icon:"➕",name:"Addition Sprint",topic:"addition"},
-{icon:"🔢",name:"Number Sense",topic:"numbers"},
-{icon:"➖",name:"Subtraction Training",topic:"subtraction"},
-{icon:"🔺",name:"Shape Hunter",topic:"shapes"}
+
+{
+icon:"➕",
+name:"Addition Sprint",
+topic:"addition"
+},
+
+{
+icon:"🔢",
+name:"Number Sense",
+topic:"numbers"
+},
+
+{
+icon:"➖",
+name:"Subtraction Training",
+topic:"subtraction"
+},
+
+{
+icon:"🔺",
+name:"Shape Hunter",
+topic:"shapes"
+}
+
 ];
+
 
 $("#missions").innerHTML=`
 
 <div class="section-title">
-<h2>🎯 Ninja Missions</h2>
-<span>Daily</span>
+
+<h2>
+🎯 Ninja Missions
+</h2>
+
+<span>
+Daily
+</span>
+
 </div>
 
-${missions.map(m=>`
+
+${
+
+missions
+
+.map(mission=>`
 
 <div
 class="card"
@@ -1817,169 +3252,354 @@ align-items:center;
 ">
 
 <div style="font-size:38px">
-${m.icon}
+
+${mission.icon}
+
 </div>
 
 <div>
-<h3 style="margin:0">${m.name}</h3>
-<small>15 Questions</small>
+
+<h3 style="margin:0">
+
+${mission.name}
+
+</h3>
+
+<small>
+15 Questions
+</small>
+
 </div>
 
 <button
 class="btn small"
-onclick="openDifficulty('${m.topic}')">
+onclick="openDifficulty('${mission.topic}')">
+
 START
+
 </button>
 
 </div>
 
-`).join("")}
+`).join("")
+
+}
+
 `;
 
 }
 
 
-/* QUESTION HELPERS */
+/* =========================================================
+   QUESTIONS HELPERS
+========================================================= */
 
 function randomNumber(min,max){
 
 return Math.floor(
-Math.random()*(max-min+1)
-)+min;
+Math.random()
+*
+(max-min+1)
+)
++
+min;
 
 }
+
 
 function shuffle(array){
 
-for(let i=array.length-1;i>0;i--){
+const result=
+[...array];
+
+
+for(
+let i=result.length-1;
+i>0;
+i--
+){
 
 const j=
-Math.floor(Math.random()*(i+1));
+Math.floor(
+Math.random()
+*
+(i+1)
+);
 
-[array[i],array[j]]=
-[array[j],array[i]];
 
-}
-
-return array;
-
-}
-
-function makeQuestion(question,answer,options){
-
-let clean=[
-...new Set(options.map(String))
+[
+result[i],
+result[j]
+]
+=
+[
+result[j],
+result[i]
 ];
 
-while(clean.length<4){
+}
 
-let fallback=
+
+return result;
+
+}
+
+
+function makeQuestion(
+question,
+answer,
+options
+){
+
+let cleanOptions=
+[
+...new Set(
+options.map(String)
+)
+];
+
+
+while(
+cleanOptions.length<4
+){
+
+const numericAnswer=
+Number(answer);
+
+
+if(
+Number.isFinite(
+numericAnswer
+)
+){
+
+const fallback=
 String(
-Number(answer)+
-clean.length+
+numericAnswer
++
+cleanOptions.length
++
 1
 );
 
-if(!clean.includes(fallback)){
-clean.push(fallback);
+
+if(
+!cleanOptions.includes(
+fallback
+)
+){
+
+cleanOptions.push(
+fallback
+);
+
 }
 
 }
+else{
+
+const fallbacks=[
+"None",
+"Both",
+"Same",
+"Not sure"
+];
+
+
+const fallback=
+fallbacks.find(
+item=>
+!cleanOptions.includes(item)
+);
+
+
+cleanOptions.push(
+fallback
+||
+`Option ${cleanOptions.length+1}`
+);
+
+}
+
+}
+
 
 return{
+
 question,
-answer:String(answer),
-options:shuffle(clean.slice(0,4))
+
+answer:
+String(answer),
+
+options:
+shuffle(
+cleanOptions.slice(0,4)
+)
+
 };
 
 }
 
 
-/* QUESTION GENERATORS */
+/* =========================================================
+   ADDITION
+========================================================= */
 
 function additionQuestion(level){
 
 let a,b,c,answer;
 
+
 if(level===1){
 
 a=randomNumber(0,5);
+
 b=randomNumber(0,5);
+
 answer=a+b;
 
+
 return makeQuestion(
+
 `${a} + ${b} = ?`,
+
 answer,
-[answer,answer+1,Math.max(0,answer-1),answer+2]
+
+[
+answer,
+answer+1,
+Math.max(0,answer-1),
+answer+2
+]
+
 );
 
 }
+
 
 if(level===2){
 
 a=randomNumber(2,10);
+
 b=randomNumber(2,10);
+
 answer=a+b;
 
+
 return makeQuestion(
+
 `${a} + ${b} = ?`,
+
 answer,
-[answer,answer+1,answer+2,Math.max(0,answer-2)]
+
+[
+answer,
+answer+1,
+answer+2,
+Math.max(0,answer-2)
+]
+
 );
 
 }
+
 
 if(level===3){
 
 a=randomNumber(10,30);
+
 b=randomNumber(5,20);
+
 answer=a+b;
 
+
 return makeQuestion(
+
 `${a} + ${b} = ?`,
+
 answer,
-[answer,answer+10,answer+2,Math.max(0,answer-5)]
+
+[
+answer,
+answer+10,
+answer+2,
+Math.max(0,answer-5)
+]
+
 );
 
 }
+
 
 if(level===4){
 
 a=randomNumber(20,60);
+
 b=randomNumber(10,40);
+
 answer=a+b;
 
+
 return makeQuestion(
+
 `Ali has ${a} stickers and gets ${b} more. How many stickers now?`,
+
 answer,
-[answer,answer+5,answer-5,answer+10]
+
+[
+answer,
+answer+5,
+answer-5,
+answer+10
+]
+
 );
 
 }
 
+
 a=randomNumber(30,70);
+
 b=randomNumber(20,50);
+
 c=randomNumber(5,20);
 
 answer=a+b+c;
 
+
 return makeQuestion(
+
 `${a} + ${b} + ${c} = ?`,
+
 answer,
-[answer,answer+5,answer-5,answer+10]
+
+[
+answer,
+answer+5,
+answer-5,
+answer+10
+]
+
 );
 
 }
 
+
+/* =========================================================
+   SUBTRACTION
+========================================================= */
 
 function subtractionQuestion(level){
 
 let a,b,c,answer;
 
+
 if(level===1){
 
 a=randomNumber(2,10);
+
 b=randomNumber(0,a);
+
 answer=a-b;
 
 }
@@ -1987,7 +3607,9 @@ answer=a-b;
 else if(level===2){
 
 a=randomNumber(10,20);
+
 b=randomNumber(1,10);
+
 answer=a-b;
 
 }
@@ -1995,7 +3617,9 @@ answer=a-b;
 else if(level===3){
 
 a=randomNumber(20,50);
+
 b=randomNumber(5,a-5);
+
 answer=a-b;
 
 }
@@ -2003,13 +3627,25 @@ answer=a-b;
 else if(level===4){
 
 a=randomNumber(40,80);
+
 b=randomNumber(10,35);
+
 answer=a-b;
 
+
 return makeQuestion(
+
 `Sara has ${a} marbles and gives away ${b}. How many are left?`,
+
 answer,
-[answer,answer+5,Math.max(0,answer-5),answer+10]
+
+[
+answer,
+answer+5,
+Math.max(0,answer-5),
+answer+10
+]
+
 );
 
 }
@@ -2017,215 +3653,327 @@ answer,
 else{
 
 a=randomNumber(70,100);
+
 b=randomNumber(20,40);
+
 c=randomNumber(5,15);
+
 answer=a-b-c;
 
+
 return makeQuestion(
+
 `${a} − ${b} − ${c} = ?`,
+
 answer,
-[answer,answer+10,Math.max(0,answer-10),answer+5]
+
+[
+answer,
+answer+10,
+Math.max(0,answer-10),
+answer+5
+]
+
 );
 
 }
+
 
 return makeQuestion(
+
 `${a} − ${b} = ?`,
+
 answer,
-[answer,answer+2,Math.max(0,answer-2),answer+1]
+
+[
+answer,
+answer+2,
+Math.max(0,answer-2),
+answer+1
+]
+
 );
 
 }
 
+
+/* =========================================================
+   NUMBERS
+========================================================= */
 
 function numbersQuestion(level){
 
 if(level===1){
 
-const n=randomNumber(0,9);
+const n=
+randomNumber(0,9);
+
 
 return makeQuestion(
+
 `What number comes after ${n}?`,
+
 n+1,
-[n,n+1,n+2,Math.max(0,n-1)]
+
+[
+n,
+n+1,
+n+2,
+Math.max(0,n-1)
+]
+
 );
 
 }
+
 
 if(level===2){
 
-const a=randomNumber(1,20);
-let b=randomNumber(1,20);
+const a=
+randomNumber(1,20);
+
+
+let b=
+randomNumber(1,20);
+
 
 while(a===b){
-b=randomNumber(1,20);
+
+b=
+randomNumber(1,20);
+
 }
 
-const answer=Math.max(a,b);
 
-const distractors=[
-Math.min(a,b),
-Math.max(0,Math.min(a,b)-1),
-answer+1
-];
+const answer=
+Math.max(a,b);
 
-return makeQuestion(
+
+/*
+Only compare the two numbers.
+*/
+
+return{
+
+question:
 `Which is greater: ${a} or ${b}?`,
-answer,
-[answer,...distractors]
-);
+
+answer:
+String(answer),
+
+options:
+shuffle([
+String(a),
+String(b)
+])
+
+};
 
 }
+
 
 if(level===3){
 
-const n=randomNumber(5,40);
+const n=
+randomNumber(5,40);
+
 
 return makeQuestion(
+
 `${n}, ${n+2}, ${n+4}, __, ${n+8}`,
+
 n+6,
-[n+5,n+6,n+7,n+8]
+
+[
+n+5,
+n+6,
+n+7,
+n+8
+]
+
 );
 
 }
+
 
 if(level===4){
 
-const tens=randomNumber(2,8);
-const ones=randomNumber(1,9);
-const number=tens*10+ones;
+const tens=
+randomNumber(2,8);
+
+
+const ones=
+randomNumber(1,9);
+
+
+const number=
+tens*10+ones;
+
 
 return makeQuestion(
+
 `What is the place value of ${tens} in ${number}?`,
+
 tens*10,
-[tens,tens*10,ones,number]
+
+[
+tens,
+tens*10,
+ones,
+number
+]
+
 );
 
 }
 
-const nums=[
+
+let nums=[
 randomNumber(20,99),
 randomNumber(20,99),
 randomNumber(20,99)
 ];
 
-const answer=Math.max(...nums);
+
+while(
+new Set(nums).size<3
+){
+
+nums=[
+randomNumber(20,99),
+randomNumber(20,99),
+randomNumber(20,99)
+];
+
+}
+
+
+const answer=
+Math.max(...nums);
+
 
 return makeQuestion(
+
 `Which is largest: ${nums.join(", ")}?`,
+
 answer,
-[...nums,Math.max(0,Math.min(...nums)-1)]
+
+[
+...nums,
+Math.max(
+0,
+Math.min(...nums)-1
+)
+]
+
 );
 
 }
 
 
-function bankQuestion(topic,level){
+/* =========================================================
+   FRACTIONS
+========================================================= */
+
+function fractionsQuestion(level){
 
 const banks={
 
-fractions:{
 1:[
-["How many halves make one whole?",2,[1,2,3,4]],
-["One of two equal parts is called...","Half",["Whole","Half","Quarter","Three"]]
-],
-2:[
-["How many quarters make one whole?",4,[2,3,4,5]],
-["One of four equal parts is...","Quarter",["Half","Quarter","Whole","Third"]]
-],
-3:[
-["Which is bigger?","Half",["Half","Quarter","Same","None"]],
-["Two quarters equal...","Half",["Whole","Half","Quarter","None"]]
-],
-4:[
-["Ali eats half a pizza. What is left?","Half",["Whole","Half","Quarter","None"]]
-],
-5:[
-["Mia eats 2 of 4 equal pieces. What fraction?","Half",["Quarter","Half","Whole","None"]]
-]
-},
 
-time:{
-1:[
-["How many days in one week?",7,[5,6,7,8]],
-["After Monday comes...","Tuesday",["Sunday","Tuesday","Friday","Saturday"]]
+[
+"How many halves make one whole?",
+2,
+[1,2,3,4]
 ],
-2:[
-["How many months in one year?",12,[10,11,12,13]],
-["Before Friday is...","Thursday",["Monday","Thursday","Saturday","Sunday"]]
-],
-3:[
-["Breakfast is usually in the...","Morning",["Morning","Night","Evening","Midnight"]]
-],
-4:[
-["2 hours after 3:00 is...","5:00",["4:00","5:00","6:00","7:00"]]
-],
-5:[
-["A movie starts 2:00 and ends 4:00. Duration?","2 hours",["1 hour","2 hours","3 hours","4 hours"]]
-]
-},
 
-measurement:{
-1:[
-["Which is usually longer?","Broom",["Pencil","Broom","Coin","Eraser"]]
-],
-2:[
-["Which measures length?","Ruler",["Clock","Ruler","Calendar","Coin"]]
-],
-3:[
-["Which is heavier?","Elephant",["Feather","Elephant","Paper","Leaf"]]
-],
-4:[
-["A rope is 8 m and another 5 m. Difference?","3 m",["2 m","3 m","4 m","5 m"]]
-],
-5:[
-["Ali walks 20 m then 15 m. Total?","35 m",["25 m","30 m","35 m","40 m"]]
+[
+"One of two equal parts is called...",
+"Half",
+["Whole","Half","Quarter","Three"]
 ]
-},
 
-shapes:{
-1:[
-["Which shape has 3 sides?","Triangle",["Circle","Square","Triangle","Rectangle"]],
-["Which shape is round?","Circle",["Triangle","Square","Circle","Rectangle"]]
 ],
-2:[
-["Which shape has 4 equal sides?","Square",["Circle","Triangle","Square","Oval"]]
-],
-3:[
-["Which shape has no corners?","Circle",["Square","Triangle","Circle","Rectangle"]]
-],
-4:[
-["🔺 🔵 🔺 🔵 🔺 __","🔵",["🔺","🔵","⬛","⭐"]]
-],
-5:[
-["A shape has 4 equal sides. What is it?","Square",["Rectangle","Triangle","Square","Circle"]]
-]
-},
 
-data:{
-1:[
-["⭐⭐⭐⭐ How many stars?",4,[2,3,4,5]]
-],
 2:[
-["Cats: 5, Dogs: 3. Which has more?","Cats",["Cats","Dogs","Same","None"]]
+
+[
+"How many quarters make one whole?",
+4,
+[2,3,4,5]
 ],
-3:[
-["Ali read 2 books. Mia read 5. Total?",7,[5,6,7,8]]
-],
-4:[
-["Red:8, Blue:5, Green:3. Which has most?","Red",["Red","Blue","Green","Same"]]
-],
-5:[
-["Mon:3 books, Tue:5, Wed:4. Total?",12,[10,11,12,13]]
+
+[
+"One of four equal parts is...",
+"Quarter",
+["Half","Quarter","Whole","Third"]
 ]
-}
+
+],
+
+3:[
+
+[
+"Which is bigger?",
+"Half",
+["Half","Quarter","Same","None"]
+],
+
+[
+"Two quarters equal...",
+"Half",
+["Whole","Half","Quarter","None"]
+]
+
+],
+
+4:[
+
+[
+"Ali eats half a pizza. What fraction is left?",
+"Half",
+["Whole","Half","Quarter","None"]
+],
+
+[
+"A cake has 4 equal pieces. One piece is...",
+"Quarter",
+["Half","Quarter","Whole","Third"]
+]
+
+],
+
+5:[
+
+[
+"Mia eats 2 of 4 equal pieces. What fraction did she eat?",
+"Half",
+["Quarter","Half","Whole","None"]
+],
+
+[
+"Which is smaller?",
+"Quarter",
+["Half","Quarter","Whole","Two halves"]
+]
+
+]
 
 };
 
-const list=banks[topic][level];
+
+const list=
+banks[level];
+
 
 const item=
-list[randomNumber(0,list.length-1)];
+list[
+randomNumber(
+0,
+list.length-1
+)
+];
+
 
 return makeQuestion(
 item[0],
@@ -2236,114 +3984,433 @@ item[2]
 }
 
 
+/* =========================================================
+   MONEY
+========================================================= */
+
 function moneyQuestion(level){
 
 if(level===1){
 
+const amounts=[
+5,
+10,
+20,
+50
+];
+
+
+const amount=
+amounts[
+randomNumber(
+0,
+amounts.length-1
+)
+];
+
+
 return makeQuestion(
-"Which amount is 20 sen?",
-"20 sen",
-["10 sen","20 sen","50 sen","RM20"]
+
+`Which amount is ${amount} sen?`,
+
+`${amount} sen`,
+
+[
+`${amount} sen`,
+`${amount===50 ? 20:50} sen`,
+`RM${amount}`,
+`${amount+10} sen`
+]
+
 );
 
 }
+
 
 if(level===2){
 
 const a=randomNumber(1,5);
+
 const b=randomNumber(1,5);
+
 const answer=a+b;
 
+
 return makeQuestion(
+
 `RM${a} + RM${b} = ?`,
+
 `RM${answer}`,
-[`RM${answer}`,`RM${answer+1}`,`RM${Math.max(0,answer-1)}`,`RM${answer+2}`]
+
+[
+`RM${answer}`,
+`RM${answer+1}`,
+`RM${Math.max(0,answer-1)}`,
+`RM${answer+2}`
+]
+
 );
 
 }
+
 
 if(level===3){
 
-const price=randomNumber(2,10);
-const paid=price+randomNumber(1,5);
-const change=paid-price;
+const price=
+randomNumber(2,10);
+
+
+const paid=
+price+
+randomNumber(1,5);
+
+
+const change=
+paid-price;
+
 
 return makeQuestion(
-`Item costs RM${price}. Pay RM${paid}. Change?`,
+
+`Item costs RM${price}. You pay RM${paid}. What is the change?`,
+
 `RM${change}`,
-[`RM${change}`,`RM${change+1}`,`RM${Math.max(0,change-1)}`,`RM${price}`]
+
+[
+`RM${change}`,
+`RM${change+1}`,
+`RM${Math.max(0,change-1)}`,
+`RM${price}`
+]
+
 );
 
 }
+
 
 if(level===4){
 
-const a=randomNumber(2,10);
-const b=randomNumber(2,10);
-const total=a+b;
+const a=
+randomNumber(2,10);
+
+
+const b=
+randomNumber(2,10);
+
+
+const total=
+a+b;
+
 
 return makeQuestion(
+
 `Book RM${a} + Bag RM${b}. Total?`,
+
 `RM${total}`,
-[`RM${total}`,`RM${total+2}`,`RM${Math.max(0,total-2)}`,`RM${a}`]
+
+[
+`RM${total}`,
+`RM${total+2}`,
+`RM${Math.max(0,total-2)}`,
+`RM${a}`
+]
+
 );
 
 }
 
-const money=randomNumber(15,30);
-const a=randomNumber(3,8);
-const b=randomNumber(3,8);
 
-const left=money-a-b;
+const money=
+randomNumber(15,30);
+
+
+const a=
+randomNumber(3,8);
+
+
+const b=
+randomNumber(3,8);
+
+
+const left=
+money-a-b;
+
 
 return makeQuestion(
-`You have RM${money}. Spend RM${a} and RM${b}. Left?`,
+
+`You have RM${money}. Spend RM${a} and RM${b}. How much is left?`,
+
 `RM${left}`,
-[`RM${left}`,`RM${left+2}`,`RM${Math.max(0,left-2)}`,`RM${money-a}`]
+
+[
+`RM${left}`,
+`RM${left+2}`,
+`RM${Math.max(0,left-2)}`,
+`RM${money-a}`
+]
+
 );
 
 }
 
 
-function generateQuestion(topic,level){
+/* =========================================================
+   OTHER TOPICS
+========================================================= */
 
-if(topic==="addition")
+function bankQuestion(topic,level){
+
+const banks={
+
+time:{
+
+1:[
+["How many days are in one week?",7,[5,6,7,8]],
+["After Monday comes...","Tuesday",["Sunday","Tuesday","Friday","Saturday"]]
+],
+
+2:[
+["How many months are in one year?",12,[10,11,12,13]],
+["Before Friday is...","Thursday",["Monday","Thursday","Saturday","Sunday"]]
+],
+
+3:[
+["Breakfast is usually in the...","Morning",["Morning","Night","Evening","Midnight"]],
+["School normally starts in the...","Morning",["Morning","Night","Evening","Midnight"]]
+],
+
+4:[
+["2 hours after 3:00 is...","5:00",["4:00","5:00","6:00","7:00"]],
+["Class starts 8:00 and ends 9:00. Duration?","1 hour",["30 minutes","1 hour","2 hours","3 hours"]]
+],
+
+5:[
+["Movie starts 2:00 and ends 4:00. Duration?","2 hours",["1 hour","2 hours","3 hours","4 hours"]],
+["One hour before 7:00 is...","6:00",["5:00","6:00","7:00","8:00"]]
+]
+
+},
+
+measurement:{
+
+1:[
+["Which is usually longer?","Broom",["Pencil","Broom","Coin","Eraser"]],
+["A feather is usually...","Light",["Heavy","Light","Long","Full"]]
+],
+
+2:[
+["Which measures length?","Ruler",["Clock","Ruler","Calendar","Coin"]],
+["Which can hold more water?","Bucket",["Spoon","Bucket","Bottle cap","Coin"]]
+],
+
+3:[
+["Which is heavier?","Elephant",["Feather","Elephant","Paper","Leaf"]],
+["Which contains more water?","Bucket",["Cup","Bucket","Spoon","Bottle cap"]]
+],
+
+4:[
+["A rope is 8 m and another is 5 m. Difference?","3 m",["2 m","3 m","4 m","5 m"]],
+["15 cm minus 5 cm equals...","10 cm",["5 cm","10 cm","15 cm","20 cm"]]
+],
+
+5:[
+["Ali walks 20 m then 15 m. Total?","35 m",["25 m","30 m","35 m","40 m"]],
+["A container holds 10 cups and has 6. How many more?","4",["2","3","4","5"]]
+]
+
+},
+
+shapes:{
+
+1:[
+["Which shape has 3 sides?","Triangle",["Circle","Square","Triangle","Rectangle"]],
+["Which shape is round?","Circle",["Triangle","Square","Circle","Rectangle"]]
+],
+
+2:[
+["Which shape has 4 equal sides?","Square",["Circle","Triangle","Square","Oval"]],
+["How many sides does a rectangle have?",4,[2,3,4,5]]
+],
+
+3:[
+["Which shape has no corners?","Circle",["Square","Triangle","Circle","Rectangle"]],
+["Which has more sides?","Rectangle",["Triangle","Rectangle","Circle","Oval"]]
+],
+
+4:[
+["🔺 🔵 🔺 🔵 🔺 __","🔵",["🔺","🔵","⬛","⭐"]],
+["⬛ ⬛ 🔺 ⬛ ⬛ 🔺 __","⬛",["🔺","⬛","🔵","⭐"]]
+],
+
+5:[
+["A shape has 4 equal sides. What is it?","Square",["Rectangle","Triangle","Square","Circle"]],
+["A shape has 3 sides and 3 corners. What is it?","Triangle",["Circle","Rectangle","Triangle","Square"]]
+]
+
+},
+
+data:{
+
+1:[
+["⭐⭐⭐⭐ How many stars?",4,[2,3,4,5]],
+["🍎🍎🍎 and 🍌🍌. Which has more?","Apples",["Apples","Bananas","Same","None"]]
+],
+
+2:[
+["Cats: 5, Dogs: 3. Which has more?","Cats",["Cats","Dogs","Same","None"]],
+["Red: 2, Blue: 6. Which has fewer?","Red",["Red","Blue","Same","None"]]
+],
+
+3:[
+["Ali read 2 books. Mia read 5. Total?",7,[5,6,7,8]],
+["Apples: 6, Bananas: 4. Difference?",2,[1,2,3,4]]
+],
+
+4:[
+["Red:8, Blue:5, Green:3. Which has most?","Red",["Red","Blue","Green","Same"]],
+["Cats:7, Dogs:4. Total animals?",11,[9,10,11,12]]
+],
+
+5:[
+["Mon:3 books, Tue:5, Wed:4. Total?",12,[10,11,12,13]],
+["Team A:9 points, Team B:6. Difference?",3,[2,3,4,5]]
+]
+
+}
+
+};
+
+
+const list=
+banks[topic]?.[level];
+
+
+if(
+!list
+||
+!list.length
+){
+
+return makeQuestion(
+"1 + 1 = ?",
+2,
+[1,2,3,4]
+);
+
+}
+
+
+const item=
+list[
+randomNumber(
+0,
+list.length-1
+)
+];
+
+
+return makeQuestion(
+item[0],
+item[1],
+item[2]
+);
+
+}
+
+
+/* =========================================================
+   QUESTION GENERATOR
+========================================================= */
+
+function generateQuestion(
+topic,
+level
+){
+
+switch(topic){
+
+case "addition":
 return additionQuestion(level);
 
-if(topic==="subtraction")
+case "subtraction":
 return subtractionQuestion(level);
 
-if(topic==="numbers")
+case "numbers":
 return numbersQuestion(level);
 
-if(topic==="money")
+case "fractions":
+return fractionsQuestion(level);
+
+case "money":
 return moneyQuestion(level);
 
-return bankQuestion(topic,level);
+case "time":
+case "measurement":
+case "shapes":
+case "data":
+return bankQuestion(
+topic,
+level
+);
 
-}
+default:
 
-
-/* QUIZ */
-
-function startQuiz(topic,level){
-
-state.currentTopic=topic;
-state.difficulty=Number(level);
-state.questions=[];
-state.questionIndex=0;
-state.correctAnswers=0;
-state.answerLocked=false;
-
-for(let i=0;i<15;i++){
-
-state.questions.push(
-generateQuestion(topic,level)
+return makeQuestion(
+"1 + 1 = ?",
+2,
+[1,2,3,4]
 );
 
 }
 
+}
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+function startQuiz(
+topic,
+level
+){
+
+state.currentTopic=
+topic;
+
+
+state.difficulty=
+Number(level);
+
+
+state.questions=[];
+
+state.questionIndex=0;
+
+state.correctAnswers=0;
+
+state.answerLocked=false;
+
+
+for(
+let i=0;
+i<15;
+i++
+){
+
+state.questions.push(
+
+generateQuestion(
+topic,
+level
+)
+
+);
+
+}
+
+
 showPage("quiz");
+
 renderQuestion();
 
 }
@@ -2351,14 +4418,20 @@ renderQuestion();
 
 function renderQuestion(){
 
-const q=state.questions[state.questionIndex];
+const q=
+state.questions[
+state.questionIndex
+];
+
 
 if(!q){
 
 finishQuiz();
+
 return;
 
 }
+
 
 $("#quiz").innerHTML=`
 
@@ -2369,251 +4442,490 @@ $("#quiz").innerHTML=`
 <button
 class="btn ghost small"
 onclick="openDifficulty('${state.currentTopic}')">
+
 ←
+
 </button>
 
+
 <b>
+
 ${topics[state.currentTopic].icon}
+
 ${topicName(state.currentTopic)}
+
 </b>
 
+
 <div class="quiz-level">
+
 Level ${state.difficulty}
+
 •
-${difficultyName(state.difficulty)}
-</div>
+
+${difficultyName(
+state.difficulty
+)}
 
 </div>
 
-<div class="progress" style="margin-top:15px">
-<i style="width:${state.questionIndex/state.questions.length*100}%"></i>
 </div>
+
+
+<div
+class="progress"
+style="margin-top:15px">
+
+<i
+style="
+width:
+${state.questionIndex/state.questions.length*100}%
+">
+</i>
+
+</div>
+
 
 <div class="question">
+
 ${q.question}
+
 </div>
+
 
 <div class="answers">
 
-${q.options.map(option=>`
+${
+
+q.options
+
+.map(option=>`
 
 <button
 class="answer"
 data-answer="${String(option).replaceAll('"',"&quot;")}"
 onclick="answerQuestion(this)">
+
 ${option}
+
 </button>
 
-`).join("")}
+`).join("")
+
+}
 
 </div>
 
-<div id="feedback" class="feedback"></div>
+
+<div
+id="feedback"
+class="feedback">
+</div>
 
 </div>
+
 `;
 
 }
 
 
+/* =========================================================
+   ANSWER
+========================================================= */
+
 function answerQuestion(button){
 
-if(state.answerLocked)return;
+if(state.answerLocked)
+return;
+
 
 state.answerLocked=true;
 
+
 const q=
-state.questions[state.questionIndex];
+state.questions[
+state.questionIndex
+];
+
+
+const selected=
+button.dataset.answer;
+
 
 const correct=
-String(button.dataset.answer)===
+String(selected)
+===
 String(q.answer);
 
-const feedback=$("#feedback");
+
+const feedback=
+$("#feedback");
+
 
 if(correct){
 
 state.correctAnswers++;
 
-button.classList.add("correct");
+
+button.classList.add(
+"correct"
+);
+
 
 feedback.className=
 "feedback correct";
 
+
 feedback.textContent=
 t("correct");
 
-playSound("correct");
 
-}else{
+playSFX("correct");
 
-button.classList.add("wrong");
+}
+else{
+
+button.classList.add(
+"wrong"
+);
+
 
 document
 .querySelectorAll(".answer")
-.forEach(btn=>{
+.forEach(answerButton=>{
 
 if(
-String(btn.dataset.answer)===
+String(
+answerButton.dataset.answer
+)
+===
 String(q.answer)
 ){
 
-btn.classList.add("correct");
+answerButton.classList.add(
+"correct"
+);
 
 }
 
 });
+
 
 feedback.className=
 "feedback wrong";
 
-feedback.innerHTML=
-`${t("wrong")}<br>Correct answer: <strong>${q.answer}</strong>`;
 
-playSound("wrong");
+feedback.innerHTML=`
+
+${t("wrong")}
+
+<br>
+
+Correct answer:
+
+<strong>
+${q.answer}
+</strong>
+
+`;
+
+
+playSFX("wrong");
 
 }
+
 
 setTimeout(()=>{
 
 state.questionIndex++;
+
 state.answerLocked=false;
+
 renderQuestion();
 
-},1000);
+},1100);
 
 }
 
+
+/* =========================================================
+   FINISH QUIZ
+========================================================= */
 
 function finishQuiz(){
 
-const child=currentChild();
+const child=
+currentChild();
 
-const total=state.questions.length;
+
+const total=
+state.questions.length;
+
 
 const accuracy=
 Math.round(
-state.correctAnswers/total*100
+state.correctAnswers
+/
+total
+*
+100
 );
 
+
 let xpEarned=
-state.correctAnswers*10+
+state.correctAnswers*10
++
 state.difficulty*10;
 
+
 if(accuracy===100){
+
 xpEarned+=100;
+
 }
 
-const starsEarned=
-getStars(accuracy);
 
-child.xp=(child.xp||0)+xpEarned;
-child.stars=(child.stars||0)+starsEarned;
+const starsEarned=
+getStars(
+accuracy
+);
+
+
+child.xp=
+(child.xp||0)
++
+xpEarned;
+
+
+child.stars=
+(child.stars||0)
++
+starsEarned;
+
 
 child.totalQuestions=
-(child.totalQuestions||0)+total;
+(child.totalQuestions||0)
++
+total;
+
 
 child.correctAnswers=
-(child.correctAnswers||0)+
+(child.correctAnswers||0)
++
 state.correctAnswers;
+
 
 child.topics ||= {};
 
-const old=
-child.topics[state.currentTopic]||0;
 
-child.topics[state.currentTopic]=
+const old=
+child.topics[
+state.currentTopic
+]
+||
+0;
+
+
+child.topics[
+state.currentTopic
+]
+=
 old===0
-?accuracy
-:Math.round((old+accuracy)/2);
+?
+accuracy
+:
+Math.round(
+(old+accuracy)/2
+);
+
 
 child.history ||= [];
 
+
 child.history.unshift({
-topic:state.currentTopic,
-difficulty:state.difficulty,
-score:`${state.correctAnswers}/${total}`,
+
+topic:
+state.currentTopic,
+
+difficulty:
+state.difficulty,
+
+score:
+`${state.correctAnswers}/${total}`,
+
 accuracy,
-date:new Date().toLocaleDateString()
+
+date:
+new Date()
+.toLocaleDateString()
+
 });
 
+
 child.history=
-child.history.slice(0,30);
+child.history.slice(
+0,
+30
+);
+
 
 saveLocal();
+
 syncFirebase();
+
 
 $("#result").innerHTML=`
 
 <div class="quiz-wrap center">
 
 <div class="result-avatar">
-${renderAvatar(child.avatarId,"large")}
+
+${renderAvatar(
+child.avatarId,
+"large"
+)}
+
 </div>
+
 
 <h1>
+
 ${t("missionComplete")}
+
 </h1>
 
+
 <p class="badge">
+
 ${topicName(state.currentTopic)}
+
 •
+
 Level ${state.difficulty}
+
 </p>
 
+
 <div class="result-score">
+
 ${state.correctAnswers}/${total}
+
 </div>
 
+
 <div class="result-stars">
+
 ${"⭐".repeat(starsEarned)}
+
 </div>
+
 
 <div class="grid stats">
 
 <div class="card stat">
-<b>${accuracy}%</b>
-<span>${t("accuracy")}</span>
+
+<b>
+${accuracy}%
+</b>
+
+<span>
+${t("accuracy")}
+</span>
+
 </div>
+
 
 <div class="card stat">
-<b>+${xpEarned}</b>
-<span>XP</span>
+
+<b>
++${xpEarned}
+</b>
+
+<span>
+XP
+</span>
+
 </div>
+
 
 <div class="card stat">
-<b>+${starsEarned}</b>
-<span>Stars</span>
+
+<b>
++${starsEarned}
+</b>
+
+<span>
+Stars
+</span>
+
 </div>
+
 
 <div class="card stat">
-<b>${state.difficulty}</b>
-<span>Level</span>
+
+<b>
+${state.difficulty}
+</b>
+
+<span>
+Level
+</span>
+
 </div>
 
 </div>
+
 
 <button
 class="btn"
 onclick="startQuiz('${state.currentTopic}',${state.difficulty})">
+
 ${t("tryAgain")}
+
 </button>
+
+
+<button
+class="btn ghost"
+onclick="openDifficulty('${state.currentTopic}')">
+
+Change Level
+
+</button>
+
 
 <button
 class="btn dark"
 onclick="showPage('learn')">
+
 📚 Learn
+
 </button>
 
 </div>
+
 `;
 
-showPage("result");
+
+showPage(
+"result"
+);
+
+
+setTimeout(()=>{
+
+playSFX(
+"complete"
+);
+
+},150);
 
 }
 
 
-/* PROFILE */
+/* =========================================================
+   PROFILE
+========================================================= */
 
 function renderProfile(){
 
@@ -2622,61 +4934,98 @@ $("#profile").innerHTML=`
 <div class="section-title">
 
 <h2>
+
 🥷 ${t("whoTraining")}
+
 </h2>
 
 <span>
-${Object.keys(children).length} Profiles
+
+${Object.keys(children).length}
+Profiles
+
 </span>
 
 </div>
 
+
 <div class="grid profile-list">
 
-${Object.entries(children).map(([id,child])=>`
+${
+
+Object.entries(children)
+
+.map(([id,child])=>`
 
 <div
-class="card child-card ${id===state.currentChildId?"selected":""}">
+class="
+card
+child-card
+${id===state.currentChildId ? "selected":""}
+">
 
 <div
 class="child-select"
 onclick="selectChild('${id}')">
 
 <div class="child-avatar">
-${renderAvatar(child.avatarId,"medium")}
+
+${renderAvatar(
+child.avatarId,
+"medium"
+)}
+
 </div>
+
 
 <h3>
 ${child.name}
 </h3>
 
+
 <p>
 🎂 ${child.age} years old
 </p>
 
+
 <p>
+
 ⚡ ${child.xp||0} XP
+
 •
+
 ⭐ ${child.stars||0}
+
 </p>
 
 </div>
 
+
 <button
 class="btn danger small delete-profile"
 onclick="deleteChild('${id}')">
+
 🗑️ ${t("deleteProfile")}
+
 </button>
 
 </div>
 
-`).join("")}
+`).join("")
+
+}
 
 </div>
 
 
 <div class="section-title">
-<h2>➕ ${t("addChild")}</h2>
+
+<h2>
+
+➕ ${t("addChild")}
+
+</h2>
+
 </div>
 
 
@@ -2687,19 +5036,23 @@ onclick="deleteChild('${id}')">
 <div>
 
 <label>
+
 Ninja Name
 
 <input
 id="newChildName"
 placeholder="e.g. Danish"
 maxlength="20">
+
 </label>
 
 </div>
 
+
 <div>
 
 <label>
+
 🎂 ${t("chooseAge")}
 
 <select id="newChildAge">
@@ -2742,35 +5095,53 @@ Select Age
 
 
 <div class="avatar-title">
+
 🥷 ${t("chooseAvatar")}
+
 </div>
 
 
 <div class="avatar-options">
 
-${Object.entries(avatars)
+${
+
+Object.entries(avatars)
+
 .map(([id,avatar])=>`
 
 <div
-class="avatar-option ${state.newAvatar===id?"selected":""}"
+class="
+avatar-option
+${state.newAvatar===id ? "selected":""}
+"
 onclick="selectNewAvatar('${id}')">
 
-${renderAvatar(id,"small")}
+${renderAvatar(
+id,
+"small"
+)}
 
 <span>
+
 ${avatar.name}
+
 </span>
 
 </div>
 
-`).join("")}
+`).join("")
+
+}
 
 </div>
 
 
 <button
 class="btn"
-style="margin-top:20px;width:100%"
+style="
+margin-top:20px;
+width:100%;
+"
 onclick="addChild()">
 
 🥷 ${t("saveChild")}
@@ -2778,6 +5149,7 @@ onclick="addChild()">
 </button>
 
 </div>
+
 `;
 
 }
@@ -2785,9 +5157,18 @@ onclick="addChild()">
 
 function selectNewAvatar(id){
 
-if(!avatars[id])return;
+if(!avatars[id])
+return;
 
-state.newAvatar=id;
+
+state.newAvatar=
+id;
+
+
+playSFX(
+"select"
+);
+
 
 renderProfile();
 
@@ -2796,13 +5177,25 @@ renderProfile();
 
 function selectChild(id){
 
-if(!children[id])return;
+if(!children[id])
+return;
 
-state.currentChildId=id;
+
+state.currentChildId=
+id;
+
 
 saveLocal();
+
 syncFirebase();
+
 renderAll();
+
+
+playSFX(
+"profile"
+);
+
 
 toast(
 `🥷 ${children[id].name} selected!`
@@ -2811,6 +5204,10 @@ toast(
 }
 
 
+/* =========================================================
+   ADD CHILD
+========================================================= */
+
 function addChild(){
 
 const name=
@@ -2818,56 +5215,66 @@ $("#newChildName")
 .value
 .trim();
 
+
 const age=
 Number(
 $("#newChildAge").value
 );
 
+
 if(!name){
 
 toast(
 state.language==="en"
-?"Please enter the child's name."
-:"Sila masukkan nama anak."
+?
+"Please enter the child's name."
+:
+"Sila masukkan nama anak."
 );
 
 return;
 
 }
 
-if(!age || age<7 || age>12){
+
+if(
+!age
+||
+age<7
+||
+age>12
+){
 
 toast(
 state.language==="en"
-?"Please select age between 7 and 12."
-:"Sila pilih umur antara 7 hingga 12 tahun."
+?
+"Please select age between 7 and 12."
+:
+"Sila pilih umur antara 7 hingga 12 tahun."
 );
 
 return;
 
 }
 
-if(!state.newAvatar){
-
-toast(
-state.language==="en"
-?"Please select a Ninja avatar."
-:"Sila pilih avatar Ninja."
-);
-
-return;
-
-}
 
 const id=
-(name
+(
+name
 .toLowerCase()
-.replace(/[^a-z0-9]/g,"")
-||"ninja")
+.replace(
+/[^a-z0-9]/g,
+""
+)
+||
+"ninja"
+)
+
 +
 Date.now()
 .toString()
 .slice(-6);
+
 
 children[id]={
 
@@ -2904,81 +5311,151 @@ history:[]
 
 };
 
-state.currentChildId=id;
-state.parentChildId=id;
-state.newAvatar="redBoy";
+
+state.currentChildId=
+id;
+
+
+state.parentChildId=
+id;
+
+
+state.newAvatar=
+"redBoy";
+
 
 saveLocal();
+
 syncFirebase();
+
 renderAll();
+
+
+playSFX(
+"complete"
+);
+
 
 toast(
 state.language==="en"
-?"🥷 Ninja profile created!"
-:"🥷 Profil Ninja berjaya dibuat!"
+?
+"🥷 Ninja profile created!"
+:
+"🥷 Profil Ninja berjaya dibuat!"
 );
 
 }
 
 
+/* =========================================================
+   DELETE CHILD
+========================================================= */
+
 function deleteChild(id){
 
-if(!children[id])return;
+if(!children[id])
+return;
 
-if(Object.keys(children).length<=1){
+
+if(
+Object.keys(children).length<=1
+){
 
 toast(
 state.language==="en"
-?"At least one child profile is required."
-:"Sekurang-kurangnya satu profil anak diperlukan."
+?
+"At least one child profile is required."
+:
+"Sekurang-kurangnya satu profil anak diperlukan."
 );
 
 return;
 
 }
 
-const child=children[id];
+
+const child=
+children[id];
+
 
 const message=
 state.language==="en"
+
 ?
+
 `Delete ${child.name}'s profile?
 
 All XP, stars, history and learning progress will be permanently removed.`
+
 :
+
 `Padam profil ${child.name}?
 
 Semua XP, bintang, sejarah dan kemajuan pembelajaran akan dipadam.`;
 
-if(!confirm(message))return;
+
+if(
+!window.confirm(message)
+){
+
+return;
+
+}
+
 
 delete children[id];
+
 
 const first=
 Object.keys(children)[0];
 
-if(state.currentChildId===id){
-state.currentChildId=first;
+
+if(
+state.currentChildId===id
+){
+
+state.currentChildId=
+first;
+
 }
 
-if(state.parentChildId===id){
-state.parentChildId=state.currentChildId;
+
+if(
+state.parentChildId===id
+){
+
+state.parentChildId=
+state.currentChildId;
+
 }
+
 
 saveLocal();
+
 syncFirebase();
+
 renderAll();
+
+
+playSFX(
+"delete"
+);
+
 
 toast(
 state.language==="en"
-?"Child profile deleted."
-:"Profil anak telah dipadam."
+?
+"Child profile deleted."
+:
+"Profil anak telah dipadam."
 );
 
 }
 
 
-/* RANKING */
+/* =========================================================
+   RANKING
+========================================================= */
 
 function renderRanking(){
 
@@ -2987,17 +5464,24 @@ Object.entries(children)
 
 .map(([id,child])=>{
 
-const level=getLevel(child);
+const level=
+getLevel(child);
+
 
 return{
+
 id,
+
 ...child,
+
 level
+
 };
 
 })
 
-.sort((a,b)=>
+.sort(
+(a,b)=>
 (b.xp||0)-(a.xp||0)
 ||
 (b.stars||0)-(a.stars||0)
@@ -3018,6 +5502,7 @@ ${ranking.length} Ninjas
 
 </div>
 
+
 <div class="card ranking-top-card">
 
 <div class="trophy">
@@ -3037,25 +5522,52 @@ ${t("rankingInfo")}
 
 <div class="card">
 
-${ranking.map((player,index)=>{
+${
+
+ranking
+
+.map((player,index)=>{
 
 const medal=
-index===0?"🥇":
-index===1?"🥈":
-index===2?"🥉":
+index===0
+?
+"🥇"
+:
+index===1
+?
+"🥈"
+:
+index===2
+?
+"🥉"
+:
 index+1;
+
 
 return`
 
-<div class="rank-row ${player.id===state.currentChildId?"rank-current":""}">
+<div
+class="
+rank-row
+${player.id===state.currentChildId ? "rank-current":""}
+">
 
 <div class="rank-position">
+
 ${medal}
+
 </div>
 
+
 <div>
-${renderAvatar(player.avatarId,"small")}
+
+${renderAvatar(
+player.avatarId,
+"small"
+)}
+
 </div>
+
 
 <div>
 
@@ -3066,18 +5578,25 @@ ${player.name}
 <br>
 
 <small>
+
 🎂 ${player.age} years
+
 •
+
 Level ${player.level.level}
+
 </small>
 
 <br>
 
 <small>
+
 ⭐ ${player.stars||0}
+
 </small>
 
 </div>
+
 
 <div style="text-align:right">
 
@@ -3097,58 +5616,99 @@ XP
 
 `;
 
-}).join("")}
+}).join("")
+
+}
 
 </div>
+
 `;
 
 }
 
 
-/* PARENT */
+/* =========================================================
+   PARENT
+========================================================= */
 
 function selectParentChild(id){
 
-if(!children[id])return;
+if(!children[id])
+return;
 
-state.parentChildId=id;
+
+state.parentChildId=
+id;
+
 
 saveLocal();
+
 syncFirebase();
+
 renderParent();
+
+
+playSFX(
+"select"
+);
 
 }
 
 
 function renderParent(){
 
-const child=parentChild();
-const level=getLevel(child);
+const child=
+parentChild();
+
+
+const level=
+getLevel(child);
+
 
 const accuracy=
 Math.round(
-(child.correctAnswers||0) /
-Math.max(child.totalQuestions||0,1)
+
+(child.correctAnswers||0)
+
+/
+
+Math.max(
+child.totalQuestions||0,
+1
+)
+
 *100
+
 );
 
+
 const topicData=
-child.topics||{};
+child.topics
+||
+{};
+
 
 const sorted=
 Object.entries(topicData)
-.sort((a,b)=>a[1]-b[1]);
+.sort(
+(a,b)=>a[1]-b[1]
+);
+
 
 const weak=
 sorted.slice(0,3);
+
 
 const strong=
 [...sorted]
 .reverse()
 .slice(0,3);
 
+
 const history=
-child.history||[];
+child.history
+||
+[];
 
 
 $("#parent").innerHTML=`
@@ -3169,8 +5729,14 @@ ${Object.keys(children).length} Children
 <div class="parent-selector">
 
 <div class="parent-selector-avatar">
-${renderAvatar(child.avatarId,"medium")}
+
+${renderAvatar(
+child.avatarId,
+"medium"
+)}
+
 </div>
+
 
 <div class="parent-selector-info">
 
@@ -3179,21 +5745,32 @@ ${t("selectChild")}
 </h3>
 
 <p>
+
 ${t("viewPerformance")} ${child.name}
+
 </p>
+
 
 <select
 onchange="selectParentChild(this.value)">
 
-${Object.entries(children).map(([id,c])=>`
+${
+
+Object.entries(children)
+
+.map(([id,c])=>`
 
 <option
 value="${id}"
-${id===state.parentChildId?"selected":""}>
+${id===state.parentChildId ? "selected":""}>
+
 ${c.name} — Age ${c.age}
+
 </option>
 
-`).join("")}
+`).join("")
+
+}
 
 </select>
 
@@ -3204,28 +5781,46 @@ ${c.name} — Age ${c.age}
 
 <div class="card">
 
-<div style="
+<div
+style="
 display:flex;
 align-items:center;
 gap:15px;
 ">
 
-${renderAvatar(child.avatarId,"medium")}
+${renderAvatar(
+child.avatarId,
+"medium"
+)}
 
 <div>
 
 <h2 style="margin:0">
+
 ${child.name}
+
 </h2>
 
-<p style="margin:5px 0;color:#777">
+<p style="
+margin:5px 0;
+color:#777;
+">
+
 🎂 ${child.age} years old
+
 </p>
 
-<p style="margin:0;color:#777">
+<p style="
+margin:0;
+color:#777;
+">
+
 🥷 Level ${level.level}
+
 •
+
 ${level.name}
+
 </p>
 
 </div>
@@ -3238,23 +5833,54 @@ ${level.name}
 <div class="grid stats">
 
 <div class="card stat">
-<b>${child.xp||0}</b>
-<span>⚡ Total XP</span>
+
+<b>
+${child.xp||0}
+</b>
+
+<span>
+⚡ Total XP
+</span>
+
 </div>
 
-<div class="card stat">
-<b>${child.totalQuestions||0}</b>
-<span>📝 Questions</span>
-</div>
 
 <div class="card stat">
-<b>${child.correctAnswers||0}</b>
-<span>✅ Correct</span>
+
+<b>
+${child.totalQuestions||0}
+</b>
+
+<span>
+📝 Questions
+</span>
+
 </div>
 
+
 <div class="card stat">
-<b>${accuracy}%</b>
-<span>🎯 ${t("accuracy")}</span>
+
+<b>
+${child.correctAnswers||0}
+</b>
+
+<span>
+✅ Correct
+</span>
+
+</div>
+
+
+<div class="card stat">
+
+<b>
+${accuracy}%
+</b>
+
+<span>
+🎯 ${t("accuracy")}
+</span>
+
 </div>
 
 </div>
@@ -3266,35 +5892,58 @@ ${level.name}
 📊 ${t("performanceTopic")}
 </h3>
 
-${Object.keys(topics).map(topic=>{
+
+${
+
+Object.keys(topics)
+
+.map(topic=>{
 
 const score=
-topicData[topic]||0;
+topicData[topic]
+||
+0;
+
 
 return`
 
 <div class="performance-row">
 
 <header>
+
 <b>
+
 ${topics[topic].icon}
+
 ${topicName(topic)}
+
 </b>
 
 <span>
 ${score}%
 </span>
+
 </header>
 
+
 <div class="progress">
-<i style="width:${score}%"></i>
+
+<i
+style="
+width:
+${score}%
+">
+</i>
+
 </div>
 
 </div>
 
 `;
 
-}).join("")}
+}).join("")
+
+}
 
 </div>
 
@@ -3309,16 +5958,28 @@ style="margin-top:14px">
 ⚠️ ${t("needsPractice")}
 </h3>
 
-${weak.map(([topic,score])=>`
+
+${
+
+weak.map(([topic,score])=>`
 
 <p>
-${topics[topic].icon}
-${topicName(topic)}
+
+${topics[topic]?.icon || "📘"}
+
+${topics[topic] ? topicName(topic):topic}
+
 —
-<b>${score}%</b>
+
+<b>
+${score}%
+</b>
+
 </p>
 
-`).join("")}
+`).join("")
+
+}
 
 </div>
 
@@ -3329,16 +5990,28 @@ ${topicName(topic)}
 💪 ${t("strongTopics")}
 </h3>
 
-${strong.map(([topic,score])=>`
+
+${
+
+strong.map(([topic,score])=>`
 
 <p>
-${topics[topic].icon}
-${topicName(topic)}
+
+${topics[topic]?.icon || "📘"}
+
+${topics[topic] ? topicName(topic):topic}
+
 —
-<b>${score}%</b>
+
+<b>
+${score}%
+</b>
+
 </p>
 
-`).join("")}
+`).join("")
+
+}
 
 </div>
 
@@ -3353,73 +6026,159 @@ style="margin-top:14px">
 📚 ${t("learningHistory")}
 </h3>
 
-${history.length
+
+${
+history.length
+
 ?
+
 history.map(item=>`
 
 <div class="history-row">
 
 <b>
-${topics[item.topic]?.icon||"📘"}
-${topics[item.topic]
-?topicName(item.topic)
-:item.topic}
+
+${topics[item.topic]?.icon || "📘"}
+
+${topics[item.topic] ? topicName(item.topic):item.topic}
+
 </b>
 
 <br>
 
 <small>
+
 ${item.date}
+
 •
+
 Level ${item.difficulty||1}
+
 •
+
 ${item.score}
+
 •
+
 ${item.accuracy}%
+
 </small>
 
 </div>
 
 `).join("")
+
 :
-`<p style="color:#777">No learning history yet.</p>`
+
+`
+
+<p style="color:#777">
+
+No learning history yet.
+
+</p>
+
+`
+
 }
 
 </div>
+
+
+<div class="card audio-card">
+
+<h3>
+🎧 ${t("audioSettings")}
+</h3>
+
+<p>
+${t("audioInfo")}
+</p>
+
+<div class="audio-controls">
+
+<div class="audio-control">
+
+<span>
+🎵 ${t("music")}
+</span>
+
+<button
+class="btn small"
+onclick="toggleMusic()">
+
+${state.music ? "ON":"OFF"}
+
+</button>
+
+</div>
+
+
+<div class="audio-control">
+
+<span>
+🔊 ${t("soundEffects")}
+</span>
+
+<button
+class="btn small"
+onclick="toggleSFX()">
+
+${state.sfx ? "ON":"OFF"}
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 `;
 
 }
 
 
-/* LANGUAGE & SOUND */
+/* =========================================================
+   LANGUAGE
+========================================================= */
 
 function toggleLanguage(){
 
 state.language=
 state.language==="en"
-?"bm"
-:"en";
+?
+"bm"
+:
+"en";
+
 
 saveLocal();
+
 renderAll();
+
+
+playSFX(
+"select"
+);
 
 }
 
-function toggleSound(){
 
-state.sound=!state.sound;
-
-saveLocal();
-renderAll();
-
-}
-
-
-/* FIREBASE */
+/* =========================================================
+   FIREBASE SAVE
+========================================================= */
 
 async function syncFirebase(){
 
-if(!auth.currentUser)return;
+if(
+!auth.currentUser
+){
+
+return;
+
+}
+
 
 try{
 
@@ -3431,15 +6190,37 @@ database,
 ),
 
 {
+
 children,
-currentChildId:state.currentChildId,
-parentChildId:state.parentChildId,
-updatedAt:Date.now()
+
+currentChildId:
+state.currentChildId,
+
+parentChildId:
+state.parentChildId,
+
+settings:{
+
+language:
+state.language,
+
+music:
+state.music,
+
+sfx:
+state.sfx
+
+},
+
+updatedAt:
+Date.now()
+
 }
 
 );
 
-}catch(error){
+}
+catch(error){
 
 console.log(
 "Firebase sync error:",
@@ -3451,33 +6232,44 @@ error
 }
 
 
+/* =========================================================
+   FIREBASE LOAD
+========================================================= */
+
 async function loadFirebase(user){
 
 try{
 
 const snapshot=
 await get(
+
 ref(
 database,
 `users/${user.uid}/ninjaMath`
 )
+
 );
 
-if(snapshot.exists()){
-
-const data=snapshot.val();
 
 if(
-data.children &&
+snapshot.exists()
+){
+
+const data=
+snapshot.val();
+
+
+if(
+data.children
+&&
 Object.keys(data.children).length
 ){
 
-children=data.children;
+children=
+data.children;
 
 }
 
-
-/* Convert older cloud profiles */
 
 Object.values(children)
 .forEach((child,index)=>{
@@ -3486,27 +6278,34 @@ if(!child.avatarId){
 
 child.avatarId=
 index%2===0
-?"redBoy"
-:"pinkGirl";
+?
+"redBoy"
+:
+"pinkGirl";
 
 }
 
+
 if(!child.age){
+
 child.age=7;
+
 }
 
 });
 
 
 if(
-data.currentChildId &&
+data.currentChildId
+&&
 children[data.currentChildId]
 ){
 
 state.currentChildId=
 data.currentChildId;
 
-}else{
+}
+else{
 
 state.currentChildId=
 Object.keys(children)[0];
@@ -3515,25 +6314,71 @@ Object.keys(children)[0];
 
 
 if(
-data.parentChildId &&
+data.parentChildId
+&&
 children[data.parentChildId]
 ){
 
 state.parentChildId=
 data.parentChildId;
 
-}else{
+}
+else{
 
 state.parentChildId=
 state.currentChildId;
 
 }
 
+
+/*
+Load cloud audio settings if available.
+*/
+
+if(data.settings){
+
+if(
+typeof data.settings.music
+===
+"boolean"
+){
+
+state.music=
+data.settings.music;
+
+}
+
+
+if(
+typeof data.settings.sfx
+===
+"boolean"
+){
+
+state.sfx=
+data.settings.sfx;
+
+}
+
+
+if(
+data.settings.language
+){
+
+state.language=
+data.settings.language;
+
+}
+
+}
+
+
 saveLocal();
 
 }
 
-}catch(error){
+}
+catch(error){
 
 console.log(
 "Firebase load error:",
@@ -3542,47 +6387,60 @@ error
 
 }
 
+
 renderAll();
 
 }
 
 
-/* RENDER */
+/* =========================================================
+   RENDER ALL
+========================================================= */
 
 function renderAll(){
 
-if(!children[state.currentChildId]){
+if(
+!children[state.currentChildId]
+){
 
 state.currentChildId=
 Object.keys(children)[0];
 
 }
 
-if(!children[state.parentChildId]){
+
+if(
+!children[state.parentChildId]
+){
 
 state.parentChildId=
 state.currentChildId;
 
 }
 
-$("#languageButton").textContent=
-state.language.toUpperCase();
 
-$("#soundButton").textContent=
-state.sound?"🔊":"🔇";
+renderHeader();
 
 renderHome();
+
 renderLearn();
+
 renderDifficulty();
+
 renderMissions();
+
 renderRanking();
+
 renderProfile();
+
 renderParent();
 
 }
 
 
-/* EVENTS */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 document
 .querySelectorAll(".nav-btn")
@@ -3590,10 +6448,17 @@ document
 
 button.addEventListener(
 "click",
-()=>showPage(button.dataset.page)
+()=>{
+
+showPage(
+button.dataset.page
+);
+
+}
 );
 
 });
+
 
 $("#languageButton")
 .addEventListener(
@@ -3601,42 +6466,79 @@ $("#languageButton")
 toggleLanguage
 );
 
-$("#soundButton")
+
+$("#musicButton")
 .addEventListener(
 "click",
-toggleSound
+toggleMusic
 );
 
 
-/* GLOBAL FUNCTIONS */
+$("#sfxButton")
+.addEventListener(
+"click",
+toggleSFX
+);
 
-window.showPage=showPage;
-window.openDifficulty=openDifficulty;
-window.selectDifficulty=selectDifficulty;
-window.startQuiz=startQuiz;
-window.answerQuestion=answerQuestion;
 
-window.selectChild=selectChild;
-window.selectNewAvatar=selectNewAvatar;
-window.addChild=addChild;
-window.deleteChild=deleteChild;
+/* =========================================================
+   GLOBAL FUNCTIONS
+========================================================= */
+
+window.showPage=
+showPage;
+
+window.openDifficulty=
+openDifficulty;
+
+window.selectDifficulty=
+selectDifficulty;
+
+window.startQuiz=
+startQuiz;
+
+window.answerQuestion=
+answerQuestion;
+
+window.selectChild=
+selectChild;
+
+window.selectNewAvatar=
+selectNewAvatar;
+
+window.addChild=
+addChild;
+
+window.deleteChild=
+deleteChild;
 
 window.selectParentChild=
 selectParentChild;
 
+window.toggleMusic=
+toggleMusic;
 
-/* AUTH */
+window.toggleSFX=
+toggleSFX;
+
+
+/* =========================================================
+   FIREBASE AUTH
+========================================================= */
 
 onAuthStateChanged(
 auth,
 user=>{
 
 if(user){
+
 loadFirebase(user);
+
 }
 
 }
 );
+
 
 signInAnonymously(auth)
 .catch(error=>{
@@ -3647,6 +6549,11 @@ error
 );
 
 });
+
+
+/* =========================================================
+   START
+========================================================= */
 
 renderAll();
 
